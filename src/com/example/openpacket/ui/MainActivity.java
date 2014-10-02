@@ -1,4 +1,4 @@
-package com.example.openpackage;
+package com.example.openpacket.ui;
 
 import com.example.openpackageapplication.R;
 
