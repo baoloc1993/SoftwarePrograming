@@ -1,4 +1,4 @@
-package com.example.openpacket.entity;
+package com.example.openpackage.entity;
 
 public abstract class User {
 	//private String id;
