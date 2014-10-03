@@ -22,7 +22,7 @@ public class Reminder {
 		this.mParseObject = mParseObject;
 	}
 	
-	public Reminder( String name, String description, Date time, boolean active ) {
+	public Reminder( String name, String description, Date time, boolean active ) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("name", name);
 		mParseObject.put("description", description);
@@ -47,23 +47,21 @@ public class Reminder {
 		return mParseObject.getBoolean("active");
 	}
 	
-	public static ArrayList<Reminder> listAll() {
+	public static ArrayList<Reminder> listAll() throws ParseException {
 		ArrayList<Reminder> res = new ArrayList<Reminder>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
-		try {
+		
 			List<ParseObject> reminders = query.find();
 			for(ParseObject reminder : reminders) {
 				Reminder cur = new Reminder(reminder);
 				res.add(cur);
 			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
 		return res;
 	}
 	
-	private void save() {
-		mParseObject.saveInBackground();
+	private void save() throws ParseException {
+		mParseObject.save();
 	}
 	
 	public ParseObject getParseObject() {

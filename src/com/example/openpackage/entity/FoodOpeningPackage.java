@@ -24,7 +24,7 @@ public class FoodOpeningPackage {
 		this.mParseObject = mParseObject;
 	}
 	
-	public FoodOpeningPackage(String title,String description, String videoLink, String type) {
+	public FoodOpeningPackage(String title,String description, String videoLink, String type) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("title", title);
 		mParseObject.put("description", description);
@@ -50,17 +50,15 @@ public class FoodOpeningPackage {
 		return mParseObject.getString("type");
 	}
 	
-	public ArrayList<Survey> getSurveyList() {
+	public ArrayList<Survey> getSurveyList() throws ParseException {
 		ArrayList<Survey> surveyList = new ArrayList<Survey>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
-		try {
-			List<ParseObject> surveys = relation.getQuery().find();
-			for(ParseObject survey : surveys ) {
-				surveyList.add(new Survey(survey));
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+
+		List<ParseObject> surveys = relation.getQuery().find();
+		for(ParseObject survey : surveys ) {
+			surveyList.add(new Survey(survey));
 		}
+	
 		return surveyList;
 	}
 	
@@ -68,7 +66,7 @@ public class FoodOpeningPackage {
 		return mParseObject.getDouble("average");
 	}
 	
-	public void addSurvey( Survey survey ) {
+	public void addSurvey( Survey survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
 		save();
@@ -84,18 +82,16 @@ public class FoodOpeningPackage {
 		save();
 	}
 	
-	public static ArrayList<FoodOpeningPackage> listAll() {
+	public static ArrayList<FoodOpeningPackage> listAll() throws ParseException {
 		ArrayList<FoodOpeningPackage> res = new ArrayList<FoodOpeningPackage>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
-		try {
-			List<ParseObject> foodOpeningPackages = query.find();
-			for(ParseObject foodOpeningPackage : foodOpeningPackages) {
-				FoodOpeningPackage cur = new FoodOpeningPackage(foodOpeningPackage);
-				res.add(cur);
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+		
+		List<ParseObject> foodOpeningPackages = query.find();
+		for(ParseObject foodOpeningPackage : foodOpeningPackages) {
+			FoodOpeningPackage cur = new FoodOpeningPackage(foodOpeningPackage);
+			res.add(cur);
 		}
+		
 		return res;
 	}
 	
@@ -105,7 +101,7 @@ public class FoodOpeningPackage {
 		return mParseObject;
 	}
 	
-	private void save() {
-		mParseObject.saveInBackground();
+	private void save() throws ParseException {
+		mParseObject.save();
 	}
 }

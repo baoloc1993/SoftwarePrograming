@@ -20,7 +20,7 @@ public class Survey {
 		this.mParseObject = mParseObject;
 	}
 	
-	public Survey( Customer user, Date date, String comment,int rate, FoodOpeningPackage type ) {
+	public Survey( Customer user, Date date, String comment,int rate, FoodOpeningPackage type ) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME); 
 		mParseObject.put("user",user.getParseObject());
 		mParseObject.put("date",date);
@@ -30,13 +30,11 @@ public class Survey {
 		save();
 	}
 	
-	public Customer getUser() {
+	public Customer getUser() throws ParseException {
 		ParseObject res = null;
-		try {
-			 res = mParseObject.getParseObject("user").fetch();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
+		res = mParseObject.getParseObject("user").fetch();
+		
 		return new Customer(res);
 	}
 	
@@ -57,7 +55,7 @@ public class Survey {
 		return mParseObject;
 	}
 	
-	private void save() {
-		mParseObject.saveInBackground();
+	private void save() throws ParseException {
+		mParseObject.save();
 	}
 }

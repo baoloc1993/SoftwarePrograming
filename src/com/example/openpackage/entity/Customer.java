@@ -21,7 +21,7 @@ public class Customer extends User {
 		this.mParseObject = mParseObject;
 	}
 	
-	public Customer(String username, String password, String email, int age, boolean gender ) {
+	public Customer(String username, String password, String email, int age, boolean gender ) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("username", username);
 		mParseObject.put("password",password);
@@ -31,24 +31,30 @@ public class Customer extends User {
 		save();
 	}
 	
+	@Override
+	public void logIn() throws ParseException {
+		mParseObject.pin();
+	}
 	
+	@Override
+	public void logOut() throws ParseException {
+		mParseObject.unpin();
+	}
 	
-	public static ArrayList<Customer> listAll() {
+	public static ArrayList<Customer> listAll() throws ParseException {
 		ArrayList<Customer> res = new ArrayList<Customer>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
-		try {
-			List<ParseObject> customers = query.find();
-			for(ParseObject customer : customers) {
-				Customer cur = new Customer(customer);
-				res.add(cur);
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+		
+		List<ParseObject> customers = query.find();
+		for(ParseObject customer : customers) {
+			Customer cur = new Customer(customer);
+			res.add(cur);
 		}
+		
 		return res;
 	}
 	
-	public void addSurvey( Survey survey ) {
+	public void addSurvey( Survey survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
 		save();
@@ -57,17 +63,15 @@ public class Customer extends User {
 	public int getAge() {
 		return mParseObject.getInt("age");
 	}
-	public ArrayList<Survey> getSurveyList() {
+	public ArrayList<Survey> getSurveyList() throws ParseException {
 		ArrayList<Survey> surveyList = new ArrayList<Survey>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
-		try {
-			List<ParseObject> surveys = relation.getQuery().find();
-			for(ParseObject survey : surveys ) {
-				surveyList.add(new Survey(survey));
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+		
+		List<ParseObject> surveys = relation.getQuery().find();
+		for(ParseObject survey : surveys ) {
+			surveyList.add(new Survey(survey));
 		}
+		
 		return surveyList;
 	}
 	
@@ -75,10 +79,6 @@ public class Customer extends User {
 		return mParseObject.getBoolean("gender");
 	}
 
-	@Override
-	public String getId() {
-		return mParseObject.getString("id");
-	}
 
 	@Override
 	public String getUsername() {
@@ -100,7 +100,7 @@ public class Customer extends User {
 		return this.mParseObject;
 	}
 	
-	private void save() {
-		mParseObject.saveInBackground();
+	private void save() throws ParseException {
+		mParseObject.save();
 	}
 }
