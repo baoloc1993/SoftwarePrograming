@@ -10,8 +10,5 @@ public class OpenPacketApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		Parse.initialize(this, "8Xufbq7PYSRLcuxLmhDmA6kzFvBKvzbzMnbv9snM", "cU89WWRKmVVjsxfvKlpzu1zM1iIxEpjILzUcuVaM");
-		ParseObject testObject = new ParseObject("TestObject");
-		testObject.put("foo", "bar");
-		testObject.saveInBackground();
 	}
 }
