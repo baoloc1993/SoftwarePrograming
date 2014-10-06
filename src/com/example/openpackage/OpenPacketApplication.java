@@ -3,11 +3,15 @@ package com.example.openpackage;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 public class OpenPacketApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Parse.initialize(this, "snW30KkVJYtESfXpAsC5Fs3Vs2edMkjCc2aNZj8n", "b6qwtdgC17C6TTRiwuBT4vbOmVehMb4oIQLPHl9D");
+		Parse.initialize(this, "8Xufbq7PYSRLcuxLmhDmA6kzFvBKvzbzMnbv9snM", "cU89WWRKmVVjsxfvKlpzu1zM1iIxEpjILzUcuVaM");
+		ParseObject testObject = new ParseObject("TestObject");
+		testObject.put("foo", "bar");
+		testObject.saveInBackground();
 	}
 }
