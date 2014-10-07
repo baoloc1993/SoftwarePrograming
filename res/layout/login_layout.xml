@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
 
+    <!-- USERNAME -->
     <RelativeLayout
         android:id="@+id/username_login_part"
         android:layout_width="fill_parent"
@@ -28,6 +29,7 @@
     	</EditText>
     </RelativeLayout>
 
+    <!--  PASSWORD -->
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -54,6 +56,7 @@
 
     </RelativeLayout>
     
+    <!-- LOGIN BUTTON -->
 	<Button
          android:id="@+id/login_button"
          android:layout_width="wrap_content"
@@ -63,6 +66,7 @@
          android:text="Login" >
     </Button>
     
+	<!--  CREATE NEW ACC BUTTON -->
 	<Button
          android:id="@+id/new_acc_button"
          android:layout_width="wrap_content"
@@ -72,6 +76,7 @@
          android:text="Create new account" >
     </Button>
     
+	<!-- FORGET PASSWORD BUTTON -->
 	<Button
          android:id="@+id/forget_password_button"
          android:layout_width="wrap_content"

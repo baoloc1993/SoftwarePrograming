@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
     
     <!-- USERNAME -->
     <RelativeLayout
         android:id="@+id/username_signup_part"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -28,7 +28,7 @@
     <!--  PASSWORD -->
     <RelativeLayout
         android:id="@+id/password_signup_part"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/username_signup_part" >
 
@@ -53,7 +53,7 @@
         <!--  REWRITE PASSWORD -->
     <RelativeLayout
         android:id="@+id/rewrite_password_signup_part"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/password_signup_part" >
 
@@ -78,7 +78,7 @@
     <!--  EMAIL -->
     <RelativeLayout
         android:id="@+id/email_signup_part"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -128,7 +128,7 @@
     <!--  AGE -->
     <RelativeLayout
         android:id="@+id/age_signup_part"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
         <TextView
