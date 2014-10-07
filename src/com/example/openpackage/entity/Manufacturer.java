@@ -83,4 +83,6 @@ public class Manufacturer extends User {
 	private void save() throws ParseException {
 		mParseObject.save();
 	}
+
+	
 }

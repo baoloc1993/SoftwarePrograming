@@ -75,7 +75,7 @@ public class Customer extends User {
 		return surveyList;
 	}
 	
-	public boolean isGender() {
+	public boolean getGender() {
 		return mParseObject.getBoolean("gender");
 	}
 

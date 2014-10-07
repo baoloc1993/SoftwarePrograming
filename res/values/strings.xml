@@ -4,5 +4,7 @@
     <string name="app_name">OpenPackageApplication</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="DoSurveyTab">Do Survey</string>
+    <string name="PersonalRecordTab">History</string>
 
 </resources>

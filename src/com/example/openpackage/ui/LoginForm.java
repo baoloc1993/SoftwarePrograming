@@ -1,4 +1,4 @@
-package com.example.openpacket.login;
+package com.example.openpackage.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,35 +8,34 @@ import android.support.v4.app.DialogFragment;
 import android.widget.Toast;
 
 import com.example.openpackage.controller.UserController;
-import com.example.openpacket.ui.MainActivity;
 
 public class LoginForm {
 
-	String name;
-	String password;
-	
-	/**
-	 * Submit the info when user click Submit button
-	 */
-	public void submit(){
-		
-	}
-	
-	
-	/**
-	 * Display error message when the login is not successful
-	 */
-	public void displayErrorMessage(String name, String password){
-		UserController userController = new UserController(MainActivity.activity)
-		if (!userController.validateLogin(name,password)){
-			Toast.makeText(
-					MainActivity.activity,
-					"Username or password is not correct", 
-					Toast.LENGTH_LONG).show(); 
-		}
-			
-		
-	}
+//	String name;
+//	String password;
+//	
+//	/**
+//	 * Submit the info when user click Submit button
+//	 */
+//	public void submit(){
+//		
+//	}
+//	
+//	
+//	/**
+//	 * Display error message when the login is not successful
+//	 */
+//	public void displayErrorMessage(String name, String password){
+//		UserController userController = new UserController(MainActivity.activity)
+//		if (!userController.validateLogin(name,password)){
+//			Toast.makeText(
+//					MainActivity.activity,
+//					"Username or password is not correct", 
+//					Toast.LENGTH_LONG).show(); 
+//		}
+//			
+//		
+//	}
 	
 //	/**
 //	 * AlertDialog Class

@@ -12,5 +12,4 @@ public abstract class User {
 	public abstract String getUsername();
 	public abstract String getPassword();
 	public abstract String getEmail();
-	public abstract boolean isGender();
 }

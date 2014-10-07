@@ -34,7 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/password_login_part"
-        android:layout_below="@id/usernamelogin_part"
+        android:layout_below="@id/username_login_part"
         android:layout_marginRight="10dp">/>
     
         
@@ -50,8 +50,7 @@
 	        android:id="@+id/password_login_field"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@id/password_login"
-	        android:inputType="password">
+	        android:layout_toRightOf="@id/password_login">
     	</EditText>
 
     </RelativeLayout>
