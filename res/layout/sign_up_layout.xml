@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <!-- USERNAME -->
+    <RelativeLayout
+        android:id="@+id/username_signup_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/user_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Email   " />
+        
+        <EditText
+        android:id="@+id/username_signup_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/username_signup" >
+    </EditText>
+    </RelativeLayout>
+    
+    <!--  PASSWORD -->
+    <RelativeLayout
+        android:id="@+id/password_signup_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/username_signup_part" >
+
+        <TextView
+            android:id="@+id/password_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Password" />
+        
+        <EditText
+	        android:id="@+id/password_signup_field"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/password_signup"
+	        android:inputType="textPassword"
+	        android:ems="10" >
+    	</EditText>
+    </RelativeLayout>
+    
+        <!--  REWRITE PASSWORD -->
+    <RelativeLayout
+        android:id="@+id/rewrite_password_signup_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/password_signup_part" >
+
+        <TextView
+            android:id="@+id/rewrite_password_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Rewrite Password" />
+        
+        <EditText
+	        android:id="@+id/rewrite_password_signup_field"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/rewrite_password_signup"
+	        android:inputType="textPassword"
+	        android:ems="10" >
+    	</EditText>
+    </RelativeLayout>
+    
+    <!--  EMAIL -->
+    <RelativeLayout
+        android:id="@+id/email_signup_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/email_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Email   " />
+        
+        <EditText
+	        android:id="@+id/email_signup_field"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/email_signup"
+	        android:ems="10"
+	        android:inputType="textEmailAddress" >
+        <requestFocus />
+    </EditText>
+    </RelativeLayout>
+    
+    <!-- COMFIRM EMAIL  -->
+    <RelativeLayout
+        android:id="@+id/rewrite_email_forgot_part"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/rewrite_email_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Confirm Emai" />
+        
+        <EditText
+	        android:id="@+id/rewrite_email_signup_field"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/rewrite_email_signup"
+	        android:ems="10"
+	        android:inputType="textEmailAddress" >
+        <requestFocus />
+    </EditText>
+    </RelativeLayout>
+    
+    <!--  AGE -->
+    <RelativeLayout
+        android:id="@+id/age_signup_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/age_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Age     " />
+        
+        <EditText
+	        android:id="@+id/age_signup_field"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/age_signup"
+	        android:ems="10"
+	        android:inputType="number" >
+        <requestFocus />
+    	</EditText>
+        
+    </RelativeLayout>
+
+    <!--  GENDER -->
+    
+	<RelativeLayout
+        android:id="@+id/gender_signup_part"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    
+        <RadioButton
+	        android:id="@+id/gender_signup_radio"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_alignParentLeft="true">
+    	</RadioButton>
+        
+    </RelativeLayout>
+
+	<Button
+         android:id="@+id/signup_button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom ="@id/gender_signup_part"
+         
+         android:text="Create new account" >
+    </Button>
+
+</RelativeLayout>

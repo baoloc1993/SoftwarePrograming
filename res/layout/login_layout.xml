@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/username_login_part"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/username_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Username" />
+
+        <EditText
+	        android:id="@+id/username_login_field"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/username_login"
+	        android:ems="10" >
+    	</EditText>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/password_login_part"
+        android:layout_below="@id/usernamelogin_part"
+        android:layout_marginRight="10dp">/>
+    
+        
+        <TextView
+            android:id="@+id/password_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="textPassword" />
+
+        <EditText
+	        android:id="@+id/password_login_field"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/password_login"
+	        android:inputType="password">
+    	</EditText>
+
+    </RelativeLayout>
+    
+	<Button
+         android:id="@+id/login_button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom ="@id/password_login_part"
+         
+         android:text="Login" >
+    </Button>
+    
+	<Button
+         android:id="@+id/new_acc_button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom ="@id/login_button"
+         
+         android:text="Create new account" >
+    </Button>
+    
+	<Button
+         android:id="@+id/forget_password_button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom ="@id/new_acc_button"
+         
+         android:text="Forget Password" >
+    </Button>
+
+	
+
+</RelativeLayout>
