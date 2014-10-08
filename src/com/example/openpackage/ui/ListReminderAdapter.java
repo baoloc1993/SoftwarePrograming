@@ -5,9 +5,11 @@ import java.util.List;
 
 
 
-import com.example.openpackage.entity.Reminder;
 
-import android.R;
+
+import com.example.openpackage.entity.Reminder;
+import com.example.openpackageapplication.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +74,7 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 			// This is how you obtain a reference to the TextViews.
 			// These TextViews are created in the XML files we defined.
 
-			TextView order = (TextView) v.findViewById(R.id.order_single_layout);
+			TextView order = (TextView) v.findViewById(R.id.order_single_reminder);
 			TextView nameInfo = (TextView) v.findViewById(R.id.name_info_single_reminder);
 			TextView dateInfo = (TextView) v.findViewById(R.id.date_info_single_reminder);
 			
@@ -91,25 +93,25 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 			if (dateInfo != null) {
 				dateInfo.setText(i.getTime().toString());
 			}
-			//
-			if (icon != null) {
-				int size = (int) (MainActivity.getStandardSize() * 0.3);
-				icon.getLayoutParams().width = size;
-				icon.getLayoutParams().height = size;
-
-				ImageLoader imgLoader = new ImageLoader(getContext());
-				// Loader image - will be shown before loading image
-				int loader = R.drawable.image_not_found;
-				
-				imgLoader.DisplayImage(i.getImgUrl(), loader, icon);
-
-			}
-			if (content != null) {
-				content.setText(i.getDescription());
-			}
-			if (timestamp != null) {
-				timestamp.setText(i.getPubdate());
-			}
+//			//
+//			if (icon != null) {
+//				int size = (int) (MainActivity.getStandardSize() * 0.3);
+//				icon.getLayoutParams().width = size;
+//				icon.getLayoutParams().height = size;
+//
+//				ImageLoader imgLoader = new ImageLoader(getContext());
+//				// Loader image - will be shown before loading image
+//				int loader = R.drawable.image_not_found;
+//				
+//				imgLoader.DisplayImage(i.getImgUrl(), loader, icon);
+//
+////			}
+//			if (content != null) {
+//				content.setText(i.getDescription());
+//			}
+//			if (timestamp != null) {
+//				timestamp.setText(i.getPubdate());
+//			}
 
 		}
 

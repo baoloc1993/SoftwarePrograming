@@ -1,91 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp" >
 
     <!-- USERNAME -->
+
     <RelativeLayout
         android:id="@+id/username_login_part"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp" >
 
         <TextView
             android:id="@+id/username_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignBaseline="@+id/username_login_field"
             android:layout_alignParentLeft="true"
             android:text="Username" />
 
         <EditText
-	        android:id="@+id/username_login_field"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@id/username_login"
-	        android:ems="10" >
-    	</EditText>
+            android:id="@+id/username_login_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/username_login"
+            android:ems="10" >
+        </EditText>
     </RelativeLayout>
 
-    <!--  PASSWORD -->
+    <!-- PASSWORD -->
+
     <RelativeLayout
+        android:id="@+id/password_login_part"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/password_login_part"
-        android:layout_below="@id/username_login_part"
-        android:layout_marginRight="10dp">/>
-    
-        
+       
+        android:layout_below="@id/username_login_part" >
+
         <TextView
             android:id="@+id/password_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignBaseline="@+id/password_login_field"
             android:layout_alignParentLeft="true"
-            android:text="textPassword" />
+            android:text="Password" />
 
         <EditText
-	        android:id="@+id/password_login_field"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@id/password_login">
-    	</EditText>
-
+            android:id="@+id/password_login_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/password_login"
+            android:inputType="textPassword" >
+        </EditText>
     </RelativeLayout>
     
-    <!-- LOGIN BUTTON -->
+	<!-- LOGIN BUTTON -->
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_login_part"
+        android:layout_centerHorizontal="true"
+        android:text="Login" />
 
-	<Button
-	    android:id="@+id/login_button"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignBottom="@id/password_login_part"
-	    android:text="Login" >
-
-    </Button>
-    
-	<!--  CREATE NEW ACC BUTTON -->
-	<Button
-         android:id="@+id/new_acc_button"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBottom ="@id/login_button"
-         
-         android:text="Create new account" >
-    </Button>
+    <!-- CREATE NEW ACC BUTTON -->
+    <Button
+        android:id="@+id/new_acc_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_button"
+        android:layout_centerHorizontal="true"
+        android:text="Create new account" />
     
 	<!-- FORGET PASSWORD BUTTON -->
-	<Button
-         android:id="@+id/forget_password_button"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBottom ="@id/new_acc_button"
-         
-         android:text="Forget Password" >
-    </Button>
-
-	
+    <Button
+        android:id="@+id/forget_password_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_acc_button"
+        android:layout_centerHorizontal="true"
+        android:text="Forget Password" />
 
 </RelativeLayout>
