@@ -169,25 +169,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignBottom="@+id/male_signup_radio"
+            android:layout_alignBottom="@+id/radioGroup"
             android:text="Gender\t\t\t\t\t" />
-	    
-        <RadioButton
-	        android:id="@+id/male_signup_radio"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@id/gender_signup"
-	        android:layout_alignBottom="@+id/female_signup_radio"
-	        android:text="Male">
+	    <RadioGroup 
+	        android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+        	android:layout_toRightOf="@id/gender_signup"
+        	android:id = "@+id/radioGroup">
+        	 <RadioButton
+		        android:id="@+id/male_signup_radio"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@id/gender_signup"
+		        android:layout_alignBottom="@+id/female_signup_radio"
+		        android:text="Male">
     	</RadioButton>
     	
         <RadioButton
-	        android:id="@+id/female_signup_radio"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@id/male_signup_radio"
-	        android:text="Female">
+		        android:id="@+id/female_signup_radio"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@id/male_signup_radio"
+		        android:text="Female">
     	</RadioButton>
+	        
+	    </RadioGroup>
+       
         
     </RelativeLayout>
 
