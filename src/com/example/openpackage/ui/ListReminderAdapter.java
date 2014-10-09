@@ -87,7 +87,9 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 			// if not, assign some text!
 			// Config parameter of each textview and imageview(Resize)
 
-			
+			if (order != null){
+				order.setText("stt");
+			}
 			
 			if (nameInfo != null) {
 				nameInfo.setText(i.getDescription());
@@ -95,25 +97,14 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 			if (dateInfo != null) {
 				dateInfo.setText(i.getTime().toString());
 			}
-//			//
-//			if (icon != null) {
-//				int size = (int) (MainActivity.getStandardSize() * 0.3);
-//				icon.getLayoutParams().width = size;
-//				icon.getLayoutParams().height = size;
-//
-//				ImageLoader imgLoader = new ImageLoader(getContext());
-//				// Loader image - will be shown before loading image
-//				int loader = R.drawable.image_not_found;
-//				
-//				imgLoader.DisplayImage(i.getImgUrl(), loader, icon);
-//
-////			}
-//			if (content != null) {
-//				content.setText(i.getDescription());
-//			}
-//			if (timestamp != null) {
-//				timestamp.setText(i.getPubdate());
-//			}
+			
+			if (status != null){
+				if (i.getActive()){
+					status.setImageResource(R.drawable.ic_launcher);
+				}else{
+					status.setImageResource(R.drawable.ic_launcher);
+				}
+			}
 
 		}
 
