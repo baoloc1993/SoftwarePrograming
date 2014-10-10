@@ -3,14 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="86dp"
-        android:text="abcd" />
+    	<TextView
+	    android:id="@+id/name"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="false"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerInParent="true"
+	    android:layout_marginTop="10dp"
+	    android:text="@string/select_type"
+	    android:textSize="15sp" />
+    
+	<Spinner
+	    android:id="@+id/spinner"
+	    android:layout_width="200dp"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/name"
+	    android:layout_centerInParent="true" />
+
+	<ListView
+	    android:id="@+id/listView1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/spinner"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerInParent="true"
+	    android:layout_marginTop="5dp"
+	    android:background="@color/light_gray"
+	    android:dividerHeight="2dp"
+	    android:footerDividersEnabled="true"
+	    android:headerDividersEnabled="true" >
+
+	</ListView>
 
 </RelativeLayout>

@@ -4,7 +4,15 @@
     <string name="app_name">OpenPackageApplication</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="DoSurveyTab">Do Survey</string>
+    <string name="DoSurveyTab">Survey</string>
     <string name="PersonalRecordTab">History</string>
+    <string name="log_out">Log out</string>
+    <string name="search">Search</string>
+    <string-array name="title_array">
+         <item>Bottle</item>
+        <item>Can</item>
+        <item>Pack</item>
+    </string-array>
+        <string name="select_type">Please select type of package:</string>
 
 </resources>

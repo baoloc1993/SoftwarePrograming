@@ -66,6 +66,16 @@ public class FoodOpeningPackage {
 		return mParseObject.getDouble("average");
 	}
 	
+	public String getID () {
+		return mParseObject.getObjectId();
+	}
+	
+	public static FoodOpeningPackage findById( String Id ) throws ParseException {
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		return new FoodOpeningPackage(query.get(Id));
+	}
+	
+	
 	public void addSurvey( Survey survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());

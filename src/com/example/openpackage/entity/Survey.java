@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class Survey {
 	private static String CLASSNAME = "Survey";
@@ -50,7 +51,9 @@ public class Survey {
 		return mParseObject.getInt("rate");
 	}
 	
-
+	public String getID () {
+		return mParseObject.getObjectId();
+	}
 	
 	public ParseObject getParseObject() {
 		return mParseObject;
@@ -59,4 +62,11 @@ public class Survey {
 	private void save() throws ParseException {
 		mParseObject.save();
 	}
+
+	public static Survey findById(String id) throws ParseException {
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		return new Survey(query.get(id));
+	}
+
+
 }
