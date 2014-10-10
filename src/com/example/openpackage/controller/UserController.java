@@ -13,10 +13,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.example.openpackage.entity.Customer;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.User;
+import com.example.openpackage.ui.MainActivity;
 import com.parse.ParseException;
 
 public class UserController {
@@ -48,10 +50,10 @@ public class UserController {
 			if ( customer.getUsername().equals(username) && customer.getPassword().equals(password) ) {
 				try {
 					customer.logIn();
-					//Intent intent = new Intent( mContext, MainUI.class);
-					//intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-					//mContext.startActivity(intent);
+					Intent intent = new Intent( mContext, MainActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					mContext.startActivity(intent);
 				} catch (ParseException e) {
 					e.printStackTrace();
 					return false;

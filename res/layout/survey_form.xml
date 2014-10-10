@@ -30,16 +30,16 @@
         android:stepSize="1" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/username"
         android:layout_marginTop="13dp"
         android:text="Comment: " />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/survey_header"
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/rating"
         android:ems="10" />
 
     <View

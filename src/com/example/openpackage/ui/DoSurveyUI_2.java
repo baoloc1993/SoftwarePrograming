@@ -13,7 +13,7 @@ import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackageapplication.R;
 
-public class DoSurveyUI_2 extends FragmentActivity {
+public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callbacks{
 	private static String TAG = "DoSurveyUI_2";
 	private FoodOpeningPackage mFood;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
@@ -59,5 +59,17 @@ public class DoSurveyUI_2 extends FragmentActivity {
 		fragment.setArguments(arguments);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.survey_container, fragment).commit();
+	}
+
+	@Override
+	public void onSubmitSurveySelected() {
+		Bundle arguments = new Bundle();
+		arguments.putString(Survey_Form.FOODOPENINGPACKAGE_ID, mFood.getID());
+		
+		Survey_Form fragment = new Survey_Form();
+		fragment.setArguments(arguments);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.survey_container, fragment).commit();
+		
 	}
 }

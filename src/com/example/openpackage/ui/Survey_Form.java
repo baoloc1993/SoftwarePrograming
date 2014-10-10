@@ -1,10 +1,14 @@
 package com.example.openpackage.ui;
 
 
+import java.util.Date;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openpackage.controller.FoodOpeningPackageController;
@@ -78,7 +84,8 @@ public class Survey_Form extends Fragment{
 							if (!create) {
 								Toast.makeText(getActivity(), "Your survey is invalid", Toast.LENGTH_SHORT).show();
 							} else {
-								Toast.makeText(getActivity(), "Your survey is submited", Toast.LENGTH_SHORT).show();
+								mCallbacks.onSubmitSurveySelected();
+								Toast.makeText(getActivity(), "Your survey is submited", Toast.LENGTH_LONG).show();
 							}
 							
 				        }
@@ -90,8 +97,54 @@ public class Survey_Form extends Fragment{
 			});
 			
 		} else {
-			//rootView = inflater.inflate(R.layout.survey_view, container, false);
+			Log.i(TAG, "LOAD FORM");
+			rootView = inflater.inflate(R.layout.survey_view, container, false);
+			
+			TextView username = (TextView) rootView.findViewById(R.id.username);
+			RatingBar rate = (RatingBar) rootView.findViewById(R.id.ratingBar1);
+			TextView comment = (TextView) rootView.findViewById(R.id.comment);
+			TextView date = (TextView) rootView.findViewById(R.id.date);
+			RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.container);
+			
+			layout.setBackgroundColor(getActivity().getResources().getColor(R.color.lighter_gray));
+			
+			Log.i(TAG, "STILL OKAY");
+			
+			username.setText("Your Survey");
+			rate.setRating( (float) mSurvey.getRate());
+			comment.setText(mSurvey.getComment());
+			
+			String converDate = DateUtils.getRelativeTimeSpanString(
+					mSurvey.getParseObject().getUpdatedAt().getTime(),
+					new Date().getTime(), 
+					DateUtils.SECOND_IN_MILLIS).toString();
+			
+			date.setText(converDate);
+			
+			Log.i(TAG, "STILL OKAY2");
 		}
 		return rootView;
+	}
+	
+	public interface Callbacks {
+		public void onSubmitSurveySelected();
+	}
+	
+	private Callbacks mCallbacks; 
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		if (!(activity instanceof Callbacks)) {
+			throw new IllegalStateException(
+					"Activity must implement fragment's callbacks.");
+		}
+		mCallbacks = (Callbacks) activity;
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mCallbacks = null;
 	}
 }

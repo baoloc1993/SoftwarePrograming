@@ -33,9 +33,20 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="LoginFormActivity"></activity>
-        <activity android:name="ForgetPasswordActivity"></activity>
-        <activity android:name="RegisterActivity"></activity>
+       	<activity 
+            android:name="com.example.openpackage.ui.LoginFormActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        
+       	<activity 
+            android:name="com.example.openpackage.ui.RegisterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        
+       	<activity 
+            android:name="com.example.openpackage.ui.ForgetPasswordActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
     </application>
 
