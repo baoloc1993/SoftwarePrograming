@@ -27,6 +27,15 @@ public class UserController {
 		this.mContext = mContext;
 	}
 	
+	public Customer getCurrentUser() {
+		try {
+			return Customer.getCurrentUser();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public boolean validateLogin( String username, String password ) {
 		ArrayList<Customer> customers;
 		try {

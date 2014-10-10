@@ -9,6 +9,7 @@ public class OpenPacketApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Parse.enableLocalDatastore(this);
 		Parse.initialize(this, "8Xufbq7PYSRLcuxLmhDmA6kzFvBKvzbzMnbv9snM", "cU89WWRKmVVjsxfvKlpzu1zM1iIxEpjILzUcuVaM");
 	}
 }

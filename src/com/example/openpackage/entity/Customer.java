@@ -41,6 +41,14 @@ public class Customer extends User {
 		mParseObject.unpin();
 	}
 	
+	public static Customer getCurrentUser() throws ParseException {
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		query.fromLocalDatastore();
+		List<ParseObject> customers = query.find();
+		if (customers.isEmpty()) return null;
+		return new Customer(customers.get(0));
+	}
+	
 	public static ArrayList<Customer> listAll() throws ParseException {
 		ArrayList<Customer> res = new ArrayList<Customer>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
@@ -78,8 +86,11 @@ public class Customer extends User {
 	public boolean getGender() {
 		return mParseObject.getBoolean("gender");
 	}
-
-
+	
+	public String getId() {
+		return mParseObject.getObjectId();
+	}
+	
 	@Override
 	public String getUsername() {
 		return mParseObject.getString("username");
