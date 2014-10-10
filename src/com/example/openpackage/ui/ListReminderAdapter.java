@@ -27,7 +27,7 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 		// TODO Auto-generated constructor stub
 	}
 	
-	private ArrayList<Reminder> listReminder;
+	private ArrayList<Reminder> listReminders;
 	
 	/*
 	 * here we must override the constructor for ArrayAdapter the only variable
@@ -35,9 +35,9 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 	 * objects we want to display.
 	 */
 	public ListReminderAdapter(Context context, int textViewResourceId,
-			ArrayList<Reminder> listReminder) {
-		super(context, textViewResourceId, listReminder);
-		this.listReminder = listReminder;
+			ArrayList<Reminder> listReminders) {
+		super(context, textViewResourceId, listReminders);
+		this.listReminders = listReminders;
 	}
 	
 	
@@ -69,7 +69,7 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 		 * 
 		 * Therefore, i refers to the current Item object.
 		 */
-		Reminder i = listReminder.get(position);
+		Reminder i = listReminders.get(position);
 
 		if (i != null) {
 
