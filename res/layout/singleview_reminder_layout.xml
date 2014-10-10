@@ -16,7 +16,8 @@
         android:id="@+id/name_date_single_reminder_part"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_alignRight="@id/order_single_reminder">
+        android:layout_toRightOf="@id/order_single_reminder"
+        android:layout_toLeftOf="@+id/status_reminder">
 
          <!--  NAME -->
      	<RelativeLayout
@@ -36,8 +37,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_toRightOf="@id/name_single_reminder"
-	            android:layout_alignParentTop="true"
-	            android:text="Name Info" />
+	            android:layout_alignParentTop="true" />
       	</RelativeLayout>
     
      	 <!--  DATE -->
@@ -59,8 +59,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_toRightOf="@id/date_single_reminder"
-	            android:layout_alignParentTop="true"
-	            android:text="Date Info" />
+	            android:layout_alignParentTop="true" />
       	</RelativeLayout>
     </RelativeLayout>
     

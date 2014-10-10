@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+    
     
 	<RelativeLayout
 	    android:id="@+id/new_reminder_button_part"
 	    android:layout_width="match_parent"
-    	android:layout_height="match_parent" >
+    	android:layout_height="wrap_content" >
     	
 	    <ImageView
 	        android:id="@+id/new_reminder_button"
@@ -14,6 +17,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
 	        android:layout_alignParentTop="true"
+	        
 	        android:src="@drawable/ic_launcher" />
 	    
 	    <TextView 
@@ -21,6 +25,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@id/new_reminder_button"
+	        android:layout_alignBottom="@id/new_reminder_button"
 	        android:text="NEW REMINDER"/>
 	    
 	</RelativeLayout>
@@ -30,6 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignBottom="@id/new_reminder_button_part" >
+        android:layout_below="@id/new_reminder_button_part" >
     </ListView>
 </RelativeLayout>

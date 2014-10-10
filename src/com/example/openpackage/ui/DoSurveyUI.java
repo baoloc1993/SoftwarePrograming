@@ -1,12 +1,10 @@
 package com.example.openpackage.ui;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +20,7 @@ import android.widget.Toast;
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackageapplication.R;
+
 
 public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 	private static String TAG = "DoSurveyUI";
