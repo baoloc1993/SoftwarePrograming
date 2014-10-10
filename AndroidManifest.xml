@@ -29,6 +29,12 @@
         <activity android:name="LoginFormActivity"></activity>
         <activity android:name="ForgetPasswordActivity"></activity>
         <activity android:name="RegisterActivity"></activity>
+        
+        <activity 
+            android:name="com.example.openpackage.ui.DoSurveyUI_2"
+            android:label="@string/DoSurveyTab"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
