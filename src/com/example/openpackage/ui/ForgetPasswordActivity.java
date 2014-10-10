@@ -23,8 +23,8 @@ public class ForgetPasswordActivity extends Activity {
 	    setContentView(R.layout.forget_password_layout);
 	    // TODO Auto-generated method stub
 	    
-	    EditText email = (EditText) findViewById(R.id.email_forgot_field);
-	    emailStr = email.getText().toString();
+	    final EditText email = (EditText) findViewById(R.id.email_forgot_field);
+	   
 	    
 //	    EditText user = (EditText)findViewById(R.id.username_forgot_field);
 //	    username = user.getText().toString();
@@ -35,6 +35,8 @@ public class ForgetPasswordActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				 emailStr = email.getText().toString();
+				 
 				UserController userController = new UserController(getApplicationContext());
 				if(!userController.verifyForgetInfo(emailStr)){
 					Toast.makeText(getApplicationContext(),
