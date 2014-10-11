@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -14,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.openpackage.entity.Customer;
 import com.example.openpackage.entity.Survey;
@@ -22,7 +24,7 @@ import com.example.openpackage.ui.MainActivity;
 import com.parse.ParseException;
 
 public class UserController {
-	
+	private final static String TAG = "UserController";
 	Context mContext;
 	
 	public UserController (Context mContext){
@@ -86,10 +88,10 @@ public class UserController {
 		try {
 			Customer customer = new Customer( username, password, email, age, gender );
 			customer.logIn();
-			//Intent intent = new Intent( mContext, MainUI.class);
-			//intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-			//mContext.startActivity(intent);
+			Intent intent = new Intent( mContext, MainActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			mContext.startActivity(intent);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return "There is some error with internet connection.";
@@ -98,12 +100,14 @@ public class UserController {
 	}
 	
 	public boolean verifyForgetInfo(String email) {
+		Log.i(TAG, email);
 		ArrayList<Customer> customers;
 		try {
 			customers = Customer.listAll();
 			for(Customer customer : customers) {
 				if ( customer.getEmail().equals(email) ) {
 					sendEmail( customer );
+					Log.i(TAG, "find" + customer.getEmail() );
 					return true;
 				}
 			}
@@ -145,8 +149,6 @@ public class UserController {
 		}
 	
 	private void sendEmail( Customer customer ) {
-		Properties props = new Properties();
-        Session session = Session.getDefaultInstance(props, null);
 
         String msgBody = "<p>Here is your username and password. Thank you for use our Application.</p>"
         		+ "<ul>"
@@ -155,14 +157,29 @@ public class UserController {
         		+ "</ul>";
 
         try {
+        	Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.debug", "false");
+            props.put("mail.smtp.ssl.enable", "true");
+
+            Session session = Session.getDefaultInstance(props, 
+            	    new javax.mail.Authenticator(){
+            	        protected PasswordAuthentication getPasswordAuthentication() {
+            	            return new PasswordAuthentication(
+            	                "ntuananhhp95@gmail.com", "vietanh123");// Specify the Username and the PassWord
+            	        }
+            	});
+            
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("tuananh3668@gmail.com", "Nguyen Tuan Anh"));
+            
+            msg.setFrom(new InternetAddress("ntuananhhp95@gmail.com", "Nguyen Tuan Anh"));
             msg.addRecipient(Message.RecipientType.TO,
                              new InternetAddress(customer.getEmail(), "Mr " + customer.getUsername()));
             msg.setSubject("Get Username and Password");
-            msg.setContent(msgBody, "text/html; charset=utf-8");
+            msg.setContent(msgBody, "text/html");
             Transport.send(msg);
-
+            Log.i(TAG, "email sented");
         } catch (AddressException e) {
         	e.printStackTrace();
         } catch (MessagingException e) {

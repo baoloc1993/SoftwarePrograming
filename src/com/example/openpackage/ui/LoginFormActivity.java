@@ -64,8 +64,8 @@ public class LoginFormActivity extends Activity {
 		});
 		
 		//CREATE ACC BUTTON
-		Button createAcc = (Button) findViewById(R.id.forget_password_button);
-		forgetPass.setOnClickListener(new OnClickListener() {
+		Button createAcc = (Button) findViewById(R.id.new_acc_button);
+		createAcc.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
