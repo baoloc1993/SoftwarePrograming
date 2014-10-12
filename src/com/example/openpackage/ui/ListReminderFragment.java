@@ -72,25 +72,25 @@ public class ListReminderFragment extends Fragment {
 		/**
 		 * CREATE REMINDER
 		 */
-		Button createReminder = (Button)rootView.findViewById(R.id.create_reminder_button);
-		createReminder.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				FragmentManager fragmentManager = getActivity().getFragmentManager();
-				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
-
-				//e.setArguments(args);
-
-				// Go to DisplayFullNewsFragment
-				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
-				fragmentManager.beginTransaction()
-						.replace(((ViewGroup)getView().getParent()).getId(), createReminderFragment)
-						.commit();
-			}
-		});
+//		Button createReminder = (Button)rootView.findViewById(R.id.create_reminder_button);
+//		createReminder.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				
+//				FragmentManager fragmentManager = getActivity().getFragmentManager();
+//				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
+//
+//				//e.setArguments(args);
+//
+//				// Go to DisplayFullNewsFragment
+//				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
+//				fragmentManager.beginTransaction()
+//						.replace(((ViewGroup)getView().getParent()).getId(), createReminderFragment)
+//						.commit();
+//			}
+//		});
 		return rootView;
 		
 		

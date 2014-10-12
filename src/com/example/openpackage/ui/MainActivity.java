@@ -1,9 +1,12 @@
 package com.example.openpackage.ui;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +16,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.Customer;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
@@ -23,32 +28,43 @@ import com.parse.ParseQuery;
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
 	private static final String TAG = "MainActivity";
+	Context mContext;
 	
 	private ViewPager mViewPager;
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ActionBar mActionBar;
 	private Customer mCurrentUser;
+	private UserController mUserController;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		mContext = this;
+		
+		mUserController = new UserController(this);
 		
 		// TODO erase when done
+		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
-		try {
-			ParseObject x = query.get("c0Iju0ayaz");
-			mCurrentUser = new Customer(x);
-			mCurrentUser.logIn();
-			Log.i(TAG, mCurrentUser.getUsername());
-		} catch (ParseException e) {
-			e.printStackTrace();
-			Log.i(TAG, "CANT FIND");
+//		try {
+//			ParseObject x = query.get("c0Iju0ayaz");
+//			mCurrentUser = new Customer(x);
+//			mCurrentUser.logIn();
+//			Log.i(TAG, mCurrentUser.getUsername());
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//			Log.i(TAG, "CANT FIND");
+//		}
+		
+		Customer user = mUserController.getCurrentUser();
+		if (user == null ) {
+			Intent intent = new Intent(this, LoginFormActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		}
-		
-		
-		
-		
 		
 		mSectionsPagerAdapter = new SectionsPagerAdapter(this, this.getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -86,7 +102,30 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
-		
+		switch (itemId) {
+		case R.id.action_logout:
+			new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("Log out")
+	        .setMessage("Are you sure you want to log out?")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+		        @Override
+		        public void onClick(DialogInterface dialog, int which) {
+		        	Customer user = mUserController.getCurrentUser();
+		        	mUserController.logOut(user);
+		        	Intent intent = new Intent(mContext, LoginFormActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+					finish();
+		        }
+	        })
+	        .setNegativeButton("No", null)
+	        .show();
+			break;
+		default:
+			break;
+		}
 		
 		
 		return super.onOptionsItemSelected(item);

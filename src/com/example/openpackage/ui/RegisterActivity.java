@@ -31,29 +31,17 @@ public class RegisterActivity extends Activity {
 	    setContentView(R.layout.register_layout);
 	    // TODO Auto-generated method stub
 	    
-	    EditText username = (EditText)findViewById(R.id.username_signup_field);
-	    user = username.getText().toString();
-	    
-	    EditText password = (EditText)findViewById(R.id.password_signup_field);
-	    pass = password.getText().toString();
-	    
-	    EditText rePassword = (EditText)findViewById(R.id.rewrite_password_signup_field);
-	    rePass = rePassword.getText().toString();
-	    
-	    EditText email = (EditText)findViewById(R.id.email_signup_field);
-	    emailStr = email.getText().toString();
-	    
-	    EditText reEmail = (EditText)findViewById(R.id.rewrite_email_signup_field);
-	    reEmailStr = reEmail.getText().toString();
-	    
-	    EditText age = (EditText)findViewById(R.id.age_signup_field);
-	    ageInt = Integer.parseInt(age.getText().toString());
+	    final EditText username = (EditText)findViewById(R.id.username_signup_field);
+	    final EditText password = (EditText)findViewById(R.id.password_signup_field);
+	    final EditText rePassword = (EditText)findViewById(R.id.rewrite_password_signup_field);
+	    final EditText email = (EditText)findViewById(R.id.email_signup_field);
+	    final EditText reEmail = (EditText)findViewById(R.id.rewrite_email_signup_field);
+	    final EditText age = (EditText)findViewById(R.id.age_signup_field);
 	    
 	   //boolean isMale = true;
-	    RadioGroup gender = (RadioGroup)findViewById(R.id.radioGroup);
+	    final RadioGroup gender = (RadioGroup)findViewById(R.id.radioGroup);
+	   
 	    gender.setOnClickListener(new OnClickListener() {
-			
-	    	
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -69,7 +57,6 @@ public class RegisterActivity extends Activity {
 			            }
 			        case R.id.female_signup_radio:
 			            if (checked){
-			                // Ninjas rule
 			            	isMale = false;
 			            	break;
 			            }
@@ -78,7 +65,6 @@ public class RegisterActivity extends Activity {
 			
 		});
 	    
-	    
 	    //REG BUTTON
 	    Button register = (Button)findViewById(R.id.signup_button);
 	    register.setOnClickListener(new OnClickListener() {
@@ -86,6 +72,16 @@ public class RegisterActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				//GET INFORMATION FROM UI
+				user = username.getText().toString();
+				pass = password.getText().toString();
+				rePass = rePassword.getText().toString();
+				emailStr = email.getText().toString();
+				reEmailStr = reEmail.getText().toString();
+				ageInt = Integer.parseInt(age.getText().toString());
+				 
+				 
 				if (isRegisterValid(pass, rePass, emailStr, reEmailStr)){
 					UserController userController = new UserController(getApplicationContext());
 					String result = userController.validateRegister(user, pass, emailStr, ageInt, isMale);
