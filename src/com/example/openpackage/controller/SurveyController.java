@@ -45,7 +45,7 @@ public class SurveyController {
 		cmt = cmt.trim();
 		if (rate == 0 || cmt.isEmpty()) 
 			return false;
-		Customer user = mUserController.getCurrentUser();
+		Customer user = (Customer) mUserController.getCurrentUser();
 		try {
 			Survey survey = new Survey(user, new Date(), cmt, rate, food);
 			user.addSurvey(survey);

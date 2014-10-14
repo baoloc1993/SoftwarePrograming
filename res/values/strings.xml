@@ -14,5 +14,8 @@
         <item>Pack</item>
     </string-array>
         <string name="select_type">Please select type of package:</string>
+        <string name="StatsTab">Stats</string>
+        <string name="FoodPackageTab">Food Package</string>
+        <string name="ReminderTab">Reminder</string>
 
 </resources>

@@ -18,9 +18,11 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.Manufacturer;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.User;
 import com.example.openpackage.ui.MainActivity;
+import com.example.openpackage.ui.ManufacturerUI;
 import com.parse.ParseException;
 
 public class UserController {
@@ -31,17 +33,32 @@ public class UserController {
 		this.mContext = mContext;
 	}
 	
-	public Customer getCurrentUser() {
+	public User getCurrentUser() {
 		try {
-			return Customer.getCurrentUser();
+			User user = Customer.getCurrentUser();
+			if (user!=null) return user;
+			user = Manufacturer.getCurrentUser();
+			if (user!=null) return user;
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
+	private Manufacturer getManufactureUser() {
+		try {
+			ArrayList<Manufacturer> mManufacturers = Manufacturer.listAll();
+			return mManufacturers.get(0);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	public boolean validateLogin( String username, String password ) {
 		ArrayList<Customer> customers;
+		Manufacturer mManufacturer = getManufactureUser();
 		try {
 			customers = Customer.listAll();
 		} catch (ParseException e) {
@@ -62,6 +79,19 @@ public class UserController {
 				}
 				
 				return true;
+			}
+		}
+		
+		if (mManufacturer!=null && mManufacturer.getUsername().equals(username) && mManufacturer.getPassword().equals(password)) {
+			try {
+				mManufacturer.logIn();
+				Intent intent = new Intent( mContext, ManufacturerUI.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				mContext.startActivity(intent);
+				return true;
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
 		}
 		return false;

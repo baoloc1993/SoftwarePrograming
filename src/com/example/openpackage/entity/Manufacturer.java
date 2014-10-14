@@ -60,6 +60,14 @@ public class Manufacturer extends User {
 		mParseObject.unpin();
 	}
 	
+	public static Manufacturer getCurrentUser() throws ParseException {
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		query.fromLocalDatastore();
+		List<ParseObject> manufacturers = query.find();
+		if (manufacturers.isEmpty()) return null;
+		return new Manufacturer(manufacturers.get(0));
+	}
+	
 	@Override
 	public String getUsername() {
 		return mParseObject.getString("username");

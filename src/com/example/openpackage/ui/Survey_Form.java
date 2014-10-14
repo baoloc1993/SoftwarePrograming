@@ -48,7 +48,7 @@ public class Survey_Form extends Fragment{
 		String foodId = getArguments().getString(FOODOPENINGPACKAGE_ID);
 		mFood = mFoodOpeningPackageController.getById(foodId);
 		
-		user = mUserController.getCurrentUser();
+		user = (Customer) mUserController.getCurrentUser();
 		if ( user == null ) Log.i(TAG, "No User");
 		else Log.i(TAG, user.getUsername());
 		

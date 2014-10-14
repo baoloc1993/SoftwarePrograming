@@ -47,6 +47,7 @@
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/ratingBar1"
         android:text="TextView"
+        android:textStyle="italic"
         android:textSize="12sp" />
 
     <View

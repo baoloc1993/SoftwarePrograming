@@ -31,6 +31,26 @@ public class Reminder {
 		save();
 	}
 	
+	public void setName(String name) throws ParseException {
+		mParseObject.put("name", name);
+		save();
+	}
+	
+	public void setDescription(String description) throws ParseException {
+		mParseObject.put("description", description);
+		save();
+	}
+	
+	public void setTime(Date time) throws ParseException {
+		mParseObject.put("time", time);
+		save();
+	}
+	
+	public void setActive(boolean active) throws ParseException {
+		mParseObject.put("active", active);
+		save();
+	}
+	
 	public String getName() {
 		return mParseObject.getString("name");
 	}
