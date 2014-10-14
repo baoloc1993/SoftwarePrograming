@@ -40,12 +40,7 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 		mFoodOpeningPacketController = new FoodOpeningPackageController(
 				getActivity());
 		Log.i(TAG, "Fuck VA");
-		return rootView;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
+		
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
 		        R.array.title_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -66,6 +61,7 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 			}
 			
 		});
+		return rootView;
 	}
 	
 	

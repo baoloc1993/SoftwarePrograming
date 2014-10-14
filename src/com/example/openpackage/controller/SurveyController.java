@@ -1,6 +1,8 @@
 package com.example.openpackage.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import android.content.Context;
@@ -23,9 +25,33 @@ public class SurveyController {
 		mUserController = new UserController(mContext);
 	}
 	
+	private void Sort(ArrayList<Survey> cur) {
+		Collections.sort(cur, new Comparator<Survey>() {
+
+			@Override
+			public int compare(Survey lhs, Survey rhs) {
+				
+				return (int) (rhs.getDate().getTime() - lhs.getDate().getTime());
+			}
+		});
+	}
+	
 	public ArrayList<Survey> getSurveyList(FoodOpeningPackage cur) {
 		try {
-			return cur.getSurveyList();
+			ArrayList<Survey> res = cur.getSurveyList();
+			Sort(res);
+			return res;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Survey> getSurveyList(Customer cur) {
+		try {
+			ArrayList<Survey> res = cur.getSurveyList();
+			Sort(res);
+			return res;
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

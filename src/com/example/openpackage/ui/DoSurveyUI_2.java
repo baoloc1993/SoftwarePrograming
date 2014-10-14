@@ -49,7 +49,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		
 		
 		mListView = (ListView) findViewById(R.id.listView1);
-		mListView.setAdapter(new SurveyListAdapter(this,mSurveyController.getSurveyList(mFood)));
+		mListView.setAdapter(new SurveyListAdapter(this,mSurveyController.getSurveyList(mFood), 0));
 		mListView.setVisibility(View.INVISIBLE);
 		
 		showListView = (CheckBox) findViewById(R.id.checkBox1);

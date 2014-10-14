@@ -20,11 +20,13 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 
 	private Context mContext;
 	private List<Survey> mList;
+	private int mType;
 	
-	public SurveyListAdapter(Context context, List<Survey> objects) {
+	public SurveyListAdapter(Context context, List<Survey> objects, int type) {
 		super(context, R.layout.survey_view, objects);
 		mContext = context;
 		mList = objects;
+		mType = type;
 	}
 	
 	@Override
@@ -42,11 +44,18 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 		else holder = (ViewHolder) convertView.getTag();
 		
 		Survey survey = mList.get(position);
-		
-		try {
-			holder.username.setText(survey.getUser().getUsername());
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (mType==0) {
+			try {
+				holder.username.setText(survey.getUser().getUsername());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				holder.username.setText(survey.getFoodOpeningPackage().getTitle());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		String converDate = DateUtils.getRelativeTimeSpanString(

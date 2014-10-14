@@ -59,6 +59,12 @@ public class Survey {
 		return mParseObject;
 	}
 	
+	public FoodOpeningPackage getFoodOpeningPackage() throws ParseException {
+		ParseObject res = null;
+		res = mParseObject.getParseObject("type").fetch();
+		return new FoodOpeningPackage(res);
+	}
+	
 	private void save() throws ParseException {
 		mParseObject.save();
 	}
@@ -68,5 +74,6 @@ public class Survey {
 		return new Survey(query.get(id));
 	}
 
+	
 
 }

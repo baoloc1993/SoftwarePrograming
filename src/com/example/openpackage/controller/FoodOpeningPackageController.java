@@ -1,6 +1,8 @@
 package com.example.openpackage.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.content.Context;
 
@@ -19,6 +21,15 @@ public class FoodOpeningPackageController {
 			for(FoodOpeningPackage cur : all) {
 				if (cur.getType().equals(type)) res.add(cur);
 			}
+			Collections.sort(res,new Comparator<FoodOpeningPackage> () {
+
+				@Override
+				public int compare(FoodOpeningPackage lhs,
+						FoodOpeningPackage rhs) {
+					return (int) ( rhs.getAverage()- lhs.getAverage() );
+				}
+				
+			});
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
