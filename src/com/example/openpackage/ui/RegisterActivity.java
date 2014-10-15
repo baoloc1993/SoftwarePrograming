@@ -41,29 +41,7 @@ public class RegisterActivity extends Activity {
 	   //boolean isMale = true;
 	    final RadioGroup gender = (RadioGroup)findViewById(R.id.radioGroup);
 	   
-	    gender.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// Is the button now checked?
-			    boolean checked = ((RadioButton) v).isChecked();
-			    
-			    // Check which radio button was clicked
-			    switch(v.getId()) {
-			        case R.id.male_signup_radio:
-			            if (checked){
-			                isMale = true;
-			            	break;
-			            }
-			        case R.id.female_signup_radio:
-			            if (checked){
-			            	isMale = false;
-			            	break;
-			            }
-			    }
-			}
-			
-		});
+	    
 	    
 	    //REG BUTTON
 	    Button register = (Button)findViewById(R.id.signup_button);
@@ -80,7 +58,29 @@ public class RegisterActivity extends Activity {
 				emailStr = email.getText().toString();
 				reEmailStr = reEmail.getText().toString();
 				ageInt = Integer.parseInt(age.getText().toString());
-				 
+				 gender.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							// Is the button now checked?
+						    boolean checked = ((RadioButton) v).isChecked();
+						    
+						    // Check which radio button was clicked
+						    switch(v.getId()) {
+						        case R.id.male_signup_radio:
+						            if (checked){
+						                isMale = true;
+						            	break;
+						            }
+						        case R.id.female_signup_radio:
+						            if (checked){
+						            	isMale = false;
+						            	break;
+						            }
+						    }
+						}
+						
+					});
 				 
 				if (isRegisterValid(pass, rePass, emailStr, reEmailStr)){
 					UserController userController = new UserController(getApplicationContext());

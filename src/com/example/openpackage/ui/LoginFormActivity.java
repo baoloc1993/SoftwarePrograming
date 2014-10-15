@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 
 public class LoginFormActivity extends Activity {
-	private final static String TAG = "LoginFormActivity";
 
 	/** Called when the activity is first created. */
 	@Override
@@ -24,11 +22,11 @@ public class LoginFormActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.login_layout);
 	    
-	    final EditText username = (EditText)findViewById(R.id.username_login_field);
+	    EditText username = (EditText)findViewById(R.id.username_login_field);
+	    final String user = username.getText().toString();
 	    
-	    
-	    final EditText password = (EditText)findViewById(R.id.password_login_field);
-	    
+	    EditText password = (EditText)findViewById(R.id.password_login_field);
+	    final String pass = password.getText().toString();
 	    
 	    //LOGIN BUTTON
 		Button login = (Button) findViewById(R.id.login_button);
@@ -38,11 +36,6 @@ public class LoginFormActivity extends Activity {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					UserController userController = new UserController(getApplicationContext());
-					final String user = username.getText().toString();
-					final String pass = password.getText().toString();
-					Log.i(TAG,user);
-					Log.i(TAG,pass);
-					
 					if (!userController.validateLogin(user, pass)){
 						displayErrorMessage(user, pass);
 					}
@@ -64,8 +57,8 @@ public class LoginFormActivity extends Activity {
 		});
 		
 		//CREATE ACC BUTTON
-		Button createAcc = (Button) findViewById(R.id.new_acc_button);
-		createAcc.setOnClickListener(new OnClickListener() {
+		Button createAcc = (Button) findViewById(R.id.forget_password_button);
+		forgetPass.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

@@ -1,8 +1,14 @@
 package com.example.openpackage.ui;
 
+import java.util.ArrayList;
 import java.util.TimerTask;
 
+import com.example.openpackage.entity.Manufacturer;
+import com.example.openpackage.entity.Reminder;
 import com.example.openpackageapplication.R;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.sun.mail.iap.Argument;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -19,7 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ListReminderFragment extends Fragment {
 
-	public static ListView listReminders;
+	public static ListView listRemindersView;
 	ViewGroup viewGroup;
 	
 	public ListReminderFragment(){
@@ -32,7 +38,19 @@ public class ListReminderFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.list_reminder_layout, container,
 				false);
 
+		//Temporary create new Manufacturer Object
+		//In reality, received the Manufacter Object from other Activity
+		Manufacturer tempManufacturer = new Manufacturer(new ParseObject("test"));
 		
+		ArrayList<Reminder> listReminders = new ArrayList<Reminder>();
+		try {
+			listReminders = tempManufacturer.getReminderList();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		final ArrayList<Reminder> newlist = listReminders;
 
 		/**
 		 * Calling a backgroung thread will loads recent articles of a website
@@ -47,16 +65,39 @@ public class ListReminderFragment extends Fragment {
 		/**
 		 * LIST REMINDER
 		 */
+		ListReminderAdapter adapter = new ListReminderAdapter(
+				getActivity(),
+				R.layout.list_reminder_layout,
+				listReminders);
 
-		listReminders = (ListView) rootView.findViewById(R.id.list_reminders);
-		listReminders.setOnItemClickListener( new OnItemClickListener() {
+		listRemindersView = (ListView) rootView.findViewById(R.id.list_reminders);
+		listRemindersView.setAdapter(adapter);
+		listRemindersView.setOnItemClickListener( new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
+				Reminder reminder = newlist.get(position);
+				String reminderId = reminder.getParseObject().getObjectId();
+				String reminderName = reminder.getName();
+				long reminderDate = reminder.getTime().getTime();
+				String reminderDesc = reminder.getDescription();
+				boolean isActive = reminder.getActive();
+				
+				//Transfer Data to other Fragment
+				Bundle bundle = new Bundle();
+				bundle.putString("ID", reminderId);
+				bundle.putString("Name", reminderName);
+				bundle.putLong("Date", reminderDate);
+				bundle.putString("Description", reminderDesc);
+				bundle.putBoolean("Active", isActive);
+				
+				
 				
 				FragmentManager fragmentManager = getActivity().getFragmentManager();
 				EditReminderFragment editReminderFragment = new EditReminderFragment();
+				editReminderFragment.setArguments(bundle);
+				editReminderFragment.setHasOptionsMenu(true);
 
 				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
 				fragmentManager.beginTransaction()
@@ -72,25 +113,25 @@ public class ListReminderFragment extends Fragment {
 		/**
 		 * CREATE REMINDER
 		 */
-//		Button createReminder = (Button)rootView.findViewById(R.id.create_reminder_button);
-//		createReminder.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				
-//				FragmentManager fragmentManager = getActivity().getFragmentManager();
-//				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
-//
-//				//e.setArguments(args);
-//
-//				// Go to DisplayFullNewsFragment
-//				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
-//				fragmentManager.beginTransaction()
-//						.replace(((ViewGroup)getView().getParent()).getId(), createReminderFragment)
-//						.commit();
-//			}
-//		});
+		Button createReminder = (Button)rootView.findViewById(R.id.create_reminder_button);
+		createReminder.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				FragmentManager fragmentManager = getActivity().getFragmentManager();
+				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
+
+				//e.setArguments(args);
+
+				// Go to DisplayFullNewsFragment
+				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
+				fragmentManager.beginTransaction()
+						.replace(((ViewGroup)getView().getParent()).getId(), createReminderFragment)
+						.commit();
+			}
+		});
 		return rootView;
 		
 		

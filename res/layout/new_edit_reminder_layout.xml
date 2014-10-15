@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/date_reminder"
+            android:clickable="true"
             android:inputType="datetime" >
         </EditText>
     </RelativeLayout>
