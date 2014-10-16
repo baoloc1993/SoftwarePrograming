@@ -85,7 +85,7 @@ public class EditReminderFragment extends Fragment {
 				}
 				
 				Toast.makeText(getActivity(), 
-						reminderController.validateReminderForm(nameStr, description, time, isActive),
+						reminderController.validateReminderForm(nameStr, description, time, isActive, false, Id),
 						Toast.LENGTH_LONG);
 			}
 		});

@@ -78,7 +78,7 @@ public class ListReminderFragment extends Fragment {
 					int position, long id) {
 
 				Reminder reminder = newlist.get(position);
-				String reminderId = reminder.getParseObject().getObjectId();
+				String reminderId = reminder.getID();
 				String reminderName = reminder.getName();
 				long reminderDate = reminder.getTime().getTime();
 				String reminderDesc = reminder.getDescription();

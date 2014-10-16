@@ -79,7 +79,7 @@ public class CreateReminderFragment extends Fragment {
 				
 				ReminderController reminderController = new ReminderController(getActivity());
 				Toast.makeText(getActivity(), 
-						reminderController.validateReminderForm(nameStr, description, TIME, isActive),
+						reminderController.validateReminderForm(nameStr, description, TIME, isActive, true, null),
 						Toast.LENGTH_LONG);
 			}
 		});
