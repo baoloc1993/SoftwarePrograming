@@ -53,9 +53,9 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO handle ListItemClick
+			
 				Intent intent = new Intent(getActivity(), DoSurveyUI_2.class);
-				//Log.i(TAG,""+position);
+		
 				intent.putExtra("FoodOpeningPackageID", mList.get(position).getID());
 				startActivity(intent);
 			}

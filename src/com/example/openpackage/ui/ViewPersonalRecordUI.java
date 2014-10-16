@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,13 @@ import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
 public class ViewPersonalRecordUI extends Fragment {
+	private final static String TAG = "ViewPersonalRecordUI";
 	
 	private TextView mUsername, mGenderAge, mNumSurvey;
 	private UserController mUserController;
 	private SurveyController mSurveyController;
 	private ListView mListView;
+	private ArrayList<Survey> mSurvey;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,10 +49,16 @@ public class ViewPersonalRecordUI extends Fragment {
 		mUsername.setText(user.getUsername());
 		mGenderAge.setText( (user.getGender() ? "Male"  : "Female") + " - " + user.getAge() + " years old"  );
 		
-		final ArrayList<Survey> mSurvey = mSurveyController.getSurveyList(user);
+		mSurvey = mSurveyController.getSurveyList(user);
 		
 		mNumSurvey.setText( "Number of surveys: " + (mSurvey==null ? 0 : mSurvey.size() ) );
 
+		
+		return rootView;
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
 		mListView.setAdapter(new SurveyListAdapter(getActivity(), mSurvey, 1));
 		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
@@ -67,7 +76,6 @@ public class ViewPersonalRecordUI extends Fragment {
 				
 			}
 		});
-		
-		return rootView;
+		Log.i(TAG, "Reload PersonalRecord");
 	}
 }
