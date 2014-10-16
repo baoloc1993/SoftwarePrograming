@@ -67,6 +67,9 @@ public class Reminder {
 		return mParseObject.getBoolean("active");
 	}
 	
+	public String getID(){
+		return mParseObject.getObjectId();
+	}
 	public static ArrayList<Reminder> listAll() throws ParseException {
 		ArrayList<Reminder> res = new ArrayList<Reminder>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
