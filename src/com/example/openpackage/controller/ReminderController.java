@@ -28,7 +28,7 @@ public class ReminderController {
 	
 
 	@SuppressWarnings("deprecation")
-	public String validateReminderForm(String name, String description,Date time, boolean active){
+	public String validateReminderForm(String name, String description,Date time, boolean active,boolean isNewReminder, String ID){
 		if( name.isEmpty()){
 			return "You need to fill the name of Reminder";
 		}
@@ -53,8 +53,26 @@ public class ReminderController {
 			return "Wrong input minute of Reminder";
 		
 		try{
+			if(isNewReminder){
 			Reminder newReminder = new Reminder(name,description,time,active) ;
 			ReminderList.add(newReminder);
+			}
+			else{
+				boolean found = false;
+				for(Reminder reminder : ReminderList){
+					if(ID.compareTo(reminder.getID())==0){
+						reminder.setActive(active);
+						reminder.setDescription(description);
+						reminder.setName(name);
+						reminder.setTime(time);
+						found = true;
+						break;
+					}
+				}
+				if(!found){
+					return "Invalid ID of reminder!!! Need report";
+				}
+			}
 		}
 		catch (ParseException e) {
 			e.printStackTrace();
