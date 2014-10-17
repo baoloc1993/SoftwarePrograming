@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 
-	boolean isMale = false;
+	boolean isFemale = false;
 	String user;
 	String pass;
 	String rePass;
@@ -69,12 +69,12 @@ public class RegisterActivity extends Activity {
 						    switch(v.getId()) {
 						        case R.id.male_signup_radio:
 						            if (checked){
-						                isMale = true;
+						                isFemale = false;
 						            	break;
 						            }
 						        case R.id.female_signup_radio:
 						            if (checked){
-						            	isMale = false;
+						            	isFemale = true;
 						            	break;
 						            }
 						    }
@@ -84,7 +84,7 @@ public class RegisterActivity extends Activity {
 				 
 				if (isRegisterValid(pass, rePass, emailStr, reEmailStr)){
 					UserController userController = new UserController(getApplicationContext());
-					String result = userController.validateRegister(user, pass, emailStr, ageInt, isMale);
+					String result = userController.validateRegister(user, pass, emailStr, ageInt, isFemale);
 					Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
 				}
 			}

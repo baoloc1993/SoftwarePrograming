@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
@@ -30,7 +31,7 @@ public class CreateReminderFragment extends Fragment {
 
 	String nameStr;
 	String description;
-	public static Date TIME;
+	Date time;
 	boolean isActive;
 	
 	public CreateReminderFragment(){
@@ -46,17 +47,21 @@ public class CreateReminderFragment extends Fragment {
 		final EditText name = (EditText) rootView.findViewById(R.id.name_reminder_field);
 		
 		
-		EditText date = (EditText) rootView.findViewById(R.id.date_reminder_field);
-		date.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-					
-				    new TimePickerFragment().show(getFragmentManager(), "timePicker");
-				
-			}
-		});
+		//EditText date = (EditText) rootView.findViewById(R.id.date_reminder_field);
+//		date.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//					
+//				    
+//				
+//			}
+//		});
+		final TimePicker timePicker = (TimePicker) rootView.findViewById(R.id.timePicker);
+		final DatePicker datePicker = (DatePicker) rootView.findViewById(R.id.datePicker);
+		
+		
 		
 		
 		final EditText desc = (EditText) rootView.findViewById(R.id.desc_reminder_field);
@@ -76,10 +81,19 @@ public class CreateReminderFragment extends Fragment {
 					isActive = false;
 				}
 				
+				//GET DATE/TIME
+				int year = datePicker.getYear();
+				int month =  datePicker.getMonth();
+				int day = datePicker.getDayOfMonth();
+				int hour = timePicker.getCurrentHour();
+				int minute = timePicker.getCurrentMinute();
+				time = new Date(year,month,day,hour,minute);
+				
+				
 				
 				ReminderController reminderController = new ReminderController(getActivity());
 				Toast.makeText(getActivity(), 
-						reminderController.validateReminderForm(nameStr, description, TIME, isActive, true, null),
+						reminderController.validateReminderForm(nameStr, description, time, isActive, true, null),
 						Toast.LENGTH_LONG);
 			}
 		});

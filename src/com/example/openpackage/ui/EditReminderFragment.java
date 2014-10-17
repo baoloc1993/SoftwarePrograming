@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class EditReminderFragment extends Fragment {
@@ -48,18 +50,24 @@ public class EditReminderFragment extends Fragment {
 		final EditText name = (EditText) rootView.findViewById(R.id.name_reminder_field);
 		name.setText(nameStr);
 		
-		EditText date = (EditText) rootView.findViewById(R.id.date_reminder_field);
-		date.setText(new Date(bundle.getLong("Date")).toString());
-		date.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-					
-				    new TimePickerFragment().show(getFragmentManager(), "timePicker");
-				    time = CreateReminderFragment.TIME;
-			}
-		});
+		final TimePicker timePicker = (TimePicker) rootView.findViewById(R.id.timePicker);
+		final DatePicker datePicker = (DatePicker) rootView.findViewById(R.id.datePicker);
+		timePicker.setCurrentHour(time.getHours());
+		timePicker.setCurrentMinute(time.getMinutes());
+		datePicker.updateDate(time.getYear(), time.getMonth(), time.getDay());
+		
+//		EditText date = (EditText) rootView.findViewById(R.id.date_reminder_field);
+//		date.setText(new Date(bundle.getLong("Date")).toString());
+//		date.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//					
+//				    new TimePickerFragment().show(getFragmentManager(), "timePicker");
+//				    time = CreateReminderFragment.TIME;
+//			}
+//		});
 		
 		
 		EditText desc = (EditText) rootView.findViewById(R.id.desc_reminder_field);
@@ -83,6 +91,14 @@ public class EditReminderFragment extends Fragment {
 				}else {
 					isActive = false;
 				}
+				
+				//GET DATE/TIME
+				int year = datePicker.getYear();
+				int month =  datePicker.getMonth();
+				int day = datePicker.getDayOfMonth();
+				int hour = timePicker.getCurrentHour();
+				int minute = timePicker.getCurrentMinute();
+				time = new Date(year,month,day,hour,minute);
 				
 				Toast.makeText(getActivity(), 
 						reminderController.validateReminderForm(nameStr, description, time, isActive, false, Id),

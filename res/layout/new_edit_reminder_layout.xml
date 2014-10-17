@@ -56,14 +56,22 @@
             android:layout_alignParentLeft="true"
             android:text="Date\t\t\t\t" />
 
-        <EditText
-            android:id="@+id/date_reminder_field"
-            android:layout_width="match_parent"
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/date_reminder"
             android:layout_toRightOf="@id/date_reminder"
-            android:clickable="true"
-            android:inputType="datetime" >
-        </EditText>
+            android:calendarViewShown="false" />
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/datePicker"
+            android:layout_below="@+id/datePicker" />
+
     </RelativeLayout>
     
         <!--DESCRIPTION -->
