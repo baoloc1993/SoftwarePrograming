@@ -21,7 +21,7 @@ public class RegisterActivity extends Activity {
 	String rePass;
 	String emailStr;
 	String reEmailStr;
-	int ageInt;
+	int ageInt = 0;
 	
 	
 	/** Called when the activity is first created. */
@@ -41,6 +41,7 @@ public class RegisterActivity extends Activity {
 	   //boolean isMale = true;
 	    final RadioGroup gender = (RadioGroup)findViewById(R.id.radioGroup);
 	   
+	   
 	    
 	    
 	    //REG BUTTON
@@ -57,23 +58,25 @@ public class RegisterActivity extends Activity {
 				rePass = rePassword.getText().toString();
 				emailStr = email.getText().toString();
 				reEmailStr = reEmail.getText().toString();
-				ageInt = Integer.parseInt(age.getText().toString());
+				if (age.getText().toString().compareTo("") == 0) ageInt = -1; 
+	    		else ageInt = Integer.parseInt(age.getText().toString());
+				//final boolean genderChecked;
 				 gender.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
 							// Is the button now checked?
-						    boolean checked = ((RadioButton) v).isChecked();
+						    boolean genderChecked = ((RadioButton) v).isChecked();
 						    
 						    // Check which radio button was clicked
 						    switch(v.getId()) {
 						        case R.id.male_signup_radio:
-						            if (checked){
+						            if (genderChecked){
 						                isFemale = false;
 						            	break;
 						            }
 						        case R.id.female_signup_radio:
-						            if (checked){
+						            if (genderChecked){
 						            	isFemale = true;
 						            	break;
 						            }
@@ -82,7 +85,7 @@ public class RegisterActivity extends Activity {
 						
 					});
 				 
-				if (isRegisterValid(pass, rePass, emailStr, reEmailStr)){
+				if (isRegisterValid(user, pass, rePass, emailStr, reEmailStr,ageInt)){
 					UserController userController = new UserController(getApplicationContext());
 					String result = userController.validateRegister(user, pass, emailStr, ageInt, isFemale);
 					Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
@@ -91,8 +94,12 @@ public class RegisterActivity extends Activity {
 		});
 	}
 	
-	private boolean isRegisterValid(String password, String rePassword, String email, String reEmail){
+	private boolean isRegisterValid(String user, String password, String rePassword, String email, String reEmail,int ageInt){
 		
+		//CHeck if any field missing
+		if (user.compareTo("") == 0 || pass.compareTo("") == 0 || email.compareTo("") == 0 || ageInt == -1){
+			Toast.makeText(getApplicationContext(), "You have to fill all the field", Toast.LENGTH_LONG).show();
+		}
 		if (password.compareTo(rePassword) != 0){
 			Toast.makeText(getApplicationContext(), "Password is not match", Toast.LENGTH_LONG).show();
 			return false;
