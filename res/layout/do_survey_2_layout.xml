@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:scrollbars="vertical" >
 
     <Button
         android:id="@+id/Back"
@@ -12,6 +13,14 @@
         android:layout_alignParentTop="true"
         android:text="Back" />
 
+    <FrameLayout
+        android:id="@+id/youtube_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/package_date" >
+
+    </FrameLayout>
+    
     <TextView
         android:id="@+id/package_name"
         android:layout_width="wrap_content"
@@ -38,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/package_date"
-        android:layout_below="@+id/Back"
+        android:layout_below="@id/youtube_container"
         android:layout_marginTop="5dp"
         android:text="TextView" />
 
@@ -112,5 +121,6 @@
         android:layout_marginTop="28dp" >
 
     </FrameLayout>
+
 
 </RelativeLayout>
