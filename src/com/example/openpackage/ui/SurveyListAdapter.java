@@ -77,4 +77,10 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 		TextView date;
 	}
 	
+	public void refill(List<Survey> objects) {
+		mList.clear();
+		mList.addAll(objects);
+		notifyDataSetChanged();
+	}
+	
 }

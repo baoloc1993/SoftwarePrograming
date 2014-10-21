@@ -29,6 +29,7 @@ public class ViewPersonalRecordUI extends Fragment {
 	private SurveyController mSurveyController;
 	private ListView mListView;
 	private ArrayList<Survey> mSurvey;
+	private Customer user;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,14 +45,12 @@ public class ViewPersonalRecordUI extends Fragment {
 		
 		mUserController = new UserController(getActivity());
 		
-		Customer user = (Customer) mUserController.getCurrentUser();
+		user = (Customer) mUserController.getCurrentUser();
 		
 		mUsername.setText(user.getUsername());
 		mGenderAge.setText( (user.getGender() ? "Male"  : "Female") + " - " + user.getAge() + " years old"  );
 		
-		mSurvey = mSurveyController.getSurveyList(user);
 		
-		mNumSurvey.setText( "Number of surveys: " + (mSurvey==null ? 0 : mSurvey.size() ) );
 
 		
 		return rootView;
@@ -59,6 +58,8 @@ public class ViewPersonalRecordUI extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		mSurvey = mSurveyController.getSurveyList(user);
+		mNumSurvey.setText( "Number of surveys: " + (mSurvey==null ? 0 : mSurvey.size() ) );
 		mListView.setAdapter(new SurveyListAdapter(getActivity(), mSurvey, 1));
 		
 		mListView.setOnItemClickListener(new OnItemClickListener() {

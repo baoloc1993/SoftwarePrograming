@@ -1,5 +1,6 @@
 package com.example.openpackage.ui;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import android.os.Bundle;
@@ -76,7 +77,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 				DateUtils.SECOND_IN_MILLIS).toString();
 		package_date.setText(converDate);
 		package_name.setText(mFood.getTitle());
-		package_rate.setText(mFood.getAverage()+"/5.0");
+		package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
 		package_type.setText("Type: " + mFood.getType());
 		package_description.setText(mFood.getDescription());
 		
@@ -87,8 +88,8 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		fragment.setArguments(arguments);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.survey_container, fragment).commit();
-		YoutubeFragment myFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
-		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, myFragment).commit();
+//		YoutubeFragment myFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
+//		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, myFragment).commit();
 	}
 
 	@Override
@@ -101,5 +102,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.survey_container, fragment).commit();
 		
+		((SurveyListAdapter) mListView.getAdapter()).refill(mSurveyController.getSurveyList(mFood));
+		package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
 	}
 }

@@ -64,6 +64,19 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 		return rootView;
 	}
 	
+	@Override
+	public void onResume() {
+		super.onResume();
+		mList = mFoodOpeningPacketController.getFoodOpeningPacketList(mSpinner.getSelectedItem().toString());
+		if (mListView.getAdapter() == null) {
+			FoodOpenPackageListAdapter adapter = new FoodOpenPackageListAdapter(
+					getActivity(), mList);
+			mListView.setAdapter(adapter);
+		} else {
+			((FoodOpenPackageListAdapter) mListView.getAdapter()).refill(mList);
+		}
+	}
+	
 	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,

@@ -1,5 +1,6 @@
 package com.example.openpackage.ui;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import android.content.Context;
@@ -40,7 +41,7 @@ public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackage>
 		FoodOpeningPackage cur = mList.get(position);
 		
 		holder.nameLabel.setText((position+1) + ". "+ cur.getTitle());
-		holder.averageRate.setText(cur.getAverage() + "/5.0");
+		holder.averageRate.setText( new DecimalFormat("0.0").format(cur.getAverage()) + "/5.0");
 		
 		return convertView;
 	}
