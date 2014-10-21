@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -57,6 +58,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 //		}
 		
 		User user = mUserController.getCurrentUser();
+		//mUserController.logOut(user);
+		
 		if (user == null ) {
 			Intent intent = new Intent(this, LoginFormActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -73,6 +76,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			finish();
 		}
 		
+		//Log.i(TAG, "GO HERE");
 		
 		mSectionsPagerAdapter = new SectionsPagerAdapter(this, this.getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pager);

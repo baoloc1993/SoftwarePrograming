@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry exported="true" kind="src" path="/appcompat_v7"/>
+	<classpathentry exported="true" kind="lib" path="E:/Application/android_dev_environment/workspace/OpenPackageApplication/libs/additionnal.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/Application/android_dev_environment/workspace/OpenPackageApplication/libs/android-support-v13.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/Application/android_dev_environment/workspace/OpenPackageApplication/libs/mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/Application/android_dev_environment/workspace/OpenPackageApplication/libs/Parse-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/Application/android_dev_environment/workspace/OpenPackageApplication/libs/YouTubeAndroidPlayerApi.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/YouTubeAndroidPlayerApi.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/Application/android_dev_environment/workspace/OpenPackageApplication/libs/activation.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="E:/Projects/GitHub/SoftwarePrograming/libs/activation.jar"/>
-	<classpathentry kind="lib" path="E:/Projects/GitHub/SoftwarePrograming/libs/additionnal.jar"/>
-	<classpathentry kind="lib" path="E:/Projects/GitHub/SoftwarePrograming/libs/android-support-v4.jar"/>
-	<classpathentry kind="lib" path="E:/Projects/GitHub/SoftwarePrograming/libs/android-support-v13.jar"/>
-	<classpathentry kind="lib" path="E:/Projects/GitHub/SoftwarePrograming/libs/mail.jar"/>
-	<classpathentry kind="lib" path="E:/Projects/GitHub/SoftwarePrograming/libs/Parse-1.7.0.jar"/>
-	<classpathentry kind="lib" path="E:/Projects/GitHub/SoftwarePrograming/libs/YouTubeAndroidPlayerApi.jar"/>
-	<classpathentry kind="lib" path="libs/YouTubeAndroidPlayerApi.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

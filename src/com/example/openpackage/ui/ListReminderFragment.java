@@ -1,35 +1,36 @@
 package com.example.openpackage.ui;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
 
-import com.example.openpackage.entity.Manufacturer;
-import com.example.openpackage.entity.Reminder;
-import com.example.openpackageapplication.R;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.sun.mail.iap.Argument;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import com.example.openpackage.controller.UserController;
+import com.example.openpackage.entity.Manufacturer;
+import com.example.openpackage.entity.Reminder;
+import com.example.openpackageapplication.R;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 
 
 public class ListReminderFragment extends Fragment {
 
 	public static ListView listRemindersView;
 	ViewGroup viewGroup;
+	private UserController mUserController;
 	
 	public ListReminderFragment(){
-		super();
+		mUserController = new UserController(getActivity());
 	}
 	
 	@Override
@@ -40,15 +41,15 @@ public class ListReminderFragment extends Fragment {
 
 		//Temporary create new Manufacturer Object
 		//In reality, received the Manufacter Object from other Activity
-		Manufacturer tempManufacturer = new Manufacturer(new ParseObject("test"));
+		Manufacturer tempManufacturer = (Manufacturer) mUserController.getCurrentUser();
 		
 		ArrayList<Reminder> listReminders = new ArrayList<Reminder>();
-		try {
-			listReminders = tempManufacturer.getReminderList();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			listReminders = tempManufacturer.getReminderList();
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		final ArrayList<Reminder> newlist = listReminders;
 
@@ -94,7 +95,7 @@ public class ListReminderFragment extends Fragment {
 				
 				
 				
-				FragmentManager fragmentManager = getActivity().getFragmentManager();
+				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				EditReminderFragment editReminderFragment = new EditReminderFragment();
 				editReminderFragment.setArguments(bundle);
 				editReminderFragment.setHasOptionsMenu(true);
@@ -113,14 +114,14 @@ public class ListReminderFragment extends Fragment {
 		/**
 		 * CREATE REMINDER
 		 */
-		Button createReminder = (Button)rootView.findViewById(R.id.create_reminder_button);
+		ImageView createReminder = (ImageView) rootView.findViewById(R.id.new_reminder_button);
 		createReminder.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				FragmentManager fragmentManager = getActivity().getFragmentManager();
+				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
 
 				//e.setArguments(args);

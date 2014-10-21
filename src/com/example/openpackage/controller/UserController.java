@@ -68,6 +68,7 @@ public class UserController {
 		for(Customer customer : customers) {
 			if ( customer.getUsername().equals(username) && customer.getPassword().equals(password) ) {
 				try {
+					Log.i(TAG, "Login Customer");
 					customer.logIn();
 					Intent intent = new Intent( mContext, MainActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -84,6 +85,7 @@ public class UserController {
 		
 		if (mManufacturer!=null && mManufacturer.getUsername().equals(username) && mManufacturer.getPassword().equals(password)) {
 			try {
+				Log.i(TAG, "Log in Manufacturer");
 				mManufacturer.logIn();
 				Intent intent = new Intent( mContext, ManufacturerUI.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

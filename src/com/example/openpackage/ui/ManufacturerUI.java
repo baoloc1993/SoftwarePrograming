@@ -125,19 +125,19 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
-				return new DoSurveyUI();
+				return new ListReminderFragment();
 
 			case 1:
-				return new ViewPersonalRecordUI();
+				return new ListReminderFragment();
 			case 2: 
-				return new ViewPersonalRecordUI();
+				return new ListReminderFragment();
 			}
 			return null;
 		}
 
 		@Override
 		public int getCount() {
-			return 3;
+			return 1;
 		}
 		
 		public String getTitleTab(int position) {

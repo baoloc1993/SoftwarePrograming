@@ -2,22 +2,22 @@ package com.example.openpackage.ui;
 
 import java.util.Date;
 
-import com.example.openpackage.controller.ReminderController;
-import com.example.openpackageapplication.R;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.openpackage.controller.ReminderController;
+import com.example.openpackageapplication.R;
 
 public class EditReminderFragment extends Fragment {
 
@@ -113,7 +113,7 @@ public class EditReminderFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//GO BACK TO LIST REMINDER FRAGMENT
-				FragmentManager fragmentManager = getActivity().getFragmentManager();
+				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
 				ListReminderFragment listReminderFragment = new ListReminderFragment();
 				
