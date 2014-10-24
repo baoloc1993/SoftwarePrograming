@@ -57,6 +57,16 @@
             android:screenOrientation="portrait">
         </activity>
 
+       	<service 
+       	    android:name = "com.example.openpackage.controller.ReminderService"></service>
+       	
+       	<receiver android:name="com.example.openpackage.controller.AlarmReceiver" 
+			       android:enabled="true"
+			       android:exported="false" >
+	       <intent-filter>
+	          <action android:name="android.intent.action.BOOT_COMPLETED" />
+	       </intent-filter>
+  		</receiver>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.openpackage.controller;
+package com.example.openpackage.ui;
 
 import com.example.openpackage.entity.Reminder;
 import com.parse.ParseException;
