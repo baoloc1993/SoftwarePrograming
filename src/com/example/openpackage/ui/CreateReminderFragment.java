@@ -2,6 +2,7 @@ package com.example.openpackage.ui;
 
 import java.util.Date;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.openpackage.controller.ReminderController;
+import com.example.openpackage.controller.ReminderService;
 import com.example.openpackageapplication.R;
 
 public class CreateReminderFragment extends Fragment {
@@ -84,9 +86,23 @@ public class CreateReminderFragment extends Fragment {
 				
 				
 				ReminderController reminderController = new ReminderController(getActivity());
+				String result = reminderController.validateReminderForm(nameStr, description, time, isActive, true, null);
 				Toast.makeText(getActivity(), 
-						reminderController.validateReminderForm(nameStr, description, time, isActive, true, null),
-						Toast.LENGTH_LONG);
+						result,
+						Toast.LENGTH_LONG).show();
+				if(result == "Successfull Update Reminder" && isActive){
+					Intent i = new Intent(getActivity(),ReminderService.class);
+					i.putExtra("name", nameStr);
+					i.putExtra("description", description);
+					i.putExtra("year", year);
+					i.putExtra("month", month);
+					i.putExtra("day", day);
+					i.putExtra("hour",hour);
+					i.putExtra("minute", minute);
+						
+					i.setAction("CREATE");
+					getActivity().startService(i);
+				}
 			}
 		});
 		

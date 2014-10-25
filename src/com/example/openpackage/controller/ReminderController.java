@@ -4,6 +4,7 @@ import com.example.openpackage.entity.Reminder;
 import com.parse.ParseException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.Calendar;
@@ -72,7 +73,7 @@ public class ReminderController {
 		
 		try{
 			if(isNewReminder){
-				
+				Log.d("DEBUG", "inside create new reminder");
 			Reminder newReminder = new Reminder(name,description,time,active) ;
 			ReminderList.add(newReminder);
 			}
@@ -97,6 +98,7 @@ public class ReminderController {
 			e.printStackTrace();
 			return "There is some error with internet connection.";
 		}
+		
 		return "Successfull Update Reminder";
 	}
 	

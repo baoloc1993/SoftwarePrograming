@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 
 public class ReminderService extends IntentService{
 	/*
@@ -22,8 +23,8 @@ public class ReminderService extends IntentService{
 	public final static String CANCEL = "CANCEL";
 	private final static int RQS_1 = 1;
 	private IntentFilter matcher;
-	public ReminderService(String name) {
-		super(name);
+	public ReminderService() {
+		super("Tag");
 		matcher = new IntentFilter();
 		matcher.addAction(CREATE);
 		matcher.addAction(CANCEL);
@@ -50,7 +51,7 @@ public class ReminderService extends IntentService{
 		PendingIntent pi = PendingIntent.getBroadcast(getBaseContext(), RQS_1, ni, 0);
 		if(matcher.matchAction(action)){
 			if(CREATE.equals(action)){
-				
+				Log.d("DEBUG","Inside create alarm");
 				am.set(AlarmManager.RTC_WAKEUP, calSet.getTimeInMillis(), pi);
 			}
 			else{

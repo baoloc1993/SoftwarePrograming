@@ -56,14 +56,14 @@
             android:screenOrientation="portrait">
         </activity>
 
-       <receiver android:name=".AlarmSetter">
+       <receiver android:name="com.example.openpackage.controller.AlarmSetter">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".AlarmReceiver"></receiver>
+        <receiver android:name="com.example.openpackage.controller.AlarmReceiver"></receiver>
          
-        <service android:name=".ReminderService"></service>
+        <service android:name="com.example.openpackage.controller.ReminderService"></service>
     </application>
 
 </manifest>
