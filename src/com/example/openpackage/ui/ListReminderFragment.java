@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,7 +44,13 @@ public class ListReminderFragment extends Fragment {
 		//In reality, received the Manufacter Object from other Activity
 		Manufacturer tempManufacturer = (Manufacturer) mUserController.getCurrentUser();
 		
-		ArrayList<Reminder> listReminders = new ArrayList<Reminder>();
+		ArrayList<Reminder> listReminders = null;
+		try {
+			listReminders = tempManufacturer.getReminderList();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		try {
 //			listReminders = tempManufacturer.getReminderList();
 //		} catch (ParseException e) {
@@ -124,13 +131,15 @@ public class ListReminderFragment extends Fragment {
 				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
 
+				//Log.d("DEBUG",((ViewGroup)getView().getParent()).getParent().getId());
 				//e.setArguments(args);
-
+				//fragmentManager.addOnBackStackChangedListener(arg0);
 				// Go to DisplayFullNewsFragment
 				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
 				fragmentManager.beginTransaction()
-						.replace(((ViewGroup)getView().getParent()).getId(), createReminderFragment)
+						.replace(((View) ((ViewGroup)getView().getParent()).getParent()).getId(), createReminderFragment)
 						.commit();
+				//fragmentManager.beginTransaction().remove(fragmentManager.findFragmentById(getId())).commit();
 			}
 		});
 		return rootView;
