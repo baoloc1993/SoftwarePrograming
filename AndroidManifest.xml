@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.openpackageapplication"
     android:versionCode="1"
@@ -57,16 +56,14 @@
             android:screenOrientation="portrait">
         </activity>
 
-       	<service 
-       	    android:name = "com.example.openpackage.controller.ReminderService"></service>
-       	
-       	<receiver android:name="com.example.openpackage.controller.AlarmReceiver" 
-			       android:enabled="true"
-			       android:exported="false" >
-	       <intent-filter>
-	          <action android:name="android.intent.action.BOOT_COMPLETED" />
-	       </intent-filter>
-  		</receiver>
+       <receiver android:name=".AlarmSetter">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".AlarmReceiver"></receiver>
+         
+        <service android:name=".ReminderService"></service>
     </application>
 
 </manifest>
