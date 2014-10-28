@@ -122,5 +122,14 @@
 
     </FrameLayout>
 
+    <Button
+        android:id="@+id/ShareFBButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/description"
+        android:layout_alignBottom="@+id/description"
+        android:layout_alignParentRight="true"
+        android:onClick="onClick"
+        android:text="Share" />
 
 </RelativeLayout>

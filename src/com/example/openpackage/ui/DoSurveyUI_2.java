@@ -3,9 +3,12 @@ package com.example.openpackage.ui;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,8 +19,14 @@ import android.widget.TextView;
 
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
+import com.example.openpackage.controller.UserController;
+import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.FacebookUIHelper;
 import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.UIHelper;
 import com.example.openpackageapplication.R;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
 
 public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callbacks{
 	private static String TAG = "DoSurveyUI_2";
@@ -29,6 +38,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 	private Button cancelButton;
 	private CheckBox showListView;
 	private ListView mListView;
+	private UIHelper uiHelper;
 	
 	
 	@Override
@@ -88,8 +98,26 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		fragment.setArguments(arguments);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.survey_container, fragment).commit();
-//		YoutubeFragment myFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
-//		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, myFragment).commit();
+		
+		/////
+		//Fragment videoFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
+		//getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, videoFragment).commit();
+		
+		uiHelper = new FacebookUIHelper(this,null);
+	    uiHelper.onCreate(savedInstanceState);
+		/////
+	    
+	    
+		Button shareFBButton = (Button) findViewById(R.id.ShareFBButton);
+		UserController mUserController = new UserController(this);
+		if(mSurveyController.getSurvey(mFood,(Customer) mUserController.getCurrentUser()) == null)
+		{
+			shareFBButton.setVisibility(View.INVISIBLE);
+		};
+	}
+	
+	public void onClick(View v) {
+		uiHelper.openDialog();
 	}
 
 	@Override
@@ -105,4 +133,35 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		((SurveyListAdapter) mListView.getAdapter()).refill(mSurveyController.getSurveyList(mFood));
 		package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
 	}
+	
+	@Override
+	  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	      super.onActivityResult(requestCode, resultCode, data);
+	      uiHelper.onActivityResult(requestCode, resultCode, data);
+	  }
+	
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    uiHelper.onResume();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+	    super.onSaveInstanceState(outState);
+	    uiHelper.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onPause() {
+	    super.onPause();
+	    uiHelper.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+	    super.onDestroy();
+	    uiHelper.onDestroy();
+	}
 }
+
