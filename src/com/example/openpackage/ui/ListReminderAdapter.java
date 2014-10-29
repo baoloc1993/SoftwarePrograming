@@ -1,5 +1,9 @@
 package com.example.openpackage.ui;
-
+/**
+ * ListReminderAdapter
+ * 
+ * - Display the list of Reminder by using an ArrayList of Reminder class
+ */
 import java.util.ArrayList;
 import java.util.List;
 

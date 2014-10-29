@@ -1,5 +1,8 @@
 package com.example.openpackage.ui;
 
+/**
+ * Display the list of list reminder
+ */
 import java.util.ArrayList;
 
 import android.os.Bundle;

@@ -28,7 +28,7 @@ import com.parse.ParseQuery;
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
 	private static final String TAG = "MainActivity";
-	Context mContext;
+	public static Context mContext;
 	
 	private ViewPager mViewPager;
 	private SectionsPagerAdapter mSectionsPagerAdapter;
