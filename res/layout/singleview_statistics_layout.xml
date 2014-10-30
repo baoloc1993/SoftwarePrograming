@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:id = "@+id/single_stat" >
+    
+<TextView
+        android:id="@+id/stat_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:height="30dp"
+        android:text="4.0/5.0" />
+
+    <TextView
+        android:id="@+id/stat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rate"
+        android:layout_alignBottom="@+id/rate"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:height="30dp"
+        android:text="Name"
+        android:textSize="14sp" />
+</RelativeLayout>

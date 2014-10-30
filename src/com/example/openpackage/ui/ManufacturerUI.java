@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 
 import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.Manufacturer;
@@ -125,10 +126,14 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
+				FragmentManager ft = getSupportFragmentManager();
+				ft.popBackStack();
 				return new ListReminderFragment();
 
 			case 1:
-				return new ListReminderFragment();
+				FragmentManager ft2 = getSupportFragmentManager();
+				ft2.popBackStack();
+				return new ViewStatisticsUI();
 			case 2: 
 				return new ListReminderFragment();
 			}
@@ -137,15 +142,15 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 
 		@Override
 		public int getCount() {
-			return 1;
+			return 2;
 		}
 		
 		public String getTitleTab(int position) {
 			switch (position) {
 			case 0:
-				return mContext.getString(R.string.StatsTab);
+				return mContext.getString(R.string.ReminderTab);
 			case 1:
-				return mContext.getString(R.string.FoodPackageTab);
+				return mContext.getString(R.string.StatsTab);
 			case 2: 
 				return mContext.getString(R.string.ReminderTab);
 			}

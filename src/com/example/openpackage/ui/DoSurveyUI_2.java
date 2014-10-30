@@ -2,7 +2,6 @@ package com.example.openpackage.ui;
 
 import java.text.DecimalFormat;
 import java.util.Date;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
