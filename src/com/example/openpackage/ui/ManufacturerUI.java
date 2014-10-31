@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 
 import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.Manufacturer;
@@ -23,38 +24,49 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 
 	private Context mContext;
 	private ViewPager mViewPager;
-	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private TabsPagerAdapter mTabsPagerAdapter;
 	private ActionBar mActionBar;
 	private UserController mUserController;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.manufacturer_main);
-		mContext = this;
-		mViewPager = (ViewPager) findViewById(R.id.pager2);
-		mSectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-		
-		mUserController = new UserController(this);
-		
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-		
-		mActionBar = getActionBar();
-		mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		
-		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {		
-			@Override
-			public void onPageSelected(int position) {
-				mActionBar.setSelectedNavigationItem(position);
-			}
-		
-		});
-		
-		for (int i=0; i < mSectionsPagerAdapter.getCount();i++) {
-			mActionBar.addTab(mActionBar.newTab()
-					.setText(mSectionsPagerAdapter.getTitleTab(i))
-					.setTabListener(this));
-		}
-		
+		// Initilization
+        mViewPager = (ViewPager) findViewById(R.id.pager2);
+        mActionBar = getActionBar();
+        mTabsPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+ 
+        mViewPager.setAdapter(mTabsPagerAdapter);
+        mActionBar.setHomeButtonEnabled(false);
+        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
+ 
+        // Adding Tabs
+        
+        mActionBar.addTab(mActionBar.newTab().setText("Reminder")
+                    .setTabListener(this));
+        mActionBar.addTab(mActionBar.newTab().setText("Statistic")
+                .setTabListener(this));
+        mActionBar.addTab(mActionBar.newTab().setText("Create Survey")
+                .setTabListener(this));
+        
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        	 
+            @Override
+            public void onPageSelected(int position) {
+                // on changing the page
+                // make respected tab selected
+                mActionBar.setSelectedNavigationItem(position);
+            }
+         
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+         
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
+        
 	}
 	
 	@Override
@@ -115,48 +127,6 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		
 	}
 	
-	class SectionsPagerAdapter extends FragmentPagerAdapter {
-		Context mContext;
-		public SectionsPagerAdapter(Context context,FragmentManager fragmentManager) {
-			super(fragmentManager);
-			mContext = context;	
-		}
 
-		@Override
-		public Fragment getItem(int position) {
-			switch (position) {
-			case 0:
-				FragmentManager ft = getSupportFragmentManager();
-				ft.popBackStack();
-				return new ListReminderFragment();
-
-			case 1:
-				FragmentManager ft2 = getSupportFragmentManager();
-				ft2.popBackStack();
-				return new ViewStatisticsUI();
-			case 2: 
-				return new ListReminderFragment();
-			}
-			return null;
-		}
-
-		@Override
-		public int getCount() {
-			return 2;
-		}
-		
-		public String getTitleTab(int position) {
-			switch (position) {
-			case 0:
-				return mContext.getString(R.string.ReminderTab);
-			case 1:
-				return mContext.getString(R.string.StatsTab);
-			case 2: 
-				return mContext.getString(R.string.ReminderTab);
-			}
-			return null;
-		}
-		
-	}
 
 }
