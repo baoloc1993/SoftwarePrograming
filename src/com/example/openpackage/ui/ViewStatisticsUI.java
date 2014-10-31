@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 
 import android.content.Intent;
@@ -52,11 +53,7 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
-		Toast.makeText(getActivity(),
-				parent.getItemAtPosition(position).toString() + " " + position,
-				Toast.LENGTH_SHORT).show();
-		//
+			long id) {		
 		
 		mList = mFoodOpeningPackageController.getFoodOpeningPacketList(parent
 		.getItemAtPosition(position).toString());
@@ -70,9 +67,20 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Bundle bundle = new Bundle();
-				bundle.putString("name",mList.get(position).getTitle());
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+				Intent i = new Intent(getActivity().getApplicationContext(),ViewSingleStatistic.class);
+				FoodOpeningPackage curPackage = mList.get(position);
+				SurveyController mSurveyController = new SurveyController(getActivity().getApplicationContext());
+				ArrayList<Survey> mSurvey = mSurveyController.getSurveyList(curPackage);
+				double[] rate_list = {0,0,0,0,0};
+				
+				for(Survey cur : mSurvey){
+					rate_list[cur.getRate()-1]++;;
+				}
+				i.putExtra("name",curPackage.getTitle());
+				i.putExtra("type", curPackage.getType());
+				i.putExtra("rateList", rate_list);
+				startActivity(i);
+				/*FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				ViewSingleStaticticsFragment viewSingleStatFragment = new ViewSingleStaticticsFragment();
 				viewSingleStatFragment.setArguments(bundle);
 				viewSingleStatFragment.setHasOptionsMenu(true);
@@ -82,18 +90,13 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 				Log.d("dddddd",String.valueOf(((ViewGroup)(getView().getParent()).getParent()).getId()));
 				fragmentManager.beginTransaction()
 				.replace(((ViewGroup)getView().getParent()).getId(), viewSingleStatFragment)
-				.addToBackStack(null).commit();
+				.addToBackStack(null).commit();*/
+				
+				
 			}
 			
 		});
-		// Log.i(TAG, mList.get(0).getTitle());
-		/*if (mListPackageStat.getAdapter() == null) {
-			FoodOpenPackageListAdapter adapter = new FoodOpenPackageListAdapter(
-					getActivity(), mList);
-			mListPackageStat.setAdapter(adapter);
-		} else {
-			((FoodOpenPackageListAdapter) mListPackageStat.getAdapter()).refill(mList);
-		}*/
+		
 	}
 
 	@Override
