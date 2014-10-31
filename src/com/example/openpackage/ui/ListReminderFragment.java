@@ -5,6 +5,7 @@ package com.example.openpackage.ui;
  */
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -103,18 +104,20 @@ public class ListReminderFragment extends Fragment {
 				bundle.putString("Description", reminderDesc);
 				bundle.putBoolean("Active", isActive);
 				
-				
-				
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				EditReminderFragment editReminderFragment = new EditReminderFragment();
-				editReminderFragment.setArguments(bundle);
-				editReminderFragment.setHasOptionsMenu(true);
+				Intent i = new Intent(getActivity(), EditReminderActivity.class);
+				i.putExtras(bundle);
+				startActivity(i);
+//				
+//				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//				EditReminderFragment editReminderFragment = new EditReminderFragment();
+//				editReminderFragment.setArguments(bundle);
+//				editReminderFragment.setHasOptionsMenu(true);
 
 				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
-				fragmentManager.beginTransaction()
-						.replace(((ViewGroup)getView().getParent()).getId(), editReminderFragment)
-						.commit();
-				
+//				fragmentManager.beginTransaction()
+//						.replace(((ViewGroup)getView().getParent()).getId(), editReminderFragment)
+//						.commit();
+//				
 				
 			}
 			//return onItemClickListener;
@@ -131,17 +134,19 @@ public class ListReminderFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
+				Intent i = new Intent(getActivity(), CreateReminderActivity.class);
+				startActivity(i);
+//				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
 
 				//Log.d("DEBUG",((ViewGroup)getView().getParent()).getParent().getId());
 				//e.setArguments(args);
 				//fragmentManager.addOnBackStackChangedListener(arg0);
 				// Go to DisplayFullNewsFragment
 				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
-				fragmentManager.beginTransaction()
-						.replace(((View) ((ViewGroup)getView().getParent()).getParent()).getId(), createReminderFragment)
-						.commit();
+//				fragmentManager.beginTransaction()
+//						.replace(((View) ((ViewGroup)getView().getParent()).getParent()).getId(), createReminderFragment)
+//						.commit();
 				//fragmentManager.beginTransaction().remove(fragmentManager.findFragmentById(getId())).commit();
 			}
 		});
