@@ -91,4 +91,12 @@ public class Reminder {
 		return mParseObject;
 	}
 	
+	public void delete(){
+		try {
+			mParseObject.delete();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

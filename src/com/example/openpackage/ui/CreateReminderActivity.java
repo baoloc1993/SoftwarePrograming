@@ -9,6 +9,7 @@ package com.example.openpackage.ui;
  * 	+ Date
  *  + Active
  */
+import java.util.Calendar;
 import java.util.Date;
 
 import com.example.openpackage.controller.ReminderController;
@@ -41,7 +42,13 @@ public class CreateReminderActivity extends ControlReminder {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);    
-		super.getData(null, "", "", new Date(), false);
+	    Date date = Calendar.getInstance().getTime();
+	    date.setYear(date.getYear() + 1900 );
+	    date.setMonth(date.getMonth());
+	    date.setDate(date.getDate()+1);
+	    
+	    
+		super.getData(null, "", "", date, false);
 
 	}
 

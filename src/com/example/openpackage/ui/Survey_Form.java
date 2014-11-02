@@ -36,7 +36,7 @@ public class Survey_Form extends Fragment{
 	private UserController mUserController;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	private Customer user;
-	private FoodOpeningPackage mFood;
+	private FoodOpeningPackage mFood;	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

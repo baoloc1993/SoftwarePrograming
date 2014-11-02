@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -27,6 +28,9 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	private TabsPagerAdapter mTabsPagerAdapter;
 	private ActionBar mActionBar;
 	private UserController mUserController;
+	private static int screenHeight;
+	private static int screenWidth;
+	private ManufacturerUI activity;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -46,7 +50,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
                     .setTabListener(this));
         mActionBar.addTab(mActionBar.newTab().setText("Statistic")
                 .setTabListener(this));
-        mActionBar.addTab(mActionBar.newTab().setText("Create Survey")
+        mActionBar.addTab(mActionBar.newTab().setText("Food Package")
                 .setTabListener(this));
         
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -66,6 +70,18 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+        
+
+		/**
+		 * get screen's size;
+		 */
+
+		// Get the width and length of the screen
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+		screenHeight = displayMetrics.heightPixels;
+		screenWidth = displayMetrics.widthPixels;
+		activity = this;
         
 	}
 	
@@ -125,6 +141,21 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	public void onTabReselected(android.app.ActionBar.Tab tab,
 			android.app.FragmentTransaction ft) {
 		
+	}
+
+	public int getScreenHeight() {
+		return screenHeight;
+	}
+
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+
+	/**
+	 * @return the standard size for rendering item
+	 */
+	public static int getStandardSize() {
+		return Math.min(screenWidth, screenHeight);
 	}
 	
 

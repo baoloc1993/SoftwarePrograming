@@ -13,132 +13,105 @@ import java.util.ArrayList;
 
 public class ReminderController {
 	Context mContext;
-	//To hold the reminder list when applicaton is running
-	private static ArrayList<Reminder> ReminderList;
-	//to hold the alarm set by reminder 
-	private static ArrayList<Intent> alarmIntent;
-	
-	
+	ArrayList<Reminder> reminderList;
 	public ReminderController(Context context){
 		mContext = context;
 		try{
-			ReminderList =  Reminder.listAll();
+			reminderList =  Reminder.listAll();
 		}
 		catch(ParseException e){
 			e.printStackTrace();
-			ReminderList  = null;
+			reminderList  = null;
 		}
 	}
-	/*
-	 * getReminderList(): get list of all reminder set by current account(manufacture)
-	 * saveAlarm(): save information(Intent type) about alarm to list
-	 * removeAlarm(): remove alarm when reminder is deactivated
-	 * removeAllAlarm(): remove all alarm when user log out; 
-	 */
+	
 	public  ArrayList<Reminder> getReminderList(){
-		return ReminderList;
+		return reminderList;
 	}
 	
-	public void saveAlarm(Intent i){
-		alarmIntent.add(i);
-	}
-	
-	public void removeAlarm(Context mContext,String Name){
-		Intent j = new Intent();
-		for(Intent i : alarmIntent){
-			if(i.getStringExtra("name").equals(Name)){
-				j= i;
-				break;
-			}
-		}
-		
-		j.setAction("CANCEL");
-		mContext.startService(j);
-	}
-	
-	public void removeAllAlarm(Context mContext){
-		for(Intent i : alarmIntent){
-			i.setAction("CANCEL");
-			mContext.startActivity(i);
-		}
-		
-	}
+
 	@SuppressWarnings("deprecation")
 	public String validateReminderForm(String name, String description,Date time, boolean active,boolean isNewReminder, String ID){
-		//Log.d("DEBUG", "inside validate reminder");
-		if(name==null || description == null || time == null){
-			return "Error in validate form";
-		}
+		Log.d("DEBUG", "inside validate reminder");
 		if( name.isEmpty()){
 			return "You need to fill the name of Reminder";
 		}
 		if(description.isEmpty()){
 			return "You need to fill the description of Reminder";
 		}
-		String dateTimeError = "Date/Time Error!!";
 		Calendar c = Calendar.getInstance();
-
 		int curDay = c.get(Calendar.DATE);
 		int curMonth = c.get(Calendar.MONTH);
 		int curYear = c.get(Calendar.YEAR);
 		int curHour = c.get(Calendar.HOUR);
 		int curMinute = c.get(Calendar.MINUTE);
 		if( time.getYear() < curYear )
-			return dateTimeError;
+			return "Wrong input year of Reminder";
 		if( time.getYear() == curYear){
 			if(time.getMonth() ==  curMonth){
 				 if(time.getDate() == curDay){
 					 if(time.getHours() == curHour){
 						 if(time.getMinutes() < curMinute){
-							 return dateTimeError;
+							 return "Wrong input minute of Reminder";
 						 }
 					 }
 					 if(time.getHours() < curHour){
-						 return dateTimeError;
+						 return "Wrong input hour of Reminder";
 					 }
 						 
 				 }
 				 if(time.getDate() < curDay){
-					 return dateTimeError;
+					 return "Wrong input day of Reminder";
 				 }
 				 
 			}
 			
 			if(time.getMonth() <  curMonth){
-				return dateTimeError;
+				return "Wrong input month of Reminder";
 			}
 		}
 		
 		try{
-			
 			if(isNewReminder){
-			//Log.d("DEBUG", "inside create new reminder");
+				Log.d("DEBUG", "inside create new reminder");
 			Reminder newReminder = new Reminder(name,description,time,active) ;
-			ReminderList.add(newReminder);
+			reminderList.add(newReminder);
 			}
 			else{
-				boolean isFound = false;
-				for(Reminder reminder : ReminderList){
+				boolean found = false;
+				for(Reminder reminder : reminderList){
 					if(ID.compareTo(reminder.getID())==0){
 						reminder.setActive(active);
 						reminder.setDescription(description);
 						reminder.setName(name);
 						reminder.setTime(time);
-						isFound = true;
+						found = true;
 						break;
 					}
 				}
-				if(!isFound){
+				if(!found){
 					return "Invalid ID of reminder!!! Need report";
 				}
 			}
 		}
 		catch (ParseException e) {
 			e.printStackTrace();
-			return "There is some error with reminder";
+			return "There is some error with internet connection.";
 		}
 		
 		return "Successfull Update Reminder";
+	}
+	
+	//REMOVE REMINDER
+	public String removeReminder (String id){
+		for (Reminder reminder : reminderList){
+			if (id.compareTo(reminder.getID()) == 0){
+				reminder.delete();
+				return ("Remove Successfully");
+			}
+		}
+		return "Remove Fail";
+		
 	}
 	
 }

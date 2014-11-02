@@ -5,10 +5,8 @@ package com.example.openpackage.ui;
  * - Display the list of Reminder by using an ArrayList of Reminder class
  */
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-
-
 
 
 
@@ -17,6 +15,7 @@ import com.example.openpackage.entity.Reminder;
 import com.example.openpackageapplication.R;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +82,7 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 			TextView order = (TextView) v.findViewById(R.id.order_single_reminder);
 			TextView nameInfo = (TextView) v.findViewById(R.id.name_info_single_reminder);
 			TextView dateInfo = (TextView) v.findViewById(R.id.date_info_single_reminder);
-			
+			TextView descInfo = (TextView) v.findViewById(R.id.desc_info_single_reminder);
 			ImageView status = (ImageView) v.findViewById(R.id.status_reminder);
 			
 
@@ -92,22 +91,42 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 			// Config parameter of each textview and imageview(Resize)
 
 			if (order != null){
-				order.setText("stt");
+				order.setText(String.valueOf(position + 1));
+				order.setTypeface(null, Typeface.BOLD);
 			}
 			
 			if (nameInfo != null) {
-				nameInfo.setText(i.getDescription());
+				nameInfo.setText(i.getName());
 			}
 			if (dateInfo != null) {
-				dateInfo.setText(i.getTime().toString());
+				//i.getTime().toGMTString()
+				//String text = ""
+				//GET DATE/TIME
+				Date date = i.getTime();
+				int year = date.getYear();
+				int month =  date.getMonth() + 1 ;
+				int day = date.getDate();
+				int hour = date.getHours();
+				int minute = date.getMinutes();
+				Date time2 = new Date(year,month,day,hour,minute);
+				
+				String result = String.format("%2d : %2d   %2d/%2d/%4d", hour,minute,day,month,year);
+				dateInfo.setText(result);
 			}
 			
 			if (status != null){
+				int size = (int) (ManufacturerUI.getStandardSize() * 0.1);
+				status.getLayoutParams().width = size;
+				status.getLayoutParams().height = size;
 				if (i.getActive()){
-					status.setImageResource(R.drawable.ic_launcher);
+					status.setImageResource(R.drawable.active);
 				}else{
-					status.setImageResource(R.drawable.ic_launcher);
+					status.setImageResource(R.drawable.inactive);
 				}
+			}
+			
+			if (descInfo != null){
+				descInfo.setText(i.getDescription());
 			}
 
 		}

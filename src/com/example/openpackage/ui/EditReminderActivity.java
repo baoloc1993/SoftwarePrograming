@@ -46,7 +46,12 @@ public class EditReminderActivity extends ControlReminder {
 	  		String Id = bundle.getString("ID");
 	  		String nameStr = bundle.getString("Name");
 	  		String description = bundle.getString("Description");
-	  		Date time = new Date(bundle.getLong("Date"));
+	  		Date time = new Date(
+	  				bundle.getInt("Year"), 
+	  				bundle.getInt("Month"),
+	  				bundle.getInt("Day"),
+	  				bundle.getInt("Hour"),
+	  				bundle.getInt("Minute"));
 	  		boolean isActive = bundle.getBoolean("Active");
 	  		
 	  		super.getData(Id,nameStr, description, time, isActive);

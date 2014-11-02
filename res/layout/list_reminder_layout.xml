@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_marginRight="10dp"
+    android:id = "@+id/list_reminder_layout">
     
     
 	<RelativeLayout
@@ -26,6 +27,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@id/new_reminder_button"
 	        android:layout_alignBottom="@id/new_reminder_button"
+	        
 	        android:text="NEW REMINDER"/>
 	    
 	</RelativeLayout>
