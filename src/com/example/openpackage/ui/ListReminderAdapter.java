@@ -11,6 +11,8 @@ import java.util.List;
 
 
 
+
+
 import com.example.openpackage.entity.Reminder;
 import com.example.openpackageapplication.R;
 
@@ -99,18 +101,18 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 				nameInfo.setText(i.getName());
 			}
 			if (dateInfo != null) {
-				//i.getTime().toGMTString()
+				String result = i.getTime().toString();
 				//String text = ""
 				//GET DATE/TIME
-				Date date = i.getTime();
-				int year = date.getYear();
-				int month =  date.getMonth() + 1 ;
-				int day = date.getDate();
-				int hour = date.getHours();
-				int minute = date.getMinutes();
-				Date time2 = new Date(year,month,day,hour,minute);
+//				Date date = i.getTime();
+//				int year = date.getYear();
+//				int month =  date.getMonth() ;
+//				int day = date.getDate();
+//				int hour = date.getHours();
+//				int minute = date.getMinutes();
+//				Date time2 = new Date(year,month,day,hour,minute);
 				
-				String result = String.format("%2d : %2d   %2d/%2d/%4d", hour,minute,day,month,year);
+//				String result = String.format("%2d : %2d   %2d/%2d/%4d", hour,minute,day,month,year);
 				dateInfo.setText(result);
 			}
 			

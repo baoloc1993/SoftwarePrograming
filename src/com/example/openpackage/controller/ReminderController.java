@@ -32,7 +32,10 @@ public class ReminderController {
 
 	@SuppressWarnings("deprecation")
 	public String validateReminderForm(String name, String description,Date time, boolean active,boolean isNewReminder, String ID){
-		Log.d("DEBUG", "inside validate reminder");
+		
+		
+		//
+		
 		if( name.isEmpty()){
 			return "You need to fill the name of Reminder";
 		}
@@ -73,11 +76,15 @@ public class ReminderController {
 		
 		try{
 			if(isNewReminder){
-				Log.d("DEBUG", "inside create new reminder");
+				
 			Reminder newReminder = new Reminder(name,description,time,active) ;
 			reminderList.add(newReminder);
 			}
 			else{
+				//Config time to match with database
+				
+				
+				
 				boolean found = false;
 				for(Reminder reminder : reminderList){
 					if(ID.compareTo(reminder.getID())==0){
