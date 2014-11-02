@@ -19,60 +19,62 @@ package com.facebook;
 import android.os.Handler;
 
 class RequestProgress {
-    private final Request request;
-    private final Handler callbackHandler;
-    private final long threshold;
+	private final Request request;
+	private final Handler callbackHandler;
+	private final long threshold;
 
-    private long progress, lastReportedProgress, maxProgress;
+	private long progress, lastReportedProgress, maxProgress;
 
-    RequestProgress(Handler callbackHandler, Request request) {
-        this.request = request;
-        this.callbackHandler = callbackHandler;
+	RequestProgress(Handler callbackHandler, Request request) {
+		this.request = request;
+		this.callbackHandler = callbackHandler;
 
-        this.threshold = Settings.getOnProgressThreshold();
-    }
+		this.threshold = Settings.getOnProgressThreshold();
+	}
 
-    long getProgress() {
-        return progress;
-    }
+	long getProgress() {
+		return progress;
+	}
 
-    long getMaxProgress() {
-        return maxProgress;
-    }
+	long getMaxProgress() {
+		return maxProgress;
+	}
 
-    void addProgress(long size) {
-        progress += size;
+	void addProgress(long size) {
+		progress += size;
 
-        if (progress >= lastReportedProgress + threshold || progress >= maxProgress) {
-            reportProgress();
-        }
-    }
+		if (progress >= lastReportedProgress + threshold
+				|| progress >= maxProgress) {
+			reportProgress();
+		}
+	}
 
-    void addToMax(long size) {
-        maxProgress += size;
-    }
+	void addToMax(long size) {
+		maxProgress += size;
+	}
 
-    void reportProgress() {
-        if (progress > lastReportedProgress) {
-            Request.Callback callback = request.getCallback();
-            if (maxProgress > 0 && callback instanceof Request.OnProgressCallback) {
-                // Keep copies to avoid threading issues
-                final long currentCopy = progress;
-                final long maxProgressCopy = maxProgress;
-                final Request.OnProgressCallback callbackCopy = (Request.OnProgressCallback) callback;
-                if (callbackHandler == null) {
-                    callbackCopy.onProgress(currentCopy, maxProgressCopy);
-                }
-                else {
-                    callbackHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            callbackCopy.onProgress(currentCopy, maxProgressCopy);
-                        }
-                    });
-                }
-                lastReportedProgress = progress;
-            }
-        }
-    }
+	void reportProgress() {
+		if (progress > lastReportedProgress) {
+			Request.Callback callback = request.getCallback();
+			if (maxProgress > 0
+					&& callback instanceof Request.OnProgressCallback) {
+				// Keep copies to avoid threading issues
+				final long currentCopy = progress;
+				final long maxProgressCopy = maxProgress;
+				final Request.OnProgressCallback callbackCopy = (Request.OnProgressCallback) callback;
+				if (callbackHandler == null) {
+					callbackCopy.onProgress(currentCopy, maxProgressCopy);
+				} else {
+					callbackHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							callbackCopy.onProgress(currentCopy,
+									maxProgressCopy);
+						}
+					});
+				}
+				lastReportedProgress = progress;
+			}
+		}
+	}
 }

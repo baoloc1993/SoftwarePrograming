@@ -16,59 +16,63 @@
 
 package com.facebook;
 
-import android.os.Handler;
-
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-class ProgressNoopOutputStream extends OutputStream implements RequestOutputStream {
-    private final Map<Request, RequestProgress> progressMap = new HashMap<Request, RequestProgress>();
-    private final Handler callbackHandler;
+import android.os.Handler;
 
-    private Request currentRequest;
-    private RequestProgress currentRequestProgress;
-    private int batchMax;
+class ProgressNoopOutputStream extends OutputStream implements
+		RequestOutputStream {
+	private final Map<Request, RequestProgress> progressMap = new HashMap<Request, RequestProgress>();
+	private final Handler callbackHandler;
 
-    ProgressNoopOutputStream(Handler callbackHandler) {
-        this.callbackHandler = callbackHandler;
-    }
+	private Request currentRequest;
+	private RequestProgress currentRequestProgress;
+	private int batchMax;
 
-    public void setCurrentRequest(Request currentRequest) {
-        this.currentRequest = currentRequest;
-        this.currentRequestProgress = currentRequest != null? progressMap.get(currentRequest) : null;
-    }
+	ProgressNoopOutputStream(Handler callbackHandler) {
+		this.callbackHandler = callbackHandler;
+	}
 
-    int getMaxProgress() {
-        return batchMax;
-    }
+	@Override
+	public void setCurrentRequest(Request currentRequest) {
+		this.currentRequest = currentRequest;
+		this.currentRequestProgress = currentRequest != null ? progressMap
+				.get(currentRequest) : null;
+	}
 
-    Map<Request,RequestProgress> getProgressMap() {
-        return progressMap;
-    }
+	int getMaxProgress() {
+		return batchMax;
+	}
 
-    void addProgress(long size) {
-        if (currentRequestProgress == null) {
-            currentRequestProgress = new RequestProgress(callbackHandler, currentRequest);
-            progressMap.put(currentRequest, currentRequestProgress);
-        }
+	Map<Request, RequestProgress> getProgressMap() {
+		return progressMap;
+	}
 
-        currentRequestProgress.addToMax(size);
-        batchMax += size;
-    }
+	void addProgress(long size) {
+		if (currentRequestProgress == null) {
+			currentRequestProgress = new RequestProgress(callbackHandler,
+					currentRequest);
+			progressMap.put(currentRequest, currentRequestProgress);
+		}
 
-    @Override
-    public void write(byte[] buffer) {
-        addProgress(buffer.length);
-    }
+		currentRequestProgress.addToMax(size);
+		batchMax += size;
+	}
 
-    @Override
-    public void write(byte[] buffer, int offset, int length) {
-        addProgress(length);
-    }
+	@Override
+	public void write(byte[] buffer) {
+		addProgress(buffer.length);
+	}
 
-    @Override
-    public void write(int oneByte) {
-        addProgress(1);
-    }
+	@Override
+	public void write(byte[] buffer, int offset, int length) {
+		addProgress(length);
+	}
+
+	@Override
+	public void write(int oneByte) {
+		addProgress(1);
+	}
 }

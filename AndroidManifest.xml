@@ -13,14 +13,14 @@
     <application
         android:name="com.example.openpackage.OpenPacketApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light"
         android:screenOrientation="portrait" >
         
         <activity
             android:name="com.example.openpackage.ui.MainActivity"
-            android:label="@string/DoSurveyTab"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
         
         <activity 
             android:name="com.example.openpackage.ui.DoSurveyUI_2"
-            android:label="@string/DoSurveyTab"
+            
             android:screenOrientation="portrait">
         </activity>
 

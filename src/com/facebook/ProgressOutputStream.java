@@ -16,106 +16,113 @@
 
 package com.facebook;
 
-import android.os.Handler;
-
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
-class ProgressOutputStream extends FilterOutputStream implements RequestOutputStream {
-    private final Map<Request, RequestProgress> progressMap;
-    private final RequestBatch requests;
-    private final long threshold;
+import android.os.Handler;
 
-    private long batchProgress, lastReportedProgress, maxProgress;
-    private RequestProgress currentRequestProgress;
+class ProgressOutputStream extends FilterOutputStream implements
+		RequestOutputStream {
+	private final Map<Request, RequestProgress> progressMap;
+	private final RequestBatch requests;
+	private final long threshold;
 
-    ProgressOutputStream(OutputStream out, RequestBatch requests, Map<Request, RequestProgress> progressMap, long maxProgress) {
-        super(out);
-        this.requests = requests;
-        this.progressMap = progressMap;
-        this.maxProgress = maxProgress;
+	private long batchProgress, lastReportedProgress, maxProgress;
+	private RequestProgress currentRequestProgress;
 
-        this.threshold = Settings.getOnProgressThreshold();
-    }
+	ProgressOutputStream(OutputStream out, RequestBatch requests,
+			Map<Request, RequestProgress> progressMap, long maxProgress) {
+		super(out);
+		this.requests = requests;
+		this.progressMap = progressMap;
+		this.maxProgress = maxProgress;
 
-    private void addProgress(long size) {
-        if (currentRequestProgress != null) {
-            currentRequestProgress.addProgress(size);
-        }
+		this.threshold = Settings.getOnProgressThreshold();
+	}
 
-        batchProgress += size;
+	private void addProgress(long size) {
+		if (currentRequestProgress != null) {
+			currentRequestProgress.addProgress(size);
+		}
 
-        if (batchProgress >= lastReportedProgress + threshold || batchProgress >= maxProgress) {
-            reportBatchProgress();
-        }
-    }
+		batchProgress += size;
 
-    private void reportBatchProgress() {
-        if (batchProgress > lastReportedProgress) {
-            for (RequestBatch.Callback callback : requests.getCallbacks()) {
-                if (callback instanceof RequestBatch.OnProgressCallback) {
-                    final Handler callbackHandler = requests.getCallbackHandler();
+		if (batchProgress >= lastReportedProgress + threshold
+				|| batchProgress >= maxProgress) {
+			reportBatchProgress();
+		}
+	}
 
-                    // Keep copies to avoid threading issues
-                    final RequestBatch.OnProgressCallback progressCallback = (RequestBatch.OnProgressCallback) callback;
-                    if (callbackHandler == null) {
-                        progressCallback.onBatchProgress(requests, batchProgress, maxProgress);
-                    }
-                    else {
-                        callbackHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressCallback.onBatchProgress(requests, batchProgress, maxProgress);
-                            }
-                        });
-                    }
-                }
-            }
+	private void reportBatchProgress() {
+		if (batchProgress > lastReportedProgress) {
+			for (RequestBatch.Callback callback : requests.getCallbacks()) {
+				if (callback instanceof RequestBatch.OnProgressCallback) {
+					final Handler callbackHandler = requests
+							.getCallbackHandler();
 
-            lastReportedProgress = batchProgress;
-        }
-    }
+					// Keep copies to avoid threading issues
+					final RequestBatch.OnProgressCallback progressCallback = (RequestBatch.OnProgressCallback) callback;
+					if (callbackHandler == null) {
+						progressCallback.onBatchProgress(requests,
+								batchProgress, maxProgress);
+					} else {
+						callbackHandler.post(new Runnable() {
+							@Override
+							public void run() {
+								progressCallback.onBatchProgress(requests,
+										batchProgress, maxProgress);
+							}
+						});
+					}
+				}
+			}
 
-    public void setCurrentRequest(Request request) {
-        currentRequestProgress = request != null? progressMap.get(request) : null;
-    }
+			lastReportedProgress = batchProgress;
+		}
+	}
 
-    long getBatchProgress() {
-        return batchProgress;
-    }
+	@Override
+	public void setCurrentRequest(Request request) {
+		currentRequestProgress = request != null ? progressMap.get(request)
+				: null;
+	}
 
-    long getMaxProgress() {
-        return maxProgress;
-    }
+	long getBatchProgress() {
+		return batchProgress;
+	}
 
-    @Override
-    public void write(byte[] buffer) throws IOException {
-        out.write(buffer);
-        addProgress(buffer.length);
-    }
+	long getMaxProgress() {
+		return maxProgress;
+	}
 
-    @Override
-    public void write(byte[] buffer, int offset, int length) throws IOException {
-        out.write(buffer, offset, length);
-        addProgress(length);
-    }
+	@Override
+	public void write(byte[] buffer) throws IOException {
+		out.write(buffer);
+		addProgress(buffer.length);
+	}
 
-    @Override
-    public void write(int oneByte) throws IOException {
-        out.write(oneByte);
-        addProgress(1);
-    }
+	@Override
+	public void write(byte[] buffer, int offset, int length) throws IOException {
+		out.write(buffer, offset, length);
+		addProgress(length);
+	}
 
-    @Override
-    public void close() throws IOException {
-        super.close();
+	@Override
+	public void write(int oneByte) throws IOException {
+		out.write(oneByte);
+		addProgress(1);
+	}
 
-        for (RequestProgress p : progressMap.values()) {
-            p.reportProgress();
-        }
+	@Override
+	public void close() throws IOException {
+		super.close();
 
-        reportBatchProgress();
-    }
+		for (RequestProgress p : progressMap.values()) {
+			p.reportProgress();
+		}
+
+		reportBatchProgress();
+	}
 }
