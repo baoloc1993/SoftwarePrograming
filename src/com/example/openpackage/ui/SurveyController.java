@@ -1,4 +1,4 @@
-package com.example.openpackage.controller;
+package com.example.openpackage.ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +8,7 @@ import java.util.Date;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.Customer;
 import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackage.entity.Survey;

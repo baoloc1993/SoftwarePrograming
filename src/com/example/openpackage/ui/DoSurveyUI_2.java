@@ -2,8 +2,6 @@ package com.example.openpackage.ui;
 
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.concurrent.Callable;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,7 +38,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 	private CheckBox showListView;
 	private ListView mListView;
 	private UIHelper uiHelper;
-	private Button shareFBButton;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +58,6 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		package_description = (TextView) findViewById(R.id.description);
 		
 		
-		//Set the adapter
 		mListView = (ListView) findViewById(R.id.listView1);
 		mListView.setAdapter(new SurveyListAdapter(this,mSurveyController.getSurveyList(mFood), 0));
 		mListView.setVisibility(View.INVISIBLE);
@@ -83,16 +80,15 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 				finish();
 			}
 		});
-		
 		String converDate = DateUtils.getRelativeTimeSpanString(
 				mFood.getParseObject().getUpdatedAt().getTime(),
 				new Date().getTime(), 
 				DateUtils.SECOND_IN_MILLIS).toString();
-				package_date.setText(converDate);
-				package_name.setText(mFood.getTitle());
-				package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
-				package_type.setText("Type: " + mFood.getType());
-				package_description.setText(mFood.getDescription());
+		package_date.setText(converDate);
+		package_name.setText(mFood.getTitle());
+		package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
+		package_type.setText("Type: " + mFood.getType());
+		package_description.setText(mFood.getDescription());
 		
 		Bundle arguments = new Bundle();
 		arguments.putString(Survey_Form.FOODOPENINGPACKAGE_ID, mFood.getID());
@@ -103,16 +99,15 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 				.replace(R.id.survey_container, fragment).commit();
 		
 		/////
-
 		//Fragment videoFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
-			//getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, videoFragment).commit();
-			
-			uiHelper = mSurveyController.connectToSocialNetwork("Facebook");
-		    uiHelper.onCreate(savedInstanceState);
+		//getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, videoFragment).commit();
+		
+		uiHelper = new FacebookUIHelper(this,null);
+	    uiHelper.onCreate(savedInstanceState);
 		/////
 	    
 	    
-		shareFBButton = (Button) findViewById(R.id.ShareFBButton);
+		Button shareFBButton = (Button) findViewById(R.id.ShareFBButton);
 		UserController mUserController = new UserController(this);
 		if(mSurveyController.getSurvey(mFood,(Customer) mUserController.getCurrentUser()) == null)
 		{
@@ -136,8 +131,6 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		
 		((SurveyListAdapter) mListView.getAdapter()).refill(mSurveyController.getSurveyList(mFood));
 		package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
-		
-		shareFBButton.setVisibility(View.VISIBLE);
 	}
 	
 	@Override

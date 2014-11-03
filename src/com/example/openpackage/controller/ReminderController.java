@@ -1,6 +1,8 @@
 package com.example.openpackage.controller;
 
+import com.example.openpackage.entity.Manufacturer;
 import com.example.openpackage.entity.Reminder;
+import com.example.openpackage.entity.User;
 import com.parse.ParseException;
 
 import android.content.Context;
@@ -13,7 +15,8 @@ import java.util.ArrayList;
 
 public class ReminderController {
 	Context mContext;
-	ArrayList<Reminder> reminderList;
+	private static ArrayList<Reminder> reminderList;
+	private static ArrayList<Intent> alarmIntent;
 	public ReminderController(Context context){
 		mContext = context;
 		try{
@@ -23,19 +26,63 @@ public class ReminderController {
 			e.printStackTrace();
 			reminderList  = null;
 		}
+		
+		alarmIntent = new ArrayList<Intent>();
 	}
 	
+	public void firstUpdateAlarmAfterLogIn(){
+		for(Reminder r : reminderList){
+			if(r.getActive()){
+				Intent i = new Intent(mContext,ReminderService.class);
+				i.putExtra("name", r.getName());
+				i.putExtra("description", r.getDescription());
+				i.putExtra("year", r.getTime().getYear());
+				i.putExtra("month", r.getTime().getMonth());
+				i.putExtra("day", r.getTime().getDay());
+				i.putExtra("hour",r.getTime().getHours());
+				i.putExtra("minute", r.getTime().getMinutes());
+				i.setAction("CREATE");
+				alarmIntent.add(i);
+				mContext.startService(i);
+			}
+		}
+	}
 	public  ArrayList<Reminder> getReminderList(){
 		return reminderList;
 	}
 	
-
+	public void addNewAlarm(Context context,Intent i){
+		alarmIntent.add(i);
+		i.setAction("CREATE");
+		context.startService(i);
+		
+	}
+	
+	private void removeAlarm(String name){
+		Intent j = new Intent(mContext,ReminderService.class);
+		for(int i = 0; i < alarmIntent.size();++i){
+			j = alarmIntent.get(i);
+			if(j.getStringExtra("name").compareTo(name) == 0){
+				j.setAction("CANCEL");
+				alarmIntent.remove(i);
+				break;
+				
+			}
+		}
+		mContext.startService(j);
+	}
+	public void removeAllAlarms(){
+		for(int i = 0; i < alarmIntent.size();++i){
+			Intent j = alarmIntent.get(i);
+			j.setAction("CANCEL");
+			alarmIntent.remove(i);
+			mContext.startService(j);
+				
+		}
+	}
 	@SuppressWarnings("deprecation")
 	public String validateReminderForm(String name, String description,Date time, boolean active,boolean isNewReminder, String ID){
-		
-		
-		//
-		
+		Log.d("DEBUG", "inside validate reminder");
 		if( name.isEmpty()){
 			return "You need to fill the name of Reminder";
 		}
@@ -76,15 +123,19 @@ public class ReminderController {
 		
 		try{
 			if(isNewReminder){
-				
-			Reminder newReminder = new Reminder(name,description,time,active) ;
-			reminderList.add(newReminder);
+				//Log.d("DEBUG", "inside create new reminder");
+				Reminder newReminder = new Reminder(name,description,time,active) ;
+			
+				reminderList.add(newReminder);
+				try {
+					Manufacturer tmp = Manufacturer.getCurrentUser();
+					tmp.addReminder(newReminder);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else{
-				//Config time to match with database
-				
-				
-				
 				boolean found = false;
 				for(Reminder reminder : reminderList){
 					if(ID.compareTo(reminder.getID())==0){
@@ -103,7 +154,7 @@ public class ReminderController {
 		}
 		catch (ParseException e) {
 			e.printStackTrace();
-			return "There is some error with internet connection.";
+			return "Some errors happen in database.";
 		}
 		
 		return "Successfull Update Reminder";
@@ -113,8 +164,10 @@ public class ReminderController {
 	public String removeReminder (String id){
 		for (Reminder reminder : reminderList){
 			if (id.compareTo(reminder.getID()) == 0){
+				removeAlarm(reminder.getName());
 				reminder.delete();
 				return ("Remove Successfully");
+				
 			}
 		}
 		return "Remove Fail";

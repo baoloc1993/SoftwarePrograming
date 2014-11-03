@@ -6,7 +6,6 @@ import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
-import com.example.openpackage.controller.*;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,17 +80,6 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 				i.putExtra("type", curPackage.getType());
 				i.putExtra("rateList", rate_list);
 				startActivity(i);
-				/*FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				ViewSingleStaticticsFragment viewSingleStatFragment = new ViewSingleStaticticsFragment();
-				viewSingleStatFragment.setArguments(bundle);
-				viewSingleStatFragment.setHasOptionsMenu(true);
-				if(viewGroup.getId()==((ViewGroup)getView().getParent()).getId()){
-					Log.d("idfalse","false");
-				}
-				Log.d("dddddd",String.valueOf(((ViewGroup)(getView().getParent()).getParent()).getId()));
-				fragmentManager.beginTransaction()
-				.replace(((ViewGroup)getView().getParent()).getId(), viewSingleStatFragment)
-				.addToBackStack(null).commit();*/
 				
 				
 			}

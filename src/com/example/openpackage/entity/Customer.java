@@ -1,4 +1,3 @@
-
 package com.example.openpackage.entity;
 
 import java.util.ArrayList;
@@ -32,28 +31,16 @@ public class Customer extends User {
 		save();
 	}
 	
-	/**
-	 * Login function (Inherit from User class)
-	 */
 	@Override
 	public void logIn() throws ParseException {
 		mParseObject.pin();
 	}
 	
-
-	/**
-	 * Logout function (Inherit from User class)
-	 */
 	@Override
 	public void logOut() throws ParseException {
 		mParseObject.unpin();
 	}
 	
-	/**
-	 * Get current User
-	 * @return : current customer
-	 * @throws ParseException
-	 */
 	public static Customer getCurrentUser() throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		query.fromLocalDatastore();
@@ -62,11 +49,6 @@ public class Customer extends User {
 		return new Customer(customers.get(0));
 	}
 	
-	/**
-	 * Get list  of all customers
-	 * @return : list of customers
-	 * @throws ParseException
-	 */
 	public static ArrayList<Customer> listAll() throws ParseException {
 		ArrayList<Customer> res = new ArrayList<Customer>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
@@ -80,11 +62,6 @@ public class Customer extends User {
 		return res;
 	}
 	
-	/**
-	 * Match customer with the survey he has done
-	 * @param survey : a survey he/she has done 
-	 * @throws ParseException
-	 */
 	public void addSurvey( Survey survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
@@ -94,12 +71,6 @@ public class Customer extends User {
 	public int getAge() {
 		return mParseObject.getInt("age");
 	}
-	
-	/**
-	 * Get list of survey that customers has done
-	 * @return : list of survey
-	 * @throws ParseException
-	 */
 	public ArrayList<Survey> getSurveyList() throws ParseException {
 		ArrayList<Survey> surveyList = new ArrayList<Survey>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");

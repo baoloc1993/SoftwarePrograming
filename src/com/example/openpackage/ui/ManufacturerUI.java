@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 
+import com.example.openpackage.controller.ReminderController;
 import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.Manufacturer;
 import com.example.openpackageapplication.R;
@@ -31,6 +32,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	private static int screenHeight;
 	private static int screenWidth;
 	private ManufacturerUI activity;
+	private ReminderController reminderController;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -82,7 +84,12 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		screenHeight = displayMetrics.heightPixels;
 		screenWidth = displayMetrics.widthPixels;
 		activity = this;
-        
+		
+		/*
+		 * set up alarm after manufacturer log in
+		 */
+		reminderController = new ReminderController(getApplicationContext());
+		reminderController.firstUpdateAlarmAfterLogIn();
 	}
 	
 	@Override
@@ -93,6 +100,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		mUserController = new UserController(getApplicationContext());
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case R.id.action_logout:
@@ -103,9 +111,10 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 		        @Override
 		        public void onClick(DialogInterface dialog, int which) {
-		        	Manufacturer user = (Manufacturer) mUserController.getCurrentUser();
+		        	final Manufacturer user = (Manufacturer) mUserController.getCurrentUser();
+		        	reminderController.removeAllAlarms();
 		        	mUserController.logOut(user);
-		        	Intent intent = new Intent(mContext, LoginFormActivity.class);
+		        	Intent intent = new Intent(getApplicationContext(), LoginFormActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
@@ -158,6 +167,5 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		return Math.min(screenWidth, screenHeight);
 	}
 	
-
-
+	
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.util.Log;
-
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -13,6 +11,10 @@ import com.parse.ParseQuery;
 public class Reminder {
 	private static String CLASSNAME = "Reminder";
 	
+//	private Date time;
+//	private String description;
+//	private String name;
+//	private boolean active;
 	
 	ParseObject mParseObject;
 	
@@ -21,13 +23,11 @@ public class Reminder {
 	}
 	
 	public Reminder( String name, String description, Date time, boolean active ) throws ParseException {
-		time.setYear(time.getYear() - 1900);
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("name", name);
 		mParseObject.put("description", description);
 		mParseObject.put("time", time);
 		mParseObject.put("active", active);
-		//Log.d("DATE CHECK", String.valueOf(mParseObject.get("time")));
 		save();
 	}
 	
@@ -42,7 +42,6 @@ public class Reminder {
 	}
 	
 	public void setTime(Date time) throws ParseException {
-		Log.d("DATE CHECK", String.valueOf(time.getDate()));
 		mParseObject.put("time", time);
 		save();
 	}
@@ -71,12 +70,6 @@ public class Reminder {
 	public String getID(){
 		return mParseObject.getObjectId();
 	}
-	
-	/**
-	 * Get all reminder in the database
-	 * @return : list of reminder
-	 * @throws ParseException
-	 */
 	public static ArrayList<Reminder> listAll() throws ParseException {
 		ArrayList<Reminder> res = new ArrayList<Reminder>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
@@ -98,9 +91,6 @@ public class Reminder {
 		return mParseObject;
 	}
 	
-	/**
-	 * delete reminder
-	 */
 	public void delete(){
 		try {
 			mParseObject.delete();

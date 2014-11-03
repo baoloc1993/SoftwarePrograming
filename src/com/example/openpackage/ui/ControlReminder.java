@@ -152,10 +152,7 @@ public abstract class ControlReminder extends Activity {
 					i.putExtra("day", day);
 					i.putExtra("hour",hour);
 					i.putExtra("minute", minute);
-						
-					i.setAction("CREATE");
-					startService(i);
-					
+					reminderController.addNewAlarm(getApplicationContext(),i);	
 					
 				}
 				

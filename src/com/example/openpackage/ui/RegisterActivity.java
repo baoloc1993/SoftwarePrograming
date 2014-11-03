@@ -103,8 +103,7 @@ public class RegisterActivity extends Activity {
 						}
 						
 					});
-
-				 //Check information
+				 
 				if (isRegisterValid(user, pass, rePass, emailStr, reEmailStr,ageInt)){
 					UserController userController = new UserController(getApplicationContext());
 					String result = userController.validateRegister(user, pass, emailStr, ageInt, isFemale);
@@ -114,16 +113,6 @@ public class RegisterActivity extends Activity {
 		});
 	}
 	
-	/**
-	 *  Check information
-	 * @param user
-	 * @param password
-	 * @param rePassword
-	 * @param email
-	 * @param reEmail
-	 * @param ageInt
-	 * @return
-	 */
 	private boolean isRegisterValid(String user, String password, String rePassword, String email, String reEmail,int ageInt){
 		if (user == null || password == null || email == null){
 			Toast.makeText(getApplicationContext(), "You have to fill all the field", Toast.LENGTH_LONG).show();

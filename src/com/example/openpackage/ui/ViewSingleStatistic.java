@@ -39,7 +39,7 @@ public class ViewSingleStatistic extends Activity{
 	    , new GraphViewData(3, rate_list[3])
 	    , new GraphViewData(4, rate_list[4])
 	});
-GraphView graphView = new BarGraphView(
+	GraphView graphView = new BarGraphView(
 	    getApplicationContext()// context
 	    , i.getStringExtra("name") // heading
 	);
@@ -50,12 +50,13 @@ GraphView graphView = new BarGraphView(
 	graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLUE);
 	graphView.getGraphViewStyle().setNumVerticalLabels(3);
 	graphView.setHorizontalLabels(new String[]{"1","2","3","4","5"} );
+	
 	RelativeLayout layout = (RelativeLayout) findViewById(R.id.graph_draw);
 	RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 	params.addRule(RelativeLayout.BELOW, R.id.graph_title);
 	layout.setLayoutParams(params);
-	
 	layout.addView(graphView);
+	
 	Button Back = (Button) findViewById(R.id.graph_exit_button);
 	Back.setOnClickListener(new OnClickListener(){
 

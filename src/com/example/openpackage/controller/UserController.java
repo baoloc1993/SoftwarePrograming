@@ -22,7 +22,6 @@ import com.example.openpackage.entity.Manufacturer;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.User;
 import com.example.openpackage.ui.MainActivity;
-
 import com.example.openpackage.ui.ManufacturerUI;
 import com.parse.ParseException;
 
@@ -34,10 +33,6 @@ public class UserController {
 		this.mContext = mContext;
 	}
 	
-	/**
-	 * Get current user
-	 * @return current user (Manufacturer or Customer). Null if cannot get current user
-	 */
 	public User getCurrentUser() {
 		try {
 			User user = Customer.getCurrentUser();
@@ -50,10 +45,6 @@ public class UserController {
 		return null;
 	}
 	
-	/**
-	 * Get the Manufacturer User
-	 * @return : The first Manufacturer in the list of manufacturers
-	 */
 	private Manufacturer getManufactureUser() {
 		try {
 			ArrayList<Manufacturer> mManufacturers = Manufacturer.listAll();
@@ -64,12 +55,6 @@ public class UserController {
 		return null;
 	}
 	
-	/**
-	 * Validate the login
-	 * @param username : username of user
-	 * @param password : password of user
-	 * @return : true if login sucessfully
-	 */
 	
 	public boolean validateLogin( String username, String password ) {
 		ArrayList<Customer> customers;
@@ -80,8 +65,6 @@ public class UserController {
 			e.printStackTrace();
 			return false;
 		}
-		
-		//If user is customer
 		for(Customer customer : customers) {
 			if ( customer.getUsername().equals(username) && customer.getPassword().equals(password) ) {
 				try {
@@ -100,7 +83,6 @@ public class UserController {
 			}
 		}
 		
-		//If user is Manufacturer
 		if (mManufacturer!=null && mManufacturer.getUsername().equals(username) && mManufacturer.getPassword().equals(password)) {
 			try {
 				Log.i(TAG, "Log in Manufacturer");
@@ -117,16 +99,6 @@ public class UserController {
 		return false;
 	}
 	
-	/**
-	 * Validate Register
-	 * @param username : 
-	 * @param password :
-	 * @param email : 
-	 * @param age   : must be greater than 0
-	 * @param gender: true if male, false if female
-	 * @return : Result and Error after check the input
-	 * 	
-	 */
 	public String validateRegister( String username, String password, String email, int age, boolean gender ) {
 		ArrayList<Customer> customers;
 		
@@ -159,11 +131,6 @@ public class UserController {
 		return "OKAY";
 	}
 	
-	/**
-	 * Verify email when forget password
-	 * @param email : email which the user input
-	 * @return : true if email is in database.
-	 */
 	public boolean verifyForgetInfo(String email) {
 		Log.i(TAG, email);
 		ArrayList<Customer> customers;
@@ -183,11 +150,6 @@ public class UserController {
 		return false;
 	}
 	
-	/**
-	 * Get Personal Record
-	 * @param customer
-	 * @return : List of survey of that customer
-	 */
 	public ArrayList<Survey> retrievePersonalRecord(Customer customer) {
 		try {
 			return customer.getSurveyList();
@@ -197,11 +159,6 @@ public class UserController {
 		return null;
 	}
 	
-	/**
-	 * Logout 
-	 * @param user : current user
-	 * @return
-	 */
 	public boolean logOut(User user) {
 		try {
 			user.logOut();
@@ -212,11 +169,6 @@ public class UserController {
 		return true;
 	}
 	
-	/**
-	 * Check if the email is valid or not
-	 * @param email
-	 * @return : false if the email address is not valid
-	 */
 	private boolean isValidEmailAddress(String email) {
 		   boolean result = true;
 		   try {
@@ -228,10 +180,6 @@ public class UserController {
 		   return result;
 		}
 	
-	/**
-	 * Send email
-	 * @param customer
-	 */
 	private void sendEmail( Customer customer ) {
 
         String msgBody = "<p>Here is your username and password. Thank you for use our Application.</p>"

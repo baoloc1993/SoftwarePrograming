@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="libs/additionnal.jar"/>
 	<classpathentry kind="lib" path="libs/mail.jar"/>
 	<classpathentry kind="lib" path="libs/Parse-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/FacebookSDK/libs/bolts-android-1.1.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
