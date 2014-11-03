@@ -5,12 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
 import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.FacebookUIHelper;
 import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackage.entity.Survey;
+import com.example.openpackage.entity.UIHelper;
 import com.parse.ParseException;
 
 public class SurveyController {
@@ -97,5 +100,11 @@ public class SurveyController {
 			}
 		return null;
 	}
-	
+	public UIHelper connectToSocialNetwork(String choice)
+	{
+		if(choice.equals("Facebook"))
+			return new FacebookUIHelper((Activity)mContext,null);
+		return null;
+	}
+
 }

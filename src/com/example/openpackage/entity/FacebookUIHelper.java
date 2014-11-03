@@ -1,5 +1,7 @@
 package com.example.openpackage.entity;
 
+import java.util.concurrent.Callable;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.Session.StatusCallback;
 import com.facebook.widget.FacebookDialog;
+import com.facebook.widget.FacebookDialog.PendingCall;
 
 public class FacebookUIHelper extends UiLifecycleHelper implements UIHelper
 {
@@ -29,7 +32,6 @@ public class FacebookUIHelper extends UiLifecycleHelper implements UIHelper
 		// TODO Auto-generated method stub
 		super.onResume();
 	}
-
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -37,13 +39,15 @@ public class FacebookUIHelper extends UiLifecycleHelper implements UIHelper
 	          @Override
 	          public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
 	              Log.e("Activity", String.format("Error: %s", error.toString()));
+	              
 	          }
 
 	          @Override
 	          public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
 	              Log.i("Activity", "Success!");
+	            
 	          }
-	      });
+		});
 	}
 
 	@Override

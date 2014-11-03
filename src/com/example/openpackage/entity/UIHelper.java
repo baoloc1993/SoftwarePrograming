@@ -1,6 +1,7 @@
 package com.example.openpackage.entity;
 
-import android.app.Activity;
+import java.util.concurrent.Callable;
+
 import android.content.Intent;
 import android.os.Bundle;
 
