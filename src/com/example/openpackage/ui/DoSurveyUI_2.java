@@ -60,6 +60,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		package_description = (TextView) findViewById(R.id.description);
 		
 		
+		//Set the adapter
 		mListView = (ListView) findViewById(R.id.listView1);
 		mListView.setAdapter(new SurveyListAdapter(this,mSurveyController.getSurveyList(mFood), 0));
 		mListView.setVisibility(View.INVISIBLE);
@@ -82,15 +83,16 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 				finish();
 			}
 		});
+		
 		String converDate = DateUtils.getRelativeTimeSpanString(
 				mFood.getParseObject().getUpdatedAt().getTime(),
 				new Date().getTime(), 
 				DateUtils.SECOND_IN_MILLIS).toString();
-		package_date.setText(converDate);
-		package_name.setText(mFood.getTitle());
-		package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
-		package_type.setText("Type: " + mFood.getType());
-		package_description.setText(mFood.getDescription());
+				package_date.setText(converDate);
+				package_name.setText(mFood.getTitle());
+				package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
+				package_type.setText("Type: " + mFood.getType());
+				package_description.setText(mFood.getDescription());
 		
 		Bundle arguments = new Bundle();
 		arguments.putString(Survey_Form.FOODOPENINGPACKAGE_ID, mFood.getID());

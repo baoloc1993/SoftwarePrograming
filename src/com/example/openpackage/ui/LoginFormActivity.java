@@ -49,12 +49,15 @@ public class LoginFormActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					
+					//Get information from user
 					UserController userController = new UserController(getApplicationContext());
 					final String user = username.getText().toString();
 					final String pass = password.getText().toString();
 					Log.i(TAG,user);
 					Log.i(TAG,pass);
 					
+					//Check information 
 					if (!userController.validateLogin(user, pass)){
 						displayErrorMessage(user, pass);
 					}
