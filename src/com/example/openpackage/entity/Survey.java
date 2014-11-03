@@ -9,11 +9,6 @@ import com.parse.ParseQuery;
 public class Survey {
 	private static String CLASSNAME = "Survey";
 	
-//	private Customer user;
-//	private Date date;
-//	private String comment;
-//	private int rate;
-//	private FoodOpeningPackage type;
 	
 	private ParseObject mParseObject;
 	
@@ -69,6 +64,12 @@ public class Survey {
 		mParseObject.save();
 	}
 
+	/**
+	 * Get a survey by its ID
+	 * @param id : id of survey
+	 * @return : survey. null if not found
+	 * @throws ParseException
+	 */
 	public static Survey findById(String id) throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		return new Survey(query.get(id));

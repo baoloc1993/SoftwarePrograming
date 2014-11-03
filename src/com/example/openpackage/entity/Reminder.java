@@ -13,10 +13,6 @@ import com.parse.ParseQuery;
 public class Reminder {
 	private static String CLASSNAME = "Reminder";
 	
-//	private Date time;
-//	private String description;
-//	private String name;
-//	private boolean active;
 	
 	ParseObject mParseObject;
 	
@@ -75,6 +71,12 @@ public class Reminder {
 	public String getID(){
 		return mParseObject.getObjectId();
 	}
+	
+	/**
+	 * Get all reminder in the database
+	 * @return : list of reminder
+	 * @throws ParseException
+	 */
 	public static ArrayList<Reminder> listAll() throws ParseException {
 		ArrayList<Reminder> res = new ArrayList<Reminder>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
@@ -96,6 +98,9 @@ public class Reminder {
 		return mParseObject;
 	}
 	
+	/**
+	 * delete reminder
+	 */
 	public void delete(){
 		try {
 			mParseObject.delete();

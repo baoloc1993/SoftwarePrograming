@@ -19,12 +19,22 @@ public class Manufacturer extends User {
 		this.mParseObject = mParseObject;
 	}
 	
+	/**
+	 * Match this Manufacturer with the reminder he/she has created
+	 * @param reminder : reminder has been created by this manufacturer
+	 * @throws ParseException
+	 */
 	public void addReminder( Reminder reminder ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("reminderList");
 		relation.add(reminder.getParseObject());
 		save();
 	}
 
+	/**
+	 * Get all Manufacturer
+	 * @return : list of manufacturers
+	 * @throws ParseException
+	 */
 	public static ArrayList<Manufacturer> listAll() throws ParseException {
 		ArrayList<Manufacturer> res = new ArrayList<Manufacturer>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
@@ -38,6 +48,11 @@ public class Manufacturer extends User {
 		return res;
 	}
 	
+	/**
+	 * get the list of reminder which is set by this manufacturer
+	 * @return : list of reminder
+	 * @throws ParseException
+	 */
 	public ArrayList<Reminder> getReminderList() throws ParseException {
 		ArrayList<Reminder> reminderList = new ArrayList<Reminder>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("reminderList");
@@ -60,6 +75,11 @@ public class Manufacturer extends User {
 		mParseObject.unpin();
 	}
 	
+	/**
+	 * Get current manufacturer
+	 * @return 
+	 * @throws ParseException
+	 */
 	public static Manufacturer getCurrentUser() throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		query.fromLocalDatastore();

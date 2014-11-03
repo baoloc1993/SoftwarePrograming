@@ -23,11 +23,17 @@ public class SurveyController {
 	Context mContext;
 	UserController mUserController;
 	
+	
 	public SurveyController(Context mContext) {
 		this.mContext = mContext;
 		mUserController = new UserController(mContext);
 	}
 	
+	/**
+	 * Sort the list of surrvey according to time (The latest first) 
+	 * @param cur : Array of the survey which will be sorted
+	 */
+
 	private void Sort(ArrayList<Survey> cur) {
 		Collections.sort(cur, new Comparator<Survey>() {
 
@@ -38,6 +44,12 @@ public class SurveyController {
 			}
 		});
 	}
+	
+	/**
+	 * Get list of survey of a package which is sorted (the latest first)
+	 * @param cur : a FoodOpeningPackage object
+	 * @return : sorted Array
+	 */
 	
 	public ArrayList<Survey> getSurveyList(FoodOpeningPackage cur) {
 		try {
@@ -50,6 +62,13 @@ public class SurveyController {
 		return null;
 	}
 	
+	/**
+	 * Get list of survey of a customer which is sorted (the latest first) 
+	 * @param cur : a Customer bbject	
+	 * @return : sorted Array
+	 */
+	
+	
 	public ArrayList<Survey> getSurveyList(Customer cur) {
 		try {
 			ArrayList<Survey> res = cur.getSurveyList();
@@ -61,6 +80,11 @@ public class SurveyController {
 		return null;
 	}
 
+	/**
+	 * Get Survey by ID
+	 * @param id : ID of survey
+	 * @return : Survey object. null if cannot found
+	 */
 	public Survey getById(String id) {
 		try {
 			return Survey.findById(id);
@@ -70,6 +94,14 @@ public class SurveyController {
 		return null;
 	}
 	
+	/**
+	 * Validate Data of Survey when creating data 
+	 * @param cmt : comment of survey 
+	 * @param rate : rate of survey (from 1 to 5) 
+	 * @param food : object who will be rated
+	 * @return : false if rate = 0, comment is empty or object is not in data
+	 */
+ 
 	public boolean validateCreateData(String cmt, int rate, FoodOpeningPackage food) {
 		cmt = cmt.trim();
 		if (rate == 0 || cmt.isEmpty()) 
@@ -86,6 +118,13 @@ public class SurveyController {
 		}
 		return false;
 	}
+
+	/**
+	 * Get the paticular survey 
+	 * @param mFood :Object to be surveyed
+	 * @param user : Customer who did survey 
+	 * @return
+	 */
 
 	public Survey getSurvey(FoodOpeningPackage mFood, Customer user) {
 		ArrayList<Survey>surveys = getSurveyList(mFood);
