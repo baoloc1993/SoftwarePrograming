@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/username_signup_field"
-            android:text="Username\t\t\t\t\t" />
+            android:text="Username\t\t\t\t\t\t" />
         
         <EditText
 	        android:id="@+id/username_signup_field"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/password_signup_field"
-            android:text="Password\t\t\t\t\t" />
+            android:text="Password\t\t\t\t\t\t" />
         
         <EditText
 	        android:id="@+id/password_signup_field"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/email_signup_field"
-            android:text="Email\t\t\t\t\t\t\t" />
+            android:text="Email\t\t\t\t\t\t\t\t\t" />
         
         <EditText
 	        android:id="@+id/email_signup_field"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/rewrite_email_signup_field"
-            android:text="Confirm Email\t\t\t" />
+            android:text="Confirm Email\t\t\t\t" />
         
         <EditText
 	        android:id="@+id/rewrite_email_signup_field"
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/age_signup_field"
-            android:text="Age\t\t\t\t\t\t\t\t" />
+            android:text="Age\t\t\t\t\t\t\t\t\t\t" />
         
         <EditText
 	        android:id="@+id/age_signup_field"

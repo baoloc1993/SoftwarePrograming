@@ -78,7 +78,13 @@ public class RegisterActivity extends Activity {
 				emailStr = email.getText().toString();
 				reEmailStr = reEmail.getText().toString();
 				if (age.getText().toString().compareTo("") == 0) ageInt = -1; 
-	    		else ageInt = Integer.parseInt(age.getText().toString());
+	    		else{
+	    			try{
+	    				ageInt = Integer.parseInt(age.getText().toString());
+	    			}catch (Exception e) {
+	    				ageInt = -1; 
+	    			}
+	    		}
 				//final boolean genderChecked;
 				 gender.setOnClickListener(new OnClickListener() {
 						@Override
