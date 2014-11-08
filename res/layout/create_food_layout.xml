@@ -1,97 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/create_food"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/create_food"
-        android:textSize="16sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/editVideoLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/VideoLink"
-        android:layout_alignParentRight="true"
-        android:ems="10" />
+        <TextView
+            android:id="@+id/create_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="@string/create_food"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editDescription"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:text="Submit" />
+        <RelativeLayout 
+            android:layout_below="@id/create_food"
+            android:id="@+id/rlTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/create_food"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="26dp"
-        android:text="Title: " />
+            <EditText
+                android:id="@+id/editTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/Title"
+                android:ems="10" />
 
-    <EditText
-        android:id="@+id/editTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Title"
-        android:layout_alignBottom="@+id/Title"
-        android:layout_alignParentRight="true"
-        android:ems="10" >
+            <TextView
+                android:id="@+id/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:text="Title: " />
 
-        <requestFocus />
-    </EditText>
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/Type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Title"
-        android:layout_below="@+id/editTitle"
-        android:layout_marginTop="21dp"
-        android:text="Type: " />
+        <RelativeLayout
+            android:id="@+id/rlLink"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rlTitle">
 
-    <Spinner
-        android:id="@+id/editType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editVideoLink"
-        android:layout_below="@+id/editTitle" />
+            <TextView
+                android:id="@+id/VideoLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="VideoLink: " />
 
-    <TextView
-        android:id="@+id/VideoLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Type"
-        android:layout_below="@+id/editType"
-        android:text="VideoLink: " />
+            <EditText
+                android:id="@+id/editVideoLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/VideoLink"
+                android:ems="10"
+                android:inputType="textMultiLine" >
 
-    <TextView
-        android:id="@+id/Description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/VideoLink"
-        android:layout_below="@+id/VideoLink"
-        android:layout_marginTop="25dp"
-        android:text="Description: " />
+                <requestFocus />
+            </EditText>
 
-    <EditText
-        android:id="@+id/editDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Description"
-        android:layout_alignBottom="@+id/Description"
-        android:layout_alignParentRight="true"
-        android:ems="10" />
+        </RelativeLayout>
 
-</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlDescription"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rlLink">
+
+            <TextView
+                android:id="@+id/Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Description: " />
+
+            <EditText
+                android:id="@+id/editDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/Description"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlType"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rlDescription">
+
+            <Spinner
+                android:id="@+id/EditTypeSpinner1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/Type" />
+
+            <TextView
+                android:id="@+id/Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="Type: " />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/Submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/rlType"
+            android:layout_marginTop="38dp"
+            android:text="Submit" />
+    </RelativeLayout>
+
+</ScrollView>

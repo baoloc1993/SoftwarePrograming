@@ -29,7 +29,7 @@ public class CreateFoodFragment extends Fragment{
 		View rootView = inflater.inflate(R.layout.create_food_layout, container,
 				false);
 		
-		mSpinner = (Spinner) rootView.findViewById(R.id.editType);
+		mSpinner = (Spinner) rootView.findViewById(R.id.EditTypeSpinner1);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
 		        R.array.title_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
