@@ -1,5 +1,17 @@
 package com.example.openpackage.ui;
 
+/**
+ * Login Form Activity
+ * 
+ * Field:
+ * - User Name
+ * - Password
+ * 
+ * Button:
+ * - Login
+ * - Create new account
+ * - Forget Password
+ */
 import com.example.openpackage.controller.UserController;
 import com.example.openpackageapplication.R;
 

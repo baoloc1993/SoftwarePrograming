@@ -1,5 +1,24 @@
 package com.example.openpackage.ui;
-
+/**
+ * Regsiter Activity
+ * 
+ * Field:
+ * - Username
+ * - Password
+ * - Confirm Password
+ * - Email
+ * - Confirm Email
+ * - Age
+ * - Gender
+ * 
+ * Button:
+ * - Create new account
+ * 
+ * Note:
+ * - Password and Confirm password have to be the same
+ * - Email and Confirm Email have to be the same
+ * - Valid all field before create account
+ */
 import com.example.openpackage.controller.UserController;
 import com.example.openpackageapplication.R;
 
@@ -95,9 +114,11 @@ public class RegisterActivity extends Activity {
 	}
 	
 	private boolean isRegisterValid(String user, String password, String rePassword, String email, String reEmail,int ageInt){
-		
+		if (user == null || password == null || email == null){
+			Toast.makeText(getApplicationContext(), "You have to fill all the field", Toast.LENGTH_LONG).show();
+		}
 		//CHeck if any field missing
-		if (user.compareTo("") == 0 || pass.compareTo("") == 0 || email.compareTo("") == 0 || ageInt == -1){
+		if (user.compareTo("") == 0 || password.compareTo("") == 0 || email.compareTo("") == 0 || ageInt == -1){
 			Toast.makeText(getApplicationContext(), "You have to fill all the field", Toast.LENGTH_LONG).show();
 		}
 		if (password.compareTo(rePassword) != 0){

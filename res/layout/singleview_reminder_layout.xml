@@ -9,6 +9,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            
             android:text="STT" />
     
     <!--  NAME DATE -->
@@ -23,41 +25,82 @@
      	<RelativeLayout
 	        android:id="@+id/name_single_reminder_part"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp" 
 	        android:layout_alignParentLeft="true">    
+	        
 	        <TextView
 	            android:id="@+id/name_single_reminder"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentTop="true"
-	            android:text="Name" />
+	            android:textStyle="bold"
+	            android:text="NAME\t" />
+	        
 	        
 	        <TextView
 	            android:id="@+id/name_info_single_reminder"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_toRightOf="@id/name_single_reminder"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
 	            android:layout_alignParentTop="true" />
       	</RelativeLayout>
     
+     	 <!--  DESCRIPTION -->
+     	<RelativeLayout
+	        android:id="@+id/desc_single_reminder_part"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_below="@id/name_single_reminder_part"   
+	        android:layout_alignParentLeft="true">    
+	        
+	        <TextView
+	            android:id="@+id/desc_single_reminder"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:textStyle="bold"
+	            android:text="DESCRIPTION" />
+	        
+	        
+	        <TextView
+	            android:id="@+id/desc_info_single_reminder"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_toRightOf="@id/desc_single_reminder"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:layout_alignParentTop="true" />
+      	</RelativeLayout>
+      	
      	 <!--  DATE -->
      	<RelativeLayout
 	        android:id="@+id/date_single_reminder_part"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content" 
 	        android:layout_alignParentLeft="true"
-	        android:layout_below="@id/name_single_reminder_part">    
+	       	android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp" 
+	        android:layout_below="@id/desc_single_reminder_part">    
 	        <TextView
 	            android:id="@+id/date_single_reminder"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentTop="true"
-	            android:text="Date" />
+	            android:textStyle="bold"
+	            android:text="DATE\t" />
 	        
 	        <TextView
 	            android:id="@+id/date_info_single_reminder"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
 	            android:layout_toRightOf="@id/date_single_reminder"
 	            android:layout_alignParentTop="true" />
       	</RelativeLayout>

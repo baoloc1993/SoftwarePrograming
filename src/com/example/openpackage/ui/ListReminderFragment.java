@@ -1,10 +1,15 @@
 package com.example.openpackage.ui;
 
+/**
+ * Display the list of list reminder
+ */
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +19,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.Manufacturer;
@@ -43,7 +50,13 @@ public class ListReminderFragment extends Fragment {
 		//In reality, received the Manufacter Object from other Activity
 		Manufacturer tempManufacturer = (Manufacturer) mUserController.getCurrentUser();
 		
-		ArrayList<Reminder> listReminders = new ArrayList<Reminder>();
+		ArrayList<Reminder> listReminders = null;
+		try {
+			listReminders = tempManufacturer.getReminderList();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		try {
 //			listReminders = tempManufacturer.getReminderList();
 //		} catch (ParseException e) {
@@ -81,7 +94,14 @@ public class ListReminderFragment extends Fragment {
 				Reminder reminder = newlist.get(position);
 				String reminderId = reminder.getID();
 				String reminderName = reminder.getName();
-				long reminderDate = reminder.getTime().getTime();
+				
+				int reminderDay = reminder.getTime().getDate();
+				int reminderMonth = reminder.getTime().getMonth() + 1;
+				int reminderYear = reminder.getTime().getYear();
+				int reminderHour = reminder.getTime().getHours();
+				int reminderMinute = reminder.getTime().getMinutes();
+				
+				//Toast.makeText(getActivity(), reminder.getTime().toGMTString(), Toast.LENGTH_LONG).show();
 				String reminderDesc = reminder.getDescription();
 				boolean isActive = reminder.getActive();
 				
@@ -89,22 +109,18 @@ public class ListReminderFragment extends Fragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("ID", reminderId);
 				bundle.putString("Name", reminderName);
-				bundle.putLong("Date", reminderDate);
+				bundle.putInt("Day", reminderDay);
+				bundle.putInt("Month", reminderMonth);
+				bundle.putInt("Year", reminderYear);
+				bundle.putInt("Hour", reminderHour);
+				bundle.putInt("Minute", reminderMinute);
 				bundle.putString("Description", reminderDesc);
 				bundle.putBoolean("Active", isActive);
 				
-				
-				
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				EditReminderFragment editReminderFragment = new EditReminderFragment();
-				editReminderFragment.setArguments(bundle);
-				editReminderFragment.setHasOptionsMenu(true);
+				Intent i = new Intent(getActivity(), EditReminderActivity.class);
+				i.putExtras(bundle);
+				startActivity(i);
 
-				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
-				fragmentManager.beginTransaction()
-						.replace(((ViewGroup)getView().getParent()).getId(), editReminderFragment)
-						.commit();
-				
 				
 			}
 			//return onItemClickListener;
@@ -115,22 +131,21 @@ public class ListReminderFragment extends Fragment {
 		 * CREATE REMINDER
 		 */
 		ImageView createReminder = (ImageView) rootView.findViewById(R.id.new_reminder_button);
+		createReminder.setImageResource(R.drawable.add_icon);
+		int size = (int) (ManufacturerUI.getStandardSize() * 0.1);
+		createReminder.getLayoutParams().width = size;
+		createReminder.getLayoutParams().height = size;
+		
+		
 		createReminder.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				CreateReminderFragment createReminderFragment = new CreateReminderFragment();
+				Intent i = new Intent(getActivity(), CreateReminderActivity.class);
+				startActivity(i);
 
-				//e.setArguments(args);
-
-				// Go to DisplayFullNewsFragment
-				//displaySwipeViewNewsFragment.setHasOptionsMenu(true);
-				fragmentManager.beginTransaction()
-						.replace(((ViewGroup)getView().getParent()).getId(), createReminderFragment)
-						.commit();
 			}
 		});
 		return rootView;
@@ -141,21 +156,5 @@ public class ListReminderFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
-//		listNews = (ListView) view.findViewById(R.id.listNews);
-//
-//		// We need to create a PullToRefreshLayout manually
-//		mPullToRefreshLayout = new PullToRefreshLayout(view.getContext());
-//		TimerTask timerTask = new TimerTask() {
-//
-//			@Override
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				new LoadRSSFeedItems(listNews, mPullToRefreshLayout).execute();
-//			}
-//		};
-//		// We can now setup the PullToRefreshLayout
-//		BasicFunctions.IniPullToRefresh(MainActivity.activity, (ViewGroup) view,
-//				(View) listNews, timerTask, mPullToRefreshLayout);
 	}
 }

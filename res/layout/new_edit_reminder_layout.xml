@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:layout_marginLeft = "10dp"
-    android:layout_marginRight = "10dp">
+    android:layout_height="match_parent" >
+
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
     
     <Button
         android:id="@+id/back_to_list_button"
@@ -113,5 +116,15 @@
         android:layout_alignParentLeft="true"
       	android:layout_below = "@id/is_activate"
         android:text="Create" />
+
+    <Button
+        android:id="@+id/cancel_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/create_reminder_button"
+       	android:visibility="invisible"
+        android:text="Cancel Reminder" />
 	
 </RelativeLayout>
+</ScrollView>

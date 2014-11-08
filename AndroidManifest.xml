@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.openpackageapplication"
     android:versionCode="1"
@@ -8,20 +7,20 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	
     <uses-sdk
-        android:minSdkVersion="13"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 	
     <application
         android:name="com.example.openpackage.OpenPacketApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light"
         android:screenOrientation="portrait" >
         
         <activity
             android:name="com.example.openpackage.ui.MainActivity"
-            android:label="@string/DoSurveyTab"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +32,7 @@
         
         <activity 
             android:name="com.example.openpackage.ui.DoSurveyUI_2"
-            android:label="@string/DoSurveyTab"
+            
             android:screenOrientation="portrait">
         </activity>
 
@@ -57,6 +56,25 @@
             android:screenOrientation="portrait">
         </activity>
 
+       <receiver android:name="com.example.openpackage.controller.AlarmSetter">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.example.openpackage.controller.AlarmReceiver"></receiver>
+         
+        <service android:name="com.example.openpackage.controller.ReminderService"></service>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
+        <activity android:name="com.facebook.LoginActivity"></activity>
+        <activity android:name="com.example.openpackage.ui.CreateReminderActivity"
+            	  android:screenOrientation="portrait">
+            
+        </activity>
+        <activity android:name="com.example.openpackage.ui.EditReminderActivity"
+            	  android:screenOrientation="portrait"></activity>
+        <activity android:name = "com.example.openpackage.ui.ViewSingleStatistic"   
+           	      android:screenOrientation = "portrait">
+        </activity>
     </application>
 
 </manifest>

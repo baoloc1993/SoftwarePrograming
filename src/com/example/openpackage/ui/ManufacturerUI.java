@@ -11,9 +11,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.TabHost;
 
+import com.example.openpackage.controller.ReminderController;
 import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.Manufacturer;
 import com.example.openpackageapplication.R;
@@ -22,38 +26,70 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 
 	private Context mContext;
 	private ViewPager mViewPager;
-	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private TabsPagerAdapter mTabsPagerAdapter;
 	private ActionBar mActionBar;
 	private UserController mUserController;
+	private static int screenHeight;
+	private static int screenWidth;
+	private ManufacturerUI activity;
+	private ReminderController reminderController;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.manufacturer_main);
-		mContext = this;
-		mViewPager = (ViewPager) findViewById(R.id.pager2);
-		mSectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+		// Initilization
+        mViewPager = (ViewPager) findViewById(R.id.pager2);
+        mActionBar = getActionBar();
+        mTabsPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+ 
+        mViewPager.setAdapter(mTabsPagerAdapter);
+        mActionBar.setHomeButtonEnabled(false);
+        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
+ 
+        // Adding Tabs
+        
+        mActionBar.addTab(mActionBar.newTab().setText("Reminder")
+                    .setTabListener(this));
+        mActionBar.addTab(mActionBar.newTab().setText("Statistic")
+                .setTabListener(this));
+        mActionBar.addTab(mActionBar.newTab().setText("Food Package")
+                .setTabListener(this));
+        
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        	 
+            @Override
+            public void onPageSelected(int position) {
+                // on changing the page
+                // make respected tab selected
+                mActionBar.setSelectedNavigationItem(position);
+            }
+         
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+         
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
+        
+
+		/**
+		 * get screen's size;
+		 */
+
+		// Get the width and length of the screen
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+		screenHeight = displayMetrics.heightPixels;
+		screenWidth = displayMetrics.widthPixels;
+		activity = this;
 		
-		mUserController = new UserController(this);
-		
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-		
-		mActionBar = getActionBar();
-		mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		
-		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {		
-			@Override
-			public void onPageSelected(int position) {
-				mActionBar.setSelectedNavigationItem(position);
-			}
-		
-		});
-		
-		for (int i=0; i < mSectionsPagerAdapter.getCount();i++) {
-			mActionBar.addTab(mActionBar.newTab()
-					.setText(mSectionsPagerAdapter.getTitleTab(i))
-					.setTabListener(this));
-		}
-		
+		/*
+		 * set up alarm after manufacturer log in
+		 */
+		reminderController = new ReminderController(getApplicationContext());
+		reminderController.firstUpdateAlarmAfterLogIn();
 	}
 	
 	@Override
@@ -64,6 +100,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		mUserController = new UserController(getApplicationContext());
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case R.id.action_logout:
@@ -74,9 +111,10 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 		        @Override
 		        public void onClick(DialogInterface dialog, int which) {
-		        	Manufacturer user = (Manufacturer) mUserController.getCurrentUser();
+		        	final Manufacturer user = (Manufacturer) mUserController.getCurrentUser();
+		        	reminderController.removeAllAlarms();
 		        	mUserController.logOut(user);
-		        	Intent intent = new Intent(mContext, LoginFormActivity.class);
+		        	Intent intent = new Intent(getApplicationContext(), LoginFormActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
@@ -113,45 +151,21 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 			android.app.FragmentTransaction ft) {
 		
 	}
-	
-	class SectionsPagerAdapter extends FragmentPagerAdapter {
-		Context mContext;
-		public SectionsPagerAdapter(Context context,FragmentManager fragmentManager) {
-			super(fragmentManager);
-			mContext = context;	
-		}
 
-		@Override
-		public Fragment getItem(int position) {
-			switch (position) {
-			case 0:
-				return new ListReminderFragment();
-
-			case 1:
-				return new ListReminderFragment();
-			case 2: 
-				return new ListReminderFragment();
-			}
-			return null;
-		}
-
-		@Override
-		public int getCount() {
-			return 1;
-		}
-		
-		public String getTitleTab(int position) {
-			switch (position) {
-			case 0:
-				return mContext.getString(R.string.StatsTab);
-			case 1:
-				return mContext.getString(R.string.FoodPackageTab);
-			case 2: 
-				return mContext.getString(R.string.ReminderTab);
-			}
-			return null;
-		}
-		
+	public int getScreenHeight() {
+		return screenHeight;
 	}
 
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+
+	/**
+	 * @return the standard size for rendering item
+	 */
+	public static int getStandardSize() {
+		return Math.min(screenWidth, screenHeight);
+	}
+	
+	
 }
