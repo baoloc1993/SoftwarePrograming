@@ -88,8 +88,8 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		fragment.setArguments(arguments);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.survey_container, fragment).commit();
-//		YoutubeFragment myFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
-//		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, myFragment).commit();
+		YoutubeFragment myFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
+		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, myFragment).commit();
 	}
 
 	@Override
