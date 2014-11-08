@@ -64,7 +64,7 @@ public class Survey_Form extends Fragment{
 			
 			Button submitButton = (Button) rootView.findViewById(R.id.submit_button);
 			final RatingBar rating = (RatingBar) rootView.findViewById(R.id.ratingBar1);
-			final EditText comment = (EditText) rootView.findViewById(R.id.editText1);
+			final EditText comment = (EditText) rootView.findViewById(R.id.editTitle);
 			submitButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

@@ -36,9 +36,9 @@ public class ViewPersonalRecordUI extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.personal_record_layout, container, false);
 		
-		mUsername = (TextView) rootView.findViewById(R.id.textView1);
-		mGenderAge = (TextView) rootView.findViewById(R.id.textView2);
-		mNumSurvey = (TextView) rootView.findViewById(R.id.textView3);
+		mUsername = (TextView) rootView.findViewById(R.id.create_food);
+		mGenderAge = (TextView) rootView.findViewById(R.id.Type);
+		mNumSurvey = (TextView) rootView.findViewById(R.id.VideoLink);
 		mListView = (ListView) rootView.findViewById(R.id.listView1);
 		
 		mSurveyController = new SurveyController(getActivity());

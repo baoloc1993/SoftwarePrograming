@@ -29,7 +29,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 		default:
 			break;
 		}
-		return new ListReminderFragment();
+		return new CreateFoodFragment();
 	}
 
 	@Override
