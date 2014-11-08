@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import android.content.Context;
 
-import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.parse.ParseException;
 
 public class FoodOpeningPackageController {
@@ -14,18 +14,18 @@ public class FoodOpeningPackageController {
 	public FoodOpeningPackageController(Context mContext) {
 		this.mContext = mContext;
 	}
-	public ArrayList<FoodOpeningPackage> getFoodOpeningPacketList(String type) {
-		ArrayList<FoodOpeningPackage> res = new ArrayList<FoodOpeningPackage>();
+	public ArrayList<FoodOpeningPackageRemote> getFoodOpeningPacketList(String type) {
+		ArrayList<FoodOpeningPackageRemote> res = new ArrayList<FoodOpeningPackageRemote>();
 		try {
-			ArrayList<FoodOpeningPackage> all = FoodOpeningPackage.listAll();
-			for(FoodOpeningPackage cur : all) {
+			ArrayList<FoodOpeningPackageRemote> all = FoodOpeningPackageRemote.listAll();
+			for(FoodOpeningPackageRemote cur : all) {
 				if (cur.getType().equals(type)) res.add(cur);
 			}
-			Collections.sort(res,new Comparator<FoodOpeningPackage> () {
+			Collections.sort(res,new Comparator<FoodOpeningPackageRemote> () {
 
 				@Override
-				public int compare(FoodOpeningPackage lhs,
-						FoodOpeningPackage rhs) {
+				public int compare(FoodOpeningPackageRemote lhs,
+						FoodOpeningPackageRemote rhs) {
 					return (int) ( rhs.getAverage()- lhs.getAverage() );
 				}
 				
@@ -35,9 +35,9 @@ public class FoodOpeningPackageController {
 		}
 		return res;
 	}
-	public FoodOpeningPackage getById(String foodID) {
+	public FoodOpeningPackageRemote getById(String foodID) {
 		try {
-			return FoodOpeningPackage.findById(foodID);
+			return FoodOpeningPackageRemote.findById(foodID);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

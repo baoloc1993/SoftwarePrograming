@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
@@ -60,7 +60,7 @@ public class CreateFoodFragment extends Fragment{
 			        	String type = mSpinner.getSelectedItem().toString();
 			        	
 			        	try {
-							FoodOpeningPackage mFood = new FoodOpeningPackage(title,description,videoLink,type);
+							FoodOpeningPackageRemote mFood = new FoodOpeningPackageRemote(title,description,videoLink,type);
 						} catch (ParseException e) {
 							Toast.makeText(getActivity(), "Unsuccessful created new Food Opening Package!!! Please try again!!!", Toast.LENGTH_LONG).show();
 							e.printStackTrace();

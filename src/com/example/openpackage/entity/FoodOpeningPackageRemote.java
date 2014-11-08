@@ -8,7 +8,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 
-public class FoodOpeningPackage {
+public class FoodOpeningPackageRemote {
 	private static String CLASSNAME = "FoodOpeningPackage";
 	
 //	private String title;
@@ -20,11 +20,11 @@ public class FoodOpeningPackage {
 	
 	private ParseObject mParseObject;
 	
-	public FoodOpeningPackage(ParseObject mParseObject) {
+	public FoodOpeningPackageRemote(ParseObject mParseObject) {
 		this.mParseObject = mParseObject;
 	}
 	
-	public FoodOpeningPackage(String title,String description, String videoLink, String type) throws ParseException {
+	public FoodOpeningPackageRemote(String title,String description, String videoLink, String type) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("title", title);
 		mParseObject.put("description", description);
@@ -50,13 +50,13 @@ public class FoodOpeningPackage {
 		return mParseObject.getString("type");
 	}
 	
-	public ArrayList<Survey> getSurveyList() throws ParseException {
-		ArrayList<Survey> surveyList = new ArrayList<Survey>();
+	public ArrayList<SurveyRemote> getSurveyList() throws ParseException {
+		ArrayList<SurveyRemote> surveyList = new ArrayList<SurveyRemote>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 
 		List<ParseObject> surveys = relation.getQuery().find();
 		for(ParseObject survey : surveys ) {
-			surveyList.add(new Survey(survey));
+			surveyList.add(new SurveyRemote(survey));
 		}
 	
 		return surveyList;
@@ -70,21 +70,21 @@ public class FoodOpeningPackage {
 		return mParseObject.getObjectId();
 	}
 	
-	public static FoodOpeningPackage findById( String Id ) throws ParseException {
+	public static FoodOpeningPackageRemote findById( String Id ) throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
-		return new FoodOpeningPackage(query.get(Id));
+		return new FoodOpeningPackageRemote(query.get(Id));
 	}
 	
 	
-	public void addSurvey( Survey survey ) throws ParseException {
+	public void addSurvey( SurveyRemote survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
 		save();
 		
-		ArrayList<Survey> surveyList = getSurveyList();
+		ArrayList<SurveyRemote> surveyList = getSurveyList();
 		double ave = 0;
 		int count = 0;
-		for( Survey msurvey : surveyList ) {
+		for( SurveyRemote msurvey : surveyList ) {
 			count++;
 			ave += msurvey.getRate();
 		}
@@ -92,13 +92,13 @@ public class FoodOpeningPackage {
 		save();
 	}
 	
-	public static ArrayList<FoodOpeningPackage> listAll() throws ParseException {
-		ArrayList<FoodOpeningPackage> res = new ArrayList<FoodOpeningPackage>();
+	public static ArrayList<FoodOpeningPackageRemote> listAll() throws ParseException {
+		ArrayList<FoodOpeningPackageRemote> res = new ArrayList<FoodOpeningPackageRemote>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		
 		List<ParseObject> foodOpeningPackages = query.find();
 		for(ParseObject foodOpeningPackage : foodOpeningPackages) {
-			FoodOpeningPackage cur = new FoodOpeningPackage(foodOpeningPackage);
+			FoodOpeningPackageRemote cur = new FoodOpeningPackageRemote(foodOpeningPackage);
 			res.add(cur);
 		}
 		

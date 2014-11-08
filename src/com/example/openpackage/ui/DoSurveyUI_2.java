@@ -2,6 +2,7 @@ package com.example.openpackage.ui;
 
 import java.text.DecimalFormat;
 import java.util.Date;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,9 +20,10 @@ import android.widget.TextView;
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.CustomerRemote;
 import com.example.openpackage.entity.FacebookUIHelper;
-import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Factory;
+import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.example.openpackage.entity.UIHelper;
 import com.example.openpackageapplication.R;
 import com.facebook.UiLifecycleHelper;
@@ -29,7 +31,7 @@ import com.facebook.widget.FacebookDialog;
 
 public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callbacks{
 	private static String TAG = "DoSurveyUI_2";
-	private FoodOpeningPackage mFood;
+	private FoodOpeningPackageRemote mFood;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	private SurveyController mSurveyController;
 	
@@ -111,7 +113,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 	    
 		Button shareFBButton = (Button) findViewById(R.id.ShareFBButton);
 		UserController mUserController = new UserController(this);
-		if(mSurveyController.getSurvey(mFood,(Customer) mUserController.getCurrentUser()) == null)
+		if(mSurveyController.getSurvey(mFood,(CustomerRemote) mUserController.getCurrentUser()) == null)
 		{
 			shareFBButton.setVisibility(View.INVISIBLE);
 		};

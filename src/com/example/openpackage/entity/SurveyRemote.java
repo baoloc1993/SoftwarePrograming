@@ -6,7 +6,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-public class Survey {
+public class SurveyRemote {
 	private static String CLASSNAME = "Survey";
 	
 //	private Customer user;
@@ -17,11 +17,11 @@ public class Survey {
 	
 	private ParseObject mParseObject;
 	
-	public Survey( ParseObject mParseObject ){
+	public SurveyRemote( ParseObject mParseObject ){
 		this.mParseObject = mParseObject;
 	}
 	
-	public Survey( Customer user, Date date, String comment,int rate, FoodOpeningPackage type ) throws ParseException {
+	public SurveyRemote( CustomerRemote user, Date date, String comment,int rate, FoodOpeningPackageRemote type ) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME); 
 		mParseObject.put("user",user.getParseObject());
 		mParseObject.put("date",date);
@@ -31,12 +31,12 @@ public class Survey {
 		save();
 	}
 	
-	public Customer getUser() throws ParseException {
+	public CustomerRemote getUser() throws ParseException {
 		ParseObject res = null;
 		
 		res = mParseObject.getParseObject("user").fetch();
 		
-		return new Customer(res);
+		return new CustomerRemote(res);
 	}
 	
 	public Date getDate() {
@@ -59,19 +59,19 @@ public class Survey {
 		return mParseObject;
 	}
 	
-	public FoodOpeningPackage getFoodOpeningPackage() throws ParseException {
+	public FoodOpeningPackageRemote getFoodOpeningPackage() throws ParseException {
 		ParseObject res = null;
 		res = mParseObject.getParseObject("type").fetch();
-		return new FoodOpeningPackage(res);
+		return new FoodOpeningPackageRemote(res);
 	}
 	
 	private void save() throws ParseException {
 		mParseObject.save();
 	}
 
-	public static Survey findById(String id) throws ParseException {
+	public static SurveyRemote findById(String id) throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
-		return new Survey(query.get(id));
+		return new SurveyRemote(query.get(id));
 	}
 
 	

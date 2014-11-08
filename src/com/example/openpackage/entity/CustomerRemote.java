@@ -8,7 +8,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 
-public class Customer extends User {
+public class CustomerRemote extends User {
 	private static String CLASSNAME = "Customer";
 	
 	private ParseObject mParseObject;
@@ -17,11 +17,11 @@ public class Customer extends User {
 	//private boolean gender;  // true : male , false : female
 	
 	
-	public Customer(ParseObject mParseObject) {
+	public CustomerRemote(ParseObject mParseObject) {
 		this.mParseObject = mParseObject;
 	}
 	
-	public Customer(String username, String password, String email, int age, boolean gender ) throws ParseException {
+	public CustomerRemote(String username, String password, String email, int age, boolean gender ) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("username", username);
 		mParseObject.put("password",password);
@@ -41,28 +41,28 @@ public class Customer extends User {
 		mParseObject.unpin();
 	}
 	
-	public static Customer getCurrentUser() throws ParseException {
+	public static CustomerRemote getCurrentUser() throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		query.fromLocalDatastore();
 		List<ParseObject> customers = query.find();
 		if (customers.isEmpty()) return null;
-		return new Customer(customers.get(0));
+		return new CustomerRemote(customers.get(0));
 	}
 	
-	public static ArrayList<Customer> listAll() throws ParseException {
-		ArrayList<Customer> res = new ArrayList<Customer>();
+	public static ArrayList<CustomerRemote> listAll() throws ParseException {
+		ArrayList<CustomerRemote> res = new ArrayList<CustomerRemote>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		
 		List<ParseObject> customers = query.find();
 		for(ParseObject customer : customers) {
-			Customer cur = new Customer(customer);
+			CustomerRemote cur = new CustomerRemote(customer);
 			res.add(cur);
 		}
 		
 		return res;
 	}
 	
-	public void addSurvey( Survey survey ) throws ParseException {
+	public void addSurvey( SurveyRemote survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
 		save();
@@ -71,13 +71,13 @@ public class Customer extends User {
 	public int getAge() {
 		return mParseObject.getInt("age");
 	}
-	public ArrayList<Survey> getSurveyList() throws ParseException {
-		ArrayList<Survey> surveyList = new ArrayList<Survey>();
+	public ArrayList<SurveyRemote> getSurveyList() throws ParseException {
+		ArrayList<SurveyRemote> surveyList = new ArrayList<SurveyRemote>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		
 		List<ParseObject> surveys = relation.getQuery().find();
 		for(ParseObject survey : surveys ) {
-			surveyList.add(new Survey(survey));
+			surveyList.add(new SurveyRemote(survey));
 		}
 		
 		return surveyList;

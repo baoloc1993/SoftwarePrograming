@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.Customer;
-import com.example.openpackage.entity.Survey;
+import com.example.openpackage.entity.CustomerRemote;
+import com.example.openpackage.entity.SurveyRemote;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
@@ -28,8 +28,8 @@ public class ViewPersonalRecordUI extends Fragment {
 	private UserController mUserController;
 	private SurveyController mSurveyController;
 	private ListView mListView;
-	private ArrayList<Survey> mSurvey;
-	private Customer user;
+	private ArrayList<SurveyRemote> mSurvey;
+	private CustomerRemote user;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +45,7 @@ public class ViewPersonalRecordUI extends Fragment {
 		
 		mUserController = new UserController(getActivity());
 		
-		user = (Customer) mUserController.getCurrentUser();
+		user = (CustomerRemote) mUserController.getCurrentUser();
 		
 		mUsername.setText(user.getUsername());
 		mGenderAge.setText( (user.getGender() ? "Male"  : "Female") + " - " + user.getAge() + " years old"  );
