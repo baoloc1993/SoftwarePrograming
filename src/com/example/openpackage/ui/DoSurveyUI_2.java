@@ -100,10 +100,11 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 
 		
 		/////
-		Fragment videoFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
+		Fragment videoFragment = Factory.createVideoPlayer("Youtube", mFood.getvideoLink());
 		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, videoFragment).commit();
+		videoFragment.onPause();
 		
-		uiHelper = new FacebookUIHelper(this,null);
+		uiHelper = Factory.createShareMedia("Facebook", this);
 	    uiHelper.onCreate(savedInstanceState);
 		/////
 	    
