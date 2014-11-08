@@ -24,7 +24,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 		case 1:
 			return new ViewStatisticsUI();
 		
-		case 3:
+		case 2:
 			return new CreateFoodFragment();
 		default:
 			break;

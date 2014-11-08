@@ -2,25 +2,27 @@ package com.example.openpackage.ui;
 
 import java.util.ArrayList;
 
+import com.example.openpackage.controller.FoodOpeningPackageController;
+import com.example.openpackage.controller.SurveyController;
+import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Survey;
+import com.example.openpackageapplication.R;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.openpackage.controller.FoodOpeningPackageController;
-import com.example.openpackage.controller.SurveyController;
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
-import com.example.openpackage.entity.SurveyRemote;
-import com.example.openpackageapplication.R;
 
 
 public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener{
