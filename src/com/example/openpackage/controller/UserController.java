@@ -90,6 +90,12 @@ public class UserController {
 				Intent intent = new Intent( mContext, ManufacturerUI.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				/*
+				 * set up alarm after manufacturer log in
+				 */
+				//ReminderController reminderController = new ReminderController(mContext);
+				ReminderController reminderController = new ReminderController(mContext);
+				reminderController.firstUpdateAlarmAfterLogIn();
 				mContext.startActivity(intent);
 				return true;
 			} catch (ParseException e) {
