@@ -3,8 +3,8 @@ package com.example.openpackage.ui;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
-import com.example.openpackage.entity.ReminderRemote;
+import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Reminder;
 import com.example.openpackageapplication.R;
 import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
@@ -21,14 +21,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackageRemote>{
+public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackage>{
 
 	public ListFoodPackageAdapter(Context context, int resource) {
 		super(context, resource);
 		// TODO Auto-generated constructor stub
 	}
 	
-	private ArrayList<FoodOpeningPackageRemote> listPackage;
+	private ArrayList<FoodOpeningPackage> listPackage;
 	/*
 	 * here we must override the constructor for ArrayAdapter the only variable
 	 * we care about now is ArrayList<Item> objects, because it is the list of
@@ -36,7 +36,7 @@ public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackageRemot
 	 */
 	
 	public ListFoodPackageAdapter(Context context, int textViewResourceId,
-			ArrayList<FoodOpeningPackageRemote> listPackage){
+			ArrayList<FoodOpeningPackage> listPackage){
 		super(context, textViewResourceId, listPackage);
 		this.listPackage = listPackage;
 	}
@@ -73,7 +73,7 @@ public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackageRemot
 		 * 
 		 * Therefore, i refers to the current Item object.
 		 */
-		FoodOpeningPackageRemote i = listPackage.get(position);
+		FoodOpeningPackage i = listPackage.get(position);
 
 		if (i != null) {
 
@@ -92,7 +92,7 @@ public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackageRemot
 			// check to see if each individual textview is null.
 			// if not, assign some text!
 			// Config parameter of each textview and imageview(Resize)
-			FoodOpeningPackageRemote cur = listPackage.get(position);
+			FoodOpeningPackage cur = listPackage.get(position);
 			
 			holder.nameLabel.setText((position+1) + ". "+ cur.getTitle());
 			holder.averageRate.setText( new DecimalFormat("0.0").format(cur.getAverage()) + "/5.0");

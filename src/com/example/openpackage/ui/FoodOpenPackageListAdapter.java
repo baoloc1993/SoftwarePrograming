@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
+import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackageapplication.R;
 
-public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackageRemote> {
-	private List<FoodOpeningPackageRemote> mList;
+public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackage> {
+	private List<FoodOpeningPackage> mList;
 	private Context mContext;
-	public FoodOpenPackageListAdapter(Context context,List<FoodOpeningPackageRemote> list) {
+	public FoodOpenPackageListAdapter(Context context,List<FoodOpeningPackage> list) {
 		super(context, R.layout.foodopenpackagelist_item, list);
 		mContext = context;
 		mList = list;
@@ -38,7 +38,7 @@ public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackageR
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
-		FoodOpeningPackageRemote cur = mList.get(position);
+		FoodOpeningPackage cur = mList.get(position);
 		
 		holder.nameLabel.setText((position+1) + ". "+ cur.getTitle());
 		holder.averageRate.setText( new DecimalFormat("0.0").format(cur.getAverage()) + "/5.0");
@@ -51,7 +51,7 @@ public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackageR
 		TextView averageRate;
 	}
 	
-	public void refill( List<FoodOpeningPackageRemote> list ) {
+	public void refill( List<FoodOpeningPackage> list ) {
 		mList.clear();
 		mList.addAll(list);
 		notifyDataSetChanged();

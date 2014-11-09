@@ -23,20 +23,20 @@ import android.widget.Toast;
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.CustomerRemote;
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
-import com.example.openpackage.entity.SurveyRemote;
+import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 
 public class Survey_Form extends Fragment{
 	public final static String FOODOPENINGPACKAGE_ID = "FoodOpeningPackageId";
 	private final static String TAG = "Survey_Form";
-	private SurveyRemote mSurvey;
+	private Survey mSurvey;
 	private SurveyController mSurveyController;
 	private UserController mUserController;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
-	private CustomerRemote user;
-	private FoodOpeningPackageRemote mFood;	
+	private Customer user;
+	private FoodOpeningPackage mFood;	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,7 +48,7 @@ public class Survey_Form extends Fragment{
 		String foodId = getArguments().getString(FOODOPENINGPACKAGE_ID);
 		mFood = mFoodOpeningPackageController.getById(foodId);
 		
-		user = (CustomerRemote) mUserController.getCurrentUser();
+		user = (Customer) mUserController.getCurrentUser();
 		if ( user == null ) Log.i(TAG, "No User");
 		else Log.i(TAG, user.getUsername());
 		
@@ -64,7 +64,7 @@ public class Survey_Form extends Fragment{
 			
 			Button submitButton = (Button) rootView.findViewById(R.id.submit_button);
 			final RatingBar rating = (RatingBar) rootView.findViewById(R.id.ratingBar1);
-			final EditText comment = (EditText) rootView.findViewById(R.id.editTitle);
+			final EditText comment = (EditText) rootView.findViewById(R.id.editText1);
 			submitButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

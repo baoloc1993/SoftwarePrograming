@@ -11,7 +11,7 @@ import java.util.List;
 
 
 
-import com.example.openpackage.entity.ReminderRemote;
+import com.example.openpackage.entity.Reminder;
 import com.example.openpackageapplication.R;
 
 import android.content.Context;
@@ -23,14 +23,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListReminderAdapter extends ArrayAdapter<ReminderRemote> {
+public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 
 	public ListReminderAdapter(Context context, int resource) {
 		super(context, resource);
 		// TODO Auto-generated constructor stub
 	}
 	
-	private ArrayList<ReminderRemote> listReminders;
+	private ArrayList<Reminder> listReminders;
 	
 	/*
 	 * here we must override the constructor for ArrayAdapter the only variable
@@ -38,7 +38,7 @@ public class ListReminderAdapter extends ArrayAdapter<ReminderRemote> {
 	 * objects we want to display.
 	 */
 	public ListReminderAdapter(Context context, int textViewResourceId,
-			ArrayList<ReminderRemote> listReminders) {
+			ArrayList<Reminder> listReminders) {
 		super(context, textViewResourceId, listReminders);
 		this.listReminders = listReminders;
 	}
@@ -72,7 +72,7 @@ public class ListReminderAdapter extends ArrayAdapter<ReminderRemote> {
 		 * 
 		 * Therefore, i refers to the current Item object.
 		 */
-		ReminderRemote i = listReminders.get(position);
+		Reminder i = listReminders.get(position);
 
 		if (i != null) {
 
