@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.util.Log;
+
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -23,6 +25,8 @@ public class ReminderRemote implements Reminder {
 	}
 	
 	public ReminderRemote( String name, String description, Date time, boolean active ) throws ParseException {
+		time.setYear(time.getYear() - 1900);
+		Log.d("INSIDE ENTITY",String.valueOf(time.getYear()));
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("name", name);
 		mParseObject.put("description", description);
@@ -42,6 +46,10 @@ public class ReminderRemote implements Reminder {
 	}
 	
 	public void setTime(Date time) throws ParseException {
+		if (time.getYear() > 1900){
+			time.setYear(time.getYear() - 1900);
+		}
+		Log.d("INSIDE ENTITY",String.valueOf(time.getYear()));
 		mParseObject.put("time", time);
 		save();
 	}
