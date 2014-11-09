@@ -103,12 +103,12 @@ public class ListReminderAdapter extends ArrayAdapter<ReminderRemote> {
 				//String text = ""
 				//GET DATE/TIME
 				Date date = i.getTime();
-				int year = date.getYear() + 1900;
+				int year = date.getYear();
 				int month =  date.getMonth() + 1 ;
 				int day = date.getDate();
 				int hour = date.getHours();
 				int minute = date.getMinutes();
-				//Date time2 = new Date(year,month,day,hour,minute);
+				Date time2 = new Date(year,month,day,hour,minute);
 				
 				String result = String.format("%2d : %2d   %2d/%2d/%4d", hour,minute,day,month,year);
 				dateInfo.setText(result);

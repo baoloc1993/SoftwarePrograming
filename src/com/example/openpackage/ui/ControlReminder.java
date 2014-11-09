@@ -56,7 +56,7 @@ public abstract class ControlReminder extends Activity {
 	 * @param isActive = false
 	 */
 	
-	protected void getData(final String id,final String nameStr, String description, final Date time, final boolean isActive, final boolean isNew){
+	protected void getData(final String id,final String nameStr, String description, final Date time, final boolean isActive){
 		//GET DATE/TIME
 		name = (EditText) findViewById(R.id.name_reminder_field);
 		name.setText(nameStr);
@@ -87,9 +87,9 @@ public abstract class ControlReminder extends Activity {
 		timePicker = (TimePicker) findViewById(R.id.timePicker);
 		datePicker = (DatePicker) findViewById(R.id.datePicker);
 		timePicker.setCurrentHour(time.getHours());
-		timePicker.setCurrentMinute(time.getMinutes());
+		timePicker.setCurrentMinute(time.getDay());
 
-		datePicker.updateDate(time.getYear()+1900, time.getMonth(), time.getDate());
+		datePicker.updateDate(time.getYear(), time.getMonth(), time.getDay());
 		//datePicker.updateDate(year, month, dayOfMonth);
 		
 		desc = (EditText) findViewById(R.id.desc_reminder_field);
@@ -109,7 +109,7 @@ public abstract class ControlReminder extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				nameString = name.getText().toString();
+				//nameString = name.getText().toString();
 				
 				descriptionStr = desc.getText().toString();
 				if (isActivate.isChecked()){
@@ -126,14 +126,14 @@ public abstract class ControlReminder extends Activity {
 				int day = datePicker.getDayOfMonth();
 				int hour = timePicker.getCurrentHour();
 				int minute = timePicker.getCurrentMinute();
-				//Log.d("DEBUG 123", String.valueOf(nameString));
+				Log.d("DEBUG 123", String.valueOf(nameString));
 				time2 = new Date(year,month,day,hour,minute);
 				
-				 Toast.makeText(getApplicationContext(),time2.toLocaleString(), Toast.LENGTH_LONG).show();
+				
 				
 				ReminderController reminderController = new ReminderController(getApplicationContext());
 				//String result = "";
-				String result = reminderController.validateReminderForm(nameString, descriptionStr, time2, isActive2, isNew, id);
+				String result = reminderController.validateReminderForm(nameString, descriptionStr, time, isActive, true, id);
 				Toast.makeText(getApplicationContext(), 
 						result,
 						Toast.LENGTH_LONG).show();

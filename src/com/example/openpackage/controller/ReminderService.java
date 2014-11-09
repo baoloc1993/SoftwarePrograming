@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
-import android.widget.Toast;
 
 public class ReminderService extends IntentService{
 	/*
@@ -44,7 +43,6 @@ public class ReminderService extends IntentService{
 		calSet.set(Calendar.MINUTE, i.getIntExtra("minute", 0));
 		calSet.set(Calendar.SECOND, 0);
 		calSet.set(Calendar.MILLISECOND, 0);
-		// Log.d("Calendar Alarm" , time.toLocaleString());
 		//Create the alarm service using alarm manager
 		AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		Intent ni = new Intent(this,AlarmReceiver.class);
@@ -53,7 +51,7 @@ public class ReminderService extends IntentService{
 		PendingIntent pi = PendingIntent.getBroadcast(getBaseContext(), RQS_1, ni, 0);
 		if(matcher.matchAction(action)){
 			if(CREATE.equals(action)){
-				//Log.d("DEBUG","Inside create alarm");
+				Log.d("DEBUG","Inside create alarm");
 				am.set(AlarmManager.RTC_WAKEUP, calSet.getTimeInMillis(), pi);
 			}
 			else{

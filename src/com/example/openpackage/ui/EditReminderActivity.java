@@ -53,8 +53,8 @@ public class EditReminderActivity extends ControlReminder {
 	  				bundle.getInt("Hour"),
 	  				bundle.getInt("Minute"));
 	  		boolean isActive = bundle.getBoolean("Active");
-	  		// Toast.makeText(getApplicationContext(),time.toLocaleString(), Toast.LENGTH_LONG).show();
-	  		super.getData(Id,nameStr, description, time, isActive,false);
+	  		
+	  		super.getData(Id,nameStr, description, time, isActive);
 
 	}
 

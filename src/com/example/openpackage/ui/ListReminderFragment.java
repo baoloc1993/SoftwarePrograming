@@ -96,12 +96,12 @@ public class ListReminderFragment extends Fragment {
 				String reminderName = reminder.getName();
 				
 				int reminderDay = reminder.getTime().getDate();
-				int reminderMonth = reminder.getTime().getMonth();
+				int reminderMonth = reminder.getTime().getMonth() + 1;
 				int reminderYear = reminder.getTime().getYear();
 				int reminderHour = reminder.getTime().getHours();
 				int reminderMinute = reminder.getTime().getMinutes();
 				
-				Toast.makeText(getActivity(), reminder.getTime().toGMTString(), Toast.LENGTH_LONG).show();
+				//Toast.makeText(getActivity(), reminder.getTime().toGMTString(), Toast.LENGTH_LONG).show();
 				String reminderDesc = reminder.getDescription();
 				boolean isActive = reminder.getActive();
 				

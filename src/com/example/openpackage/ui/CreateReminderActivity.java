@@ -11,7 +11,6 @@ package com.example.openpackage.ui;
  */
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import com.example.openpackage.controller.ReminderController;
 import com.example.openpackage.controller.ReminderService;
@@ -23,7 +22,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -44,14 +42,13 @@ public class CreateReminderActivity extends ControlReminder {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);    
-	    Date date = Calendar.getInstance(TimeZone.getDefault()).getTime();
-	    date.setYear(date.getYear() );
+	    Date date = Calendar.getInstance().getTime();
+	    date.setYear(date.getYear() + 1900 );
 	    date.setMonth(date.getMonth());
-	    date.setDate(date.getDate());
-	    //Toast.d("DEBUG", date.toLocaleString());
-	   
+	    date.setDate(date.getDate()+1);
 	    
-		super.getData(null, "", "", date, false,true);
+	    
+		super.getData(null, "", "", date, false);
 
 	}
 

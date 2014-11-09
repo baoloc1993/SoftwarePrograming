@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.entity.FoodOpeningPackage;
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.example.openpackage.entity.Survey;
-import com.example.openpackage.entity.SurveyRemote;
 import com.example.openpackageapplication.R;
 
 import android.content.Intent;
