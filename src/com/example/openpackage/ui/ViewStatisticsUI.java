@@ -73,12 +73,15 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 		double max = -1,min = 5.1;
 		for(int i = 0; i < mList.size(); ++i){
 			if(mList.get(i).getAverage() >max){
+				max = mList.get(i).getAverage();
 				maxPos = i;
 			}
 			if(mList.get(i).getAverage() < min){
 				minPos = i;
+				min = mList.get(i).getAverage();
 			}
 		}
+		
 		txtStat.setText("In type " + parent
 		.getItemAtPosition(position).toString() + ":\n The package that have maximum average point: " + mList.get(maxPos).getTitle() 
 		+ "\n The package that have minimum average point: " + mList.get(minPos).getTitle());
@@ -87,6 +90,7 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent i = new Intent(getActivity().getApplicationContext(),ViewSingleStatistic.class);
+				
 				FoodOpeningPackageRemote curPackage = mList.get(position);
 				SurveyController mSurveyController = new SurveyController(getActivity().getApplicationContext());
 				ArrayList<SurveyRemote> mSurvey = mSurveyController.getSurveyList(curPackage);
@@ -112,7 +116,9 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 				startActivity(i);
+				
 				
 				
 			}
