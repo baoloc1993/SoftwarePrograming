@@ -1,15 +1,17 @@
 package com.example.openpackage.controller;
 
 import com.example.openpackage.entity.Factory;
-import com.example.openpackage.entity.Manufacturer;
-import com.example.openpackage.entity.Reminder;
+import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackage.entity.ReminderRemote;
+import com.example.openpackage.entity.Reminder;
 import com.example.openpackage.entity.User;
+import com.example.openpackage.ui.MainActivity;
 import com.parse.ParseException;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -39,6 +41,7 @@ public class ReminderController {
 				i.putExtra("name", r.getName());
 				i.putExtra("description", r.getDescription());
 				i.putExtra("year", r.getTime().getYear());
+				Log.d("DEBUG 1st Update", String.valueOf(r.getTime().getYear()));
 				i.putExtra("month", r.getTime().getMonth());
 				i.putExtra("day", r.getTime().getDay());
 				i.putExtra("hour",r.getTime().getHours());
@@ -61,6 +64,7 @@ public class ReminderController {
 	}
 	
 	private void removeAlarm(String name){
+		
 		Intent j = new Intent(mContext,ReminderService.class);
 		for(int i = 0; i < alarmIntent.size();++i){
 			j = alarmIntent.get(i);
@@ -74,6 +78,7 @@ public class ReminderController {
 		mContext.startService(j);
 	}
 	public void removeAllAlarms(){
+		Log.d("REMOVE","REMOVE ALL ALLARM");
 		for(int i = 0; i < alarmIntent.size();++i){
 			Intent j = alarmIntent.get(i);
 			j.setAction("CANCEL");
@@ -97,7 +102,7 @@ public class ReminderController {
 		int curYear = c.get(Calendar.YEAR);
 		int curHour = c.get(Calendar.HOUR);
 		int curMinute = c.get(Calendar.MINUTE);
-		if( time.getYear() < curYear )
+		if( time.getYear() + 1900 < curYear )
 			return "Wrong input year of Reminder";
 		if( time.getYear() == curYear){
 			if(time.getMonth() ==  curMonth){
@@ -126,11 +131,12 @@ public class ReminderController {
 		try{
 			if(isNewReminder){
 				//Log.d("DEBUG", "inside create new reminder");
-				Reminder newReminder = new ReminderRemote(name,description,time,active) ;
+				Log.d("INSIDE CONTROLLER", String.valueOf(time.getYear()));
+				ReminderRemote newReminder = new ReminderRemote(name,description,time,active) ;
 			
 				reminderList.add(newReminder);
 				try {
-					Manufacturer tmp = Manufacturer.getCurrentUser();
+					ManufacturerRemote tmp = ManufacturerRemote.getCurrentUser();
 					tmp.addReminder(newReminder);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
@@ -141,10 +147,16 @@ public class ReminderController {
 				boolean found = false;
 				for(Reminder reminder : reminderList){
 					if(ID.compareTo(reminder.getID())==0){
-						reminder.setActive(active);
-						reminder.setDescription(description);
-						reminder.setName(name);
-						reminder.setTime(time);
+						try {
+							reminder.setActive(active);
+							reminder.setDescription(description);
+							reminder.setName(name);
+							
+							reminder.setTime(time);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						found = true;
 						break;
 					}
