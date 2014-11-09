@@ -5,11 +5,13 @@ import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackage.entity.ReminderRemote;
 import com.example.openpackage.entity.Reminder;
 import com.example.openpackage.entity.User;
+import com.example.openpackage.ui.MainActivity;
 import com.parse.ParseException;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -39,6 +41,7 @@ public class ReminderController {
 				i.putExtra("name", r.getName());
 				i.putExtra("description", r.getDescription());
 				i.putExtra("year", r.getTime().getYear());
+				Log.d("DEBUG", String.valueOf(r.getTime().getYear()));
 				i.putExtra("month", r.getTime().getMonth());
 				i.putExtra("day", r.getTime().getDay());
 				i.putExtra("hour",r.getTime().getHours());
@@ -97,7 +100,7 @@ public class ReminderController {
 		int curYear = c.get(Calendar.YEAR);
 		int curHour = c.get(Calendar.HOUR);
 		int curMinute = c.get(Calendar.MINUTE);
-		if( time.getYear() < curYear )
+		if( time.getYear() + 1900 < curYear )
 			return "Wrong input year of Reminder";
 		if( time.getYear() == curYear){
 			if(time.getMonth() ==  curMonth){
@@ -126,6 +129,7 @@ public class ReminderController {
 		try{
 			if(isNewReminder){
 				//Log.d("DEBUG", "inside create new reminder");
+				Log.d("INSIDE CONTROLLER", String.valueOf(time.getYear()));
 				ReminderRemote newReminder = new ReminderRemote(name,description,time,active) ;
 			
 				reminderList.add(newReminder);
@@ -145,6 +149,7 @@ public class ReminderController {
 							reminder.setActive(active);
 							reminder.setDescription(description);
 							reminder.setName(name);
+							
 							reminder.setTime(time);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
