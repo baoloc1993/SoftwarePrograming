@@ -17,9 +17,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.openpackage.entity.CustomerRemote;
-import com.example.openpackage.entity.ManufacturerRemote;
-import com.example.openpackage.entity.SurveyRemote;
+import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.Manufacturer;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.User;
 import com.example.openpackage.ui.MainActivity;
 import com.example.openpackage.ui.ManufacturerUI;
@@ -35,9 +35,9 @@ public class UserController {
 	
 	public User getCurrentUser() {
 		try {
-			User user = CustomerRemote.getCurrentUser();
+			User user = Customer.getCurrentUser();
 			if (user!=null) return user;
-			user = ManufacturerRemote.getCurrentUser();
+			user = Manufacturer.getCurrentUser();
 			if (user!=null) return user;
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -45,9 +45,9 @@ public class UserController {
 		return null;
 	}
 	
-	private ManufacturerRemote getManufactureUser() {
+	private Manufacturer getManufactureUser() {
 		try {
-			ArrayList<ManufacturerRemote> mManufacturers = ManufacturerRemote.listAll();
+			ArrayList<Manufacturer> mManufacturers = Manufacturer.listAll();
 			return mManufacturers.get(0);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -57,15 +57,15 @@ public class UserController {
 	
 	
 	public boolean validateLogin( String username, String password ) {
-		ArrayList<CustomerRemote> customers;
-		ManufacturerRemote mManufacturer = getManufactureUser();
+		ArrayList<Customer> customers;
+		Manufacturer mManufacturer = getManufactureUser();
 		try {
-			customers = CustomerRemote.listAll();
+			customers = Customer.listAll();
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return false;
 		}
-		for(CustomerRemote customer : customers) {
+		for(Customer customer : customers) {
 			if ( customer.getUsername().equals(username) && customer.getPassword().equals(password) ) {
 				try {
 					Log.i(TAG, "Login Customer");
@@ -90,14 +90,6 @@ public class UserController {
 				Intent intent = new Intent( mContext, ManufacturerUI.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-				
-				/*
-				 * set up alarm after manufacturer log in
-				 */
-				//ReminderController reminderController = new ReminderController(mContext);
-				ReminderController reminderController = new ReminderController(mContext);
-				reminderController.firstUpdateAlarmAfterLogIn();
-				
 				mContext.startActivity(intent);
 				return true;
 			} catch (ParseException e) {
@@ -108,10 +100,10 @@ public class UserController {
 	}
 	
 	public String validateRegister( String username, String password, String email, int age, boolean gender ) {
-		ArrayList<CustomerRemote> customers;
+		ArrayList<Customer> customers;
 		
 		try {
-			customers = CustomerRemote.listAll();
+			customers = Customer.listAll();
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return "There is some error with internet connection.";
@@ -119,14 +111,14 @@ public class UserController {
 		
 		if ( username.isEmpty() || password.isEmpty() || email.isEmpty() ) return "You need to fill all information.";
 		if (!isValidEmailAddress(email)) return "Your email is invalid.";
-		for(CustomerRemote customer : customers) {
+		for(Customer customer : customers) {
 			if ( customer.getUsername().equals(username) || customer.getEmail().equals(email) ) {
 				return "Your Username or Email has existed.";
 			}
 		}
 		
 		try {
-			CustomerRemote customer = new CustomerRemote( username, password, email, age, gender );
+			Customer customer = new Customer( username, password, email, age, gender );
 			customer.logIn();
 			Intent intent = new Intent( mContext, MainActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -141,10 +133,10 @@ public class UserController {
 	
 	public boolean verifyForgetInfo(String email) {
 		Log.i(TAG, email);
-		ArrayList<CustomerRemote> customers;
+		ArrayList<Customer> customers;
 		try {
-			customers = CustomerRemote.listAll();
-			for(CustomerRemote customer : customers) {
+			customers = Customer.listAll();
+			for(Customer customer : customers) {
 				if ( customer.getEmail().equals(email) ) {
 					sendEmail( customer );
 					Log.i(TAG, "find" + customer.getEmail() );
@@ -158,7 +150,7 @@ public class UserController {
 		return false;
 	}
 	
-	public ArrayList<SurveyRemote> retrievePersonalRecord(CustomerRemote customer) {
+	public ArrayList<Survey> retrievePersonalRecord(Customer customer) {
 		try {
 			return customer.getSurveyList();
 		} catch (ParseException e) {
@@ -188,7 +180,7 @@ public class UserController {
 		   return result;
 		}
 	
-	private void sendEmail( CustomerRemote customer ) {
+	private void sendEmail( Customer customer ) {
 
         String msgBody = "<p>Here is your username and password. Thank you for use our Application.</p>"
         		+ "<ul>"
