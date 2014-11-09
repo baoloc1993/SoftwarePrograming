@@ -85,11 +85,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		screenWidth = displayMetrics.widthPixels;
 		activity = this;
 		
-		/*
-		 * set up alarm after manufacturer log in
-		 */
-		reminderController = new ReminderController(getApplicationContext());
-		reminderController.firstUpdateAlarmAfterLogIn();
+		
 	}
 	
 	@Override
