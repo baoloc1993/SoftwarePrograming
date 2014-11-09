@@ -18,8 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.Customer;
-import com.example.openpackage.entity.Manufacturer;
+import com.example.openpackage.entity.CustomerRemote;
+import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackage.entity.User;
 import com.example.openpackageapplication.R;
 import com.parse.ParseObject;
@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private ViewPager mViewPager;
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ActionBar mActionBar;
-	private Customer mCurrentUser;
+	private CustomerRemote mCurrentUser;
 	private UserController mUserController;
 	
 	@Override
@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			finish();
 		}
 		
-		if (user instanceof Manufacturer) {
+		if (user instanceof ManufacturerRemote) {
 			Intent intent = new Intent(this, ManufacturerUI.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -123,7 +123,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 		        @Override
 		        public void onClick(DialogInterface dialog, int which) {
-		        	Customer user = (Customer) mUserController.getCurrentUser();
+		        	CustomerRemote user = (CustomerRemote) mUserController.getCurrentUser();
 		        	mUserController.logOut(user);
 		        	Intent intent = new Intent(mContext, LoginFormActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

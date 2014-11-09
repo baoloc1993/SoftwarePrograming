@@ -25,9 +25,10 @@ public class AlarmReceiver extends BroadcastReceiver{
 		         
 		        n.setLatestEventInfo(context, name, desc, pi);
 		        // TODO check user preferences
-		        n.defaults |= Notification.DEFAULT_VIBRATE;
-		      	n.defaults |= Notification.DEFAULT_SOUND;       
-		        n.flags |= Notification.FLAG_AUTO_CANCEL;       
+		        //n.defaults |= Notification.DEFAULT_VIBRATE;
+		        //n.sound = Uri.parse(RemindMe.getRingtone());
+		      	//n.defaults |= Notification.DEFAULT_SOUND;       
+		        //n.flags |= Notification.FLAG_AUTO_CANCEL;       
 		         
 		        NotificationManager nm = (NotificationManager) 
 		                                    context.getSystemService(Context.NOTIFICATION_SERVICE);

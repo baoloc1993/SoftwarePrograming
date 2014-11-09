@@ -9,7 +9,6 @@ import com.example.openpackage.entity.FoodOpeningPackageRemote;
 
 import com.example.openpackage.entity.SurveyRemote;
 import com.example.openpackageapplication.R;
-import com.parse.ParseException;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,15 +24,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener{
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	ViewGroup viewGroup;
 	public static ListView mListPackageStat;
-	private ArrayList<FoodOpeningPackage> mList;
+	private ArrayList<FoodOpeningPackageRemote> mList;
 	View rootView;
 	public ViewStatisticsUI(){
 	}
@@ -53,7 +51,6 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 		mSpinner.setAdapter(adapter);
 		mSpinner.setOnItemSelectedListener(this);
-		
 		return rootView;
 	}
 	
@@ -68,50 +65,23 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 		mListPackageStat = (ListView) rootView.findViewById(R.id.list_package_stat);
 		
 		mListPackageStat.setAdapter(adapter);
-		TextView txtStat = (TextView) rootView.findViewById(R.id.txt_stat);
-		int maxPos = 0, minPos = 0;
-		double max = -1,min = 5.1;
-		for(int i = 0; i < mList.size(); ++i){
-			if(mList.get(i).getAverage() >max){
-				maxPos = i;
-			}
-			if(mList.get(i).getAverage() < min){
-				minPos = i;
-			}
-		}
-		txtStat.setText("In type " + parent
-		.getItemAtPosition(position).toString() + ":\n The package that have maximum average point: " + mList.get(maxPos).getTitle() 
-		+ "\n The package that have minimum average point: " + mList.get(minPos).getTitle());
+		
 		mListPackageStat.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent i = new Intent(getActivity().getApplicationContext(),ViewSingleStatistic.class);
-				FoodOpeningPackage curPackage = mList.get(position);
+				FoodOpeningPackageRemote curPackage = mList.get(position);
 				SurveyController mSurveyController = new SurveyController(getActivity().getApplicationContext());
-				ArrayList<Survey> mSurvey = mSurveyController.getSurveyList(curPackage);
+				ArrayList<SurveyRemote> mSurvey = mSurveyController.getSurveyList(curPackage);
 				double[] rate_list = {0,0,0,0,0};
 				
-				for(Survey cur : mSurvey){
-					rate_list[cur.getRate()-1]++;
-				}
-				int rank = 1;
-				for(int j = 0; j < mList.size(); ++j){
-					if(curPackage.getAverage() > mList.get(j).getAverage()){
-						++rank;
-					}
+				for(SurveyRemote cur : mSurvey){
+					rate_list[cur.getRate()-1]++;;
 				}
 				i.putExtra("name",curPackage.getTitle());
 				i.putExtra("type", curPackage.getType());
 				i.putExtra("rateList", rate_list);
-				i.putExtra("rank", rank);
-				i.putExtra("size", mList.size());
-				try {
-					i.putExtra("numberOfSurvey", curPackage.getSurveyList().size());
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				startActivity(i);
 				
 				

@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.openpackage.controller.FoodOpeningPackageController;
-import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.example.openpackageapplication.R;
 
 
@@ -27,7 +27,7 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 	private Spinner mSpinner;
 	private ListView mListView;
 	private FoodOpeningPackageController mFoodOpeningPacketController;
-	private ArrayList<FoodOpeningPackage> mList;
+	private ArrayList<FoodOpeningPackageRemote> mList;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

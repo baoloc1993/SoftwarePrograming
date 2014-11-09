@@ -17,7 +17,7 @@
         android:src="@drawable/anon_user" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/create_food"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageView1"
@@ -28,22 +28,22 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/Type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/create_food"
+        android:layout_below="@+id/create_food"
         android:layout_marginTop="7dp"
         android:text="TextView"
         android:textSize="12sp"
         android:textStyle="italic" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/VideoLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView1"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignLeft="@+id/Type"
         android:layout_marginBottom="35dp"
         android:text="TextView"
         android:textSize="14sp" />

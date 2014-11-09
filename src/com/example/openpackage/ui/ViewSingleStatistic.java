@@ -5,100 +5,70 @@ import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.GraphView.GraphViewData;
-
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentTransaction;
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-public class ViewSingleStatistic extends FragmentActivity implements ActionBar.TabListener{
-	private ViewPager mViewPager;
-	private TabsStatPageAdapter mTabsStatPagerAdapter;
-	private ActionBar mActionBar;
-	private static int screenHeight;
-	private static int screenWidth;
-	private ViewSingleStatistic activity;
-	Intent graphInfo = getIntent();
+public class ViewSingleStatistic extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.graph_layout);
-	    mViewPager = (ViewPager)findViewById(R.id.pager_stat);
-	    mActionBar = getActionBar();
-	    mTabsStatPagerAdapter = new TabsStatPageAdapter(getSupportFragmentManager());
-	    mTabsStatPagerAdapter.graphInfo = graphInfo;
-	    mViewPager.setAdapter(mTabsStatPagerAdapter);
-        mActionBar.setHomeButtonEnabled(false);
-        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
-        
-     // Adding Tabs
-        mActionBar.addTab(mActionBar.newTab().setText("Graph")
-                .setTabListener(this));
-        mActionBar.addTab(mActionBar.newTab().setText("Stat")
-            .setTabListener(this));
-        
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-       	 
-            @Override
-            public void onPageSelected(int position) {
-                // on changing the page
-                // make respected tab selected
-                mActionBar.setSelectedNavigationItem(position);
-            }
-         
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
-         
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
-        
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-		screenHeight = displayMetrics.heightPixels;
-		screenWidth = displayMetrics.widthPixels;
-		activity = this;
+	    //Log.d("graph", "draw graph");
+	    Intent i = getIntent();
+	    double[] rate_list = i.getDoubleArrayExtra("rateList");
+	    //Log.d("rate_list",String.valueOf(rate_list[0]));
+	    
+	    TextView t1 = (TextView) findViewById(R.id.graph_title);
+	    t1.setText("This bar chart show the statistic for package "+i.getStringExtra("name")+" type "+i.getStringExtra("type")+
+	    		"\nX-axis is labeled by the rate level. \nY-axis is labeled by number of people that have same rate.");
+	    //t1.setTextColor(Color.WHITE);
+	    
+	    GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
+	    new GraphViewData(0,rate_list[0])
+	    , new GraphViewData(1, rate_list[1])
+	    , new GraphViewData(2, rate_list[2])
+	    , new GraphViewData(3, rate_list[3])
+	    , new GraphViewData(4, rate_list[4])
+	});
+	GraphView graphView = new BarGraphView(
+	    getApplicationContext()// context
+	    , i.getStringExtra("name") // heading
+	);
 		
-	   
-	}
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		mViewPager.setCurrentItem(tab.getPosition());
+	graphView.addSeries(exampleSeries);
+	graphView.getGraphViewStyle().setGridColor(Color.BLACK);
+	graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.RED);
+	graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLUE);
+	graphView.getGraphViewStyle().setNumVerticalLabels(3);
+	graphView.setHorizontalLabels(new String[]{"1","2","3","4","5"} );
+	
+	RelativeLayout layout = (RelativeLayout) findViewById(R.id.graph_draw);
+	RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+	params.addRule(RelativeLayout.BELOW, R.id.graph_title);
+	layout.setLayoutParams(params);
+	layout.addView(graphView);
+	
+	Button Back = (Button) findViewById(R.id.graph_exit_button);
+	Back.setOnClickListener(new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent i = new Intent(getApplicationContext(),ManufacturerUI.class);
+			startActivity(i);
+		}
 		
-	}
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
+	});
 	}
 	
-	public int getScreenHeight() {
-		return screenHeight;
-	}
-
-	public int getScreenWidth() {
-		return screenWidth;
-	}
-
-	/**
-	 * @return the standard size for rendering item
-	 */
-	public static int getStandardSize() {
-		return Math.min(screenWidth, screenHeight);
-	}
 	
 }
