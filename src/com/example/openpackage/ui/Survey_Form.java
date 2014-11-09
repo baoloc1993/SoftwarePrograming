@@ -23,20 +23,23 @@ import android.widget.Toast;
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.Customer;
-import com.example.openpackage.entity.FoodOpeningPackage;
-import com.example.openpackage.entity.Survey;
+
+import com.example.openpackage.entity.CustomerRemote;
+
+import com.example.openpackage.entity.FoodOpeningPackageRemote;
+
+import com.example.openpackage.entity.SurveyRemote;
 import com.example.openpackageapplication.R;
 
 public class Survey_Form extends Fragment{
 	public final static String FOODOPENINGPACKAGE_ID = "FoodOpeningPackageId";
 	private final static String TAG = "Survey_Form";
-	private Survey mSurvey;
+	private SurveyRemote mSurvey;
 	private SurveyController mSurveyController;
 	private UserController mUserController;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
-	private Customer user;
-	private FoodOpeningPackage mFood;	
+	private CustomerRemote user;
+	private FoodOpeningPackageRemote mFood;	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,7 +51,7 @@ public class Survey_Form extends Fragment{
 		String foodId = getArguments().getString(FOODOPENINGPACKAGE_ID);
 		mFood = mFoodOpeningPackageController.getById(foodId);
 		
-		user = (Customer) mUserController.getCurrentUser();
+		user = (CustomerRemote) mUserController.getCurrentUser();
 		if ( user == null ) Log.i(TAG, "No User");
 		else Log.i(TAG, user.getUsername());
 		

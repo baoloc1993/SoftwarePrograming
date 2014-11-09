@@ -19,7 +19,8 @@ import android.widget.TabHost;
 
 import com.example.openpackage.controller.ReminderController;
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.Manufacturer;
+
+import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackageapplication.R;
 
 public class ManufacturerUI extends FragmentActivity implements ActionBar.TabListener{
@@ -107,7 +108,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 		        @Override
 		        public void onClick(DialogInterface dialog, int which) {
-		        	final Manufacturer user = (Manufacturer) mUserController.getCurrentUser();
+		        	final ManufacturerRemote user = (ManufacturerRemote) mUserController.getCurrentUser();
 		        	reminderController.removeAllAlarms();
 		        	mUserController.logOut(user);
 		        	Intent intent = new Intent(getApplicationContext(), LoginFormActivity.class);

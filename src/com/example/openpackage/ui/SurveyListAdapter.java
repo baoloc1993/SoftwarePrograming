@@ -12,17 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.openpackage.entity.Survey;
+import com.example.openpackage.entity.SurveyRemote;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
-public class SurveyListAdapter extends ArrayAdapter<Survey> {
+public class SurveyListAdapter extends ArrayAdapter<SurveyRemote> {
 
 	private Context mContext;
-	private List<Survey> mList;
+	private List<SurveyRemote> mList;
 	private int mType;
 	
-	public SurveyListAdapter(Context context, List<Survey> objects, int type) {
+	public SurveyListAdapter(Context context, List<SurveyRemote> objects, int type) {
 		super(context, R.layout.survey_view, objects);
 		mContext = context;
 		mList = objects;
@@ -43,7 +43,7 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 		}
 		else holder = (ViewHolder) convertView.getTag();
 		
-		Survey survey = mList.get(position);
+		SurveyRemote survey = mList.get(position);
 		if (mType==0) {
 			try {
 				holder.username.setText(survey.getUser().getUsername());
@@ -77,7 +77,7 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 		TextView date;
 	}
 	
-	public void refill(List<Survey> objects) {
+	public void refill(List<SurveyRemote> objects) {
 		mList.clear();
 		mList.addAll(objects);
 		notifyDataSetChanged();

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
-import com.example.openpackage.entity.FoodOpeningPackage;
-import com.example.openpackage.entity.Survey;
+
+import com.example.openpackage.entity.FoodOpeningPackageRemote;
+
+import com.example.openpackage.entity.SurveyRemote;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
@@ -31,7 +33,7 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	ViewGroup viewGroup;
 	public static ListView mListPackageStat;
-	private ArrayList<FoodOpeningPackage> mList;
+	private ArrayList<FoodOpeningPackageRemote> mList;
 	View rootView;
 	public ViewStatisticsUI(){
 	}
@@ -85,12 +87,12 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent i = new Intent(getActivity().getApplicationContext(),ViewSingleStatistic.class);
-				FoodOpeningPackage curPackage = mList.get(position);
+				FoodOpeningPackageRemote curPackage = mList.get(position);
 				SurveyController mSurveyController = new SurveyController(getActivity().getApplicationContext());
-				ArrayList<Survey> mSurvey = mSurveyController.getSurveyList(curPackage);
+				ArrayList<SurveyRemote> mSurvey = mSurveyController.getSurveyList(curPackage);
 				double[] rate_list = {0,0,0,0,0};
 				
-				for(Survey cur : mSurvey){
+				for(SurveyRemote cur : mSurvey){
 					rate_list[cur.getRate()-1]++;
 				}
 				int rank = 1;

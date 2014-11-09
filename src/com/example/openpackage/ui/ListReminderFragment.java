@@ -48,6 +48,7 @@ public class ListReminderFragment extends Fragment {
 
 		//Temporary create new Manufacturer Object
 		//In reality, received the Manufacter Object from other Activity
+		Log.d("CLASS MANU", String.valueOf(mUserController.getCurrentUser() instanceof ManufacturerRemote));
 		ManufacturerRemote tempManufacturer = (ManufacturerRemote) mUserController.getCurrentUser();
 		
 		ArrayList<ReminderRemote> listReminders = null;
