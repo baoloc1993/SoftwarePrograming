@@ -14,7 +14,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="@string/create_food"
+            android:text="create_food"
             android:textSize="16sp" />
 
         <RelativeLayout 

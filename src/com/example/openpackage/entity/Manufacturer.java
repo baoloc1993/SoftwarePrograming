@@ -44,7 +44,7 @@ public class Manufacturer extends User {
 	
 		List<ParseObject> reminders = relation.getQuery().find();
 		for(ParseObject reminder : reminders ) {
-			reminderList.add(new Reminder(reminder));
+			reminderList.add(new ReminderRemote(reminder));
 		}
 		
 		return reminderList;

@@ -8,9 +8,9 @@ import java.util.Date;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.openpackage.entity.CustomerRemote;
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
-import com.example.openpackage.entity.SurveyRemote;
+import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Survey;
 import com.parse.ParseException;
 
 public class SurveyController {
@@ -25,20 +25,20 @@ public class SurveyController {
 		mUserController = new UserController(mContext);
 	}
 	
-	private void Sort(ArrayList<SurveyRemote> cur) {
-		Collections.sort(cur, new Comparator<SurveyRemote>() {
+	private void Sort(ArrayList<Survey> cur) {
+		Collections.sort(cur, new Comparator<Survey>() {
 
 			@Override
-			public int compare(SurveyRemote lhs, SurveyRemote rhs) {
+			public int compare(Survey lhs, Survey rhs) {
 				
 				return (int) (rhs.getDate().getTime() - lhs.getDate().getTime());
 			}
 		});
 	}
 	
-	public ArrayList<SurveyRemote> getSurveyList(FoodOpeningPackageRemote cur) {
+	public ArrayList<Survey> getSurveyList(FoodOpeningPackage cur) {
 		try {
-			ArrayList<SurveyRemote> res = cur.getSurveyList();
+			ArrayList<Survey> res = cur.getSurveyList();
 			Sort(res);
 			return res;
 		} catch (ParseException e) {
@@ -47,9 +47,9 @@ public class SurveyController {
 		return null;
 	}
 	
-	public ArrayList<SurveyRemote> getSurveyList(CustomerRemote cur) {
+	public ArrayList<Survey> getSurveyList(Customer cur) {
 		try {
-			ArrayList<SurveyRemote> res = cur.getSurveyList();
+			ArrayList<Survey> res = cur.getSurveyList();
 			Sort(res);
 			return res;
 		} catch (ParseException e) {
@@ -58,22 +58,22 @@ public class SurveyController {
 		return null;
 	}
 
-	public SurveyRemote getById(String id) {
+	public Survey getById(String id) {
 		try {
-			return SurveyRemote.findById(id);
+			return Survey.findById(id);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public boolean validateCreateData(String cmt, int rate, FoodOpeningPackageRemote food) {
+	public boolean validateCreateData(String cmt, int rate, FoodOpeningPackage food) {
 		cmt = cmt.trim();
 		if (rate == 0 || cmt.isEmpty()) 
 			return false;
-		CustomerRemote user = (CustomerRemote) mUserController.getCurrentUser();
+		Customer user = (Customer) mUserController.getCurrentUser();
 		try {
-			SurveyRemote survey = new SurveyRemote(user, new Date(), cmt, rate, food);
+			Survey survey = new Survey(user, new Date(), cmt, rate, food);
 			user.addSurvey(survey);
 			food.addSurvey(survey);
 			return true;
@@ -84,10 +84,10 @@ public class SurveyController {
 		return false;
 	}
 
-	public SurveyRemote getSurvey(FoodOpeningPackageRemote mFood, CustomerRemote user) {
-		ArrayList<SurveyRemote>surveys = getSurveyList(mFood);
+	public Survey getSurvey(FoodOpeningPackage mFood, Customer user) {
+		ArrayList<Survey>surveys = getSurveyList(mFood);
 		if (surveys == null) Log.i(TAG, "ArraySurvey is NULL");
-		for(SurveyRemote survey : surveys)
+		for(Survey survey : surveys)
 			try {
 				if (survey.getUser().getId().equals(user.getId())) {
 					return survey;

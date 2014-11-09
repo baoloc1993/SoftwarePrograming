@@ -1,9 +1,9 @@
 package com.example.openpackage.controller;
 
 import com.example.openpackage.entity.Factory;
-import com.example.openpackage.entity.ManufacturerRemote;
-import com.example.openpackage.entity.ReminderRemote;
+import com.example.openpackage.entity.Manufacturer;
 import com.example.openpackage.entity.Reminder;
+import com.example.openpackage.entity.ReminderRemote;
 import com.example.openpackage.entity.User;
 import com.parse.ParseException;
 
@@ -126,11 +126,11 @@ public class ReminderController {
 		try{
 			if(isNewReminder){
 				//Log.d("DEBUG", "inside create new reminder");
-				ReminderRemote newReminder = new ReminderRemote(name,description,time,active) ;
+				Reminder newReminder = new ReminderRemote(name,description,time,active) ;
 			
 				reminderList.add(newReminder);
 				try {
-					ManufacturerRemote tmp = ManufacturerRemote.getCurrentUser();
+					Manufacturer tmp = Manufacturer.getCurrentUser();
 					tmp.addReminder(newReminder);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
@@ -141,15 +141,10 @@ public class ReminderController {
 				boolean found = false;
 				for(Reminder reminder : reminderList){
 					if(ID.compareTo(reminder.getID())==0){
-						try {
-							reminder.setActive(active);
-							reminder.setDescription(description);
-							reminder.setName(name);
-							reminder.setTime(time);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						reminder.setActive(active);
+						reminder.setDescription(description);
+						reminder.setName(name);
+						reminder.setTime(time);
 						found = true;
 						break;
 					}

@@ -16,8 +16,7 @@
         android:layout_marginTop="10dp"
         android:height="30dp"
         android:text="4.0/5.0" />
-
-    <TextView
+<TextView
         android:id="@+id/stat_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

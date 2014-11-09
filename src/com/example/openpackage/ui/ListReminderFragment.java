@@ -23,8 +23,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.ManufacturerRemote;
-import com.example.openpackage.entity.ReminderRemote;
+import com.example.openpackage.entity.Manufacturer;
+import com.example.openpackage.entity.Reminder;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -48,9 +48,9 @@ public class ListReminderFragment extends Fragment {
 
 		//Temporary create new Manufacturer Object
 		//In reality, received the Manufacter Object from other Activity
-		ManufacturerRemote tempManufacturer = (ManufacturerRemote) mUserController.getCurrentUser();
+		Manufacturer tempManufacturer = (Manufacturer) mUserController.getCurrentUser();
 		
-		ArrayList<ReminderRemote> listReminders = null;
+		ArrayList<Reminder> listReminders = null;
 		try {
 			listReminders = tempManufacturer.getReminderList();
 		} catch (ParseException e) {
@@ -64,7 +64,7 @@ public class ListReminderFragment extends Fragment {
 //			e.printStackTrace();
 //		}
 		
-		final ArrayList<ReminderRemote> newlist = listReminders;
+		final ArrayList<Reminder> newlist = listReminders;
 
 		/**
 		 * Calling a backgroung thread will loads recent articles of a website
@@ -91,17 +91,17 @@ public class ListReminderFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				ReminderRemote reminder = newlist.get(position);
+				Reminder reminder = newlist.get(position);
 				String reminderId = reminder.getID();
 				String reminderName = reminder.getName();
 				
 				int reminderDay = reminder.getTime().getDate();
-				int reminderMonth = reminder.getTime().getMonth();
+				int reminderMonth = reminder.getTime().getMonth() + 1;
 				int reminderYear = reminder.getTime().getYear();
 				int reminderHour = reminder.getTime().getHours();
 				int reminderMinute = reminder.getTime().getMinutes();
 				
-				Toast.makeText(getActivity(), reminder.getTime().toGMTString(), Toast.LENGTH_LONG).show();
+				//Toast.makeText(getActivity(), reminder.getTime().toGMTString(), Toast.LENGTH_LONG).show();
 				String reminderDesc = reminder.getDescription();
 				boolean isActive = reminder.getActive();
 				

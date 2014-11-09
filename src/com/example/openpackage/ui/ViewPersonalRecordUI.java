@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-import com.example.openpackage.entity.CustomerRemote;
-import com.example.openpackage.entity.SurveyRemote;
+import com.example.openpackage.entity.Customer;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
@@ -28,24 +28,24 @@ public class ViewPersonalRecordUI extends Fragment {
 	private UserController mUserController;
 	private SurveyController mSurveyController;
 	private ListView mListView;
-	private ArrayList<SurveyRemote> mSurvey;
-	private CustomerRemote user;
+	private ArrayList<Survey> mSurvey;
+	private Customer user;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.personal_record_layout, container, false);
 		
-		mUsername = (TextView) rootView.findViewById(R.id.create_food);
-		mGenderAge = (TextView) rootView.findViewById(R.id.Type);
-		mNumSurvey = (TextView) rootView.findViewById(R.id.VideoLink);
+		mUsername = (TextView) rootView.findViewById(R.id.textView1);
+		mGenderAge = (TextView) rootView.findViewById(R.id.textView2);
+		mNumSurvey = (TextView) rootView.findViewById(R.id.textView3);
 		mListView = (ListView) rootView.findViewById(R.id.listView1);
 		
 		mSurveyController = new SurveyController(getActivity());
 		
 		mUserController = new UserController(getActivity());
 		
-		user = (CustomerRemote) mUserController.getCurrentUser();
+		user = (Customer) mUserController.getCurrentUser();
 		
 		mUsername.setText(user.getUsername());
 		mGenderAge.setText( (user.getGender() ? "Male"  : "Female") + " - " + user.getAge() + " years old"  );

@@ -41,7 +41,7 @@ public class Factory {
 			
 				List<ParseObject> reminders = query.find();
 				for(ParseObject reminder : reminders) {
-					ReminderRemote cur = new ReminderRemote(reminder);
+					Reminder cur = new ReminderRemote(reminder);
 					res.add(cur);
 				}
 		}
