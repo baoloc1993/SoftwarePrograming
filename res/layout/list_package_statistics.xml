@@ -15,12 +15,13 @@
      <TextView 
          android:id = "@+id/txt_stat"
          android:layout_width = "match_parent"
-         android:layout_height = "wrap_content"/>
+         android:layout_height = "wrap_content"
+         android:layout_below="@id/spinner_stat"/>
      <ListView
          android:id="@+id/list_package_stat"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_below ="@id/spinner_stat" >
+         android:layout_below ="@id/txt_stat" >
      </ListView>
     
 </RelativeLayout>

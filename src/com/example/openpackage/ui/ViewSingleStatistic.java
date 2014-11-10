@@ -24,25 +24,34 @@ public class ViewSingleStatistic extends FragmentActivity implements ActionBar.T
 	private static int screenHeight;
 	private static int screenWidth;
 	private ViewSingleStatistic activity;
-	Intent graphInfo = getIntent();
+	//private Intent graphInfo = getIntent();
+	public static Bundle bundle;
+	private TabsPagerAdapter mTabsPagerAdapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.graph_layout);
-	    mViewPager = (ViewPager)findViewById(R.id.pager_stat);
-	    mActionBar = getActionBar();
-	    mTabsStatPagerAdapter = new TabsStatPageAdapter(getSupportFragmentManager());
-	    mTabsStatPagerAdapter.graphInfo = graphInfo;
-	    mViewPager.setAdapter(mTabsStatPagerAdapter);
+	    setContentView(R.layout.manufacturer_main);
+	    
+	    //Get data from previous Intent
+	    Intent i = getIntent();
+	    bundle = i.getExtras();
+	   // bundle.getDoubleArray(key)
+	    
+		// Initilization
+        mViewPager = (ViewPager) findViewById(R.id.pager2);
+        mActionBar = getActionBar();
+        mTabsStatPagerAdapter = new TabsStatPageAdapter(getSupportFragmentManager());
+ 
+        mViewPager.setAdapter(mTabsStatPagerAdapter);
         mActionBar.setHomeButtonEnabled(false);
-        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
-        
+        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);      
      // Adding Tabs
         mActionBar.addTab(mActionBar.newTab().setText("Graph")
                 .setTabListener(this));
         mActionBar.addTab(mActionBar.newTab().setText("Stat")
             .setTabListener(this));
-        
+       
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
        	 
             @Override

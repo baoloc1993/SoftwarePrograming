@@ -20,8 +20,9 @@ import android.widget.TextView;
 
 public class GraphFragment extends Fragment{
 	View rootView;
-	Intent graphInfo ;
+	Bundle bundle; ;
 	public GraphFragment(){
+		bundle = ViewSingleStatistic.bundle;
 	}
 	
 	@Override
@@ -29,13 +30,15 @@ public class GraphFragment extends Fragment{
 			Bundle savedInstanceState){
 		rootView = inflater.inflate(R.layout.graph_layout, container,
 				false);
-	    double[] rate_list = graphInfo.getDoubleArrayExtra("rateList");
+		
+	    double[] rate_list = bundle.getDoubleArray("rateList");
 	    //Log.d("rate_list",String.valueOf(rate_list[0]));
 	    
 	    TextView t1 = (TextView) rootView.findViewById(R.id.graph_title);
-	    t1.setText("This bar chart show the statistic for package "+graphInfo.getStringExtra("name")+" type "+graphInfo.getStringExtra("type")+
+	    //t1.setText("aaaa");
+	    t1.setText("This bar chart show the statistic for package "+bundle.getString("name")+" type "+bundle.getString("type")+
 	    		"\nX-axis is labeled by the rate level. \nY-axis is labeled by number of people that have same rate.");
-	    //t1.setTextColor(Color.WHITE);
+//	    //t1.setTextColor(Color.WHITE);
 	    
 	    GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
 	    new GraphViewData(0,rate_list[0])
@@ -46,7 +49,7 @@ public class GraphFragment extends Fragment{
 	});
 	GraphView graphView = new BarGraphView(
 	    getActivity().getApplicationContext()// context
-	    , graphInfo.getStringExtra("name") // heading
+	    , bundle.getString("name") // heading
 	);
 		
 	graphView.addSeries(exampleSeries);

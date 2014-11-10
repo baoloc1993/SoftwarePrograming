@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 public class StatFragment extends Fragment{
 	View rootView;
-	Intent graphInfo ;
+	Bundle bundle;
 	
 	public StatFragment(){
-		
+		bundle = ViewSingleStatistic.bundle;
 	}
 	
 	@Override
@@ -25,8 +25,9 @@ public class StatFragment extends Fragment{
 				false);
 		double mean = 0,mode = 0;
 		double variance = 0;
-		String numberOfSurvey = graphInfo.getStringExtra("numberOfSurvey");
-		int[] rateList = graphInfo.getIntArrayExtra("rateList");
+		String numberOfSurvey = bundle.getString("numberOfSurvey");
+		double[] rateList = bundle.getDoubleArray("rateList");
+		
 		for(int i = 0; i < rateList.length; ++i){
 			mean += (i+1)*rateList[i];
 			if(rateList[i] > mode){
@@ -40,7 +41,9 @@ public class StatFragment extends Fragment{
 		}
 		variance = variance - mean*mean;
 		//set text View
+		
 		TextView txt_tab_stat = (TextView) rootView.findViewById(R.id.text_tab_stat);
+		
 		txt_tab_stat.setText("Variance Var(X): " + variance + "\n Mode: " + mode 
 				+ "\nMean : " + mean + "\n Number of surveys: " + numberOfSurvey);
 		
