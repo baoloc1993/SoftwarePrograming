@@ -33,7 +33,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	private static int screenHeight;
 	private static int screenWidth;
 	private ManufacturerUI activity;
-	private ReminderController reminderController;
+	private ReminderController reminderController = new ReminderController(mContext);
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
