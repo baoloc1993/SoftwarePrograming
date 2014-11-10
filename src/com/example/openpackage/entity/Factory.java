@@ -1,6 +1,7 @@
 package com.example.openpackage.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -47,4 +48,16 @@ public class Factory {
 		}
 		return res;
 	}
+	
+	public static Reminder createReminderObject(String choice, String name, String description, Date time, boolean active) throws ParseException
+	{
+		if(choice.equals("RemoteDB"))
+		{
+		return new ReminderRemote(name,description,time,active) ;
+		}
+		return null;
+	}
+	
+	
+	
 }

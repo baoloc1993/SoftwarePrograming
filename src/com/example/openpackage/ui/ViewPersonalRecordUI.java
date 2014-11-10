@@ -16,10 +16,8 @@ import android.widget.TextView;
 
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-
 import com.example.openpackage.entity.CustomerRemote;
-
-import com.example.openpackage.entity.SurveyRemote;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
@@ -30,7 +28,7 @@ public class ViewPersonalRecordUI extends Fragment {
 	private UserController mUserController;
 	private SurveyController mSurveyController;
 	private ListView mListView;
-	private ArrayList<SurveyRemote> mSurvey;
+	private ArrayList<Survey> mSurvey;
 	private CustomerRemote user;
 	
 	@Override

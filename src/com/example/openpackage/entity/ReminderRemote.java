@@ -78,7 +78,7 @@ public class ReminderRemote implements Reminder {
 	public String getID(){
 		return mParseObject.getObjectId();
 	}
-	/*
+	
 	public ArrayList<Reminder> listAll() throws ParseException {
 		ArrayList<Reminder> res = new ArrayList<Reminder>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
@@ -91,7 +91,7 @@ public class ReminderRemote implements Reminder {
 		
 		return res;
 	}
-	*/
+	
 	private void save() throws ParseException {
 		mParseObject.save();
 	}

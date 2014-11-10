@@ -23,23 +23,20 @@ import android.widget.Toast;
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-
 import com.example.openpackage.entity.CustomerRemote;
-
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
-
-import com.example.openpackage.entity.SurveyRemote;
+import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 
 public class Survey_Form extends Fragment{
 	public final static String FOODOPENINGPACKAGE_ID = "FoodOpeningPackageId";
 	private final static String TAG = "Survey_Form";
-	private SurveyRemote mSurvey;
+	private Survey mSurvey;
 	private SurveyController mSurveyController;
 	private UserController mUserController;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	private CustomerRemote user;
-	private FoodOpeningPackageRemote mFood;	
+	private FoodOpeningPackage mFood;	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

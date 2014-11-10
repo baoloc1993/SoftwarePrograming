@@ -8,7 +8,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 
-public class FoodOpeningPackageRemote {
+public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 	private static String CLASSNAME = "FoodOpeningPackage";
 	
 //	private String title;
@@ -50,8 +50,8 @@ public class FoodOpeningPackageRemote {
 		return mParseObject.getString("type");
 	}
 	
-	public ArrayList<SurveyRemote> getSurveyList() throws ParseException {
-		ArrayList<SurveyRemote> surveyList = new ArrayList<SurveyRemote>();
+	public ArrayList<Survey> getSurveyList() throws ParseException {
+		ArrayList<Survey> surveyList = new ArrayList<Survey>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 
 		List<ParseObject> surveys = relation.getQuery().find();
@@ -70,21 +70,21 @@ public class FoodOpeningPackageRemote {
 		return mParseObject.getObjectId();
 	}
 	
-	public static FoodOpeningPackageRemote findById( String Id ) throws ParseException {
+	public static FoodOpeningPackage findById( String Id ) throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		return new FoodOpeningPackageRemote(query.get(Id));
 	}
 	
 	
-	public void addSurvey( SurveyRemote survey ) throws ParseException {
+	public void addSurvey( Survey survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
 		save();
 		
-		ArrayList<SurveyRemote> surveyList = getSurveyList();
+		ArrayList<Survey> surveyList = getSurveyList();
 		double ave = 0;
 		int count = 0;
-		for( SurveyRemote msurvey : surveyList ) {
+		for( Survey msurvey : surveyList ) {
 			count++;
 			ave += msurvey.getRate();
 		}
@@ -92,13 +92,13 @@ public class FoodOpeningPackageRemote {
 		save();
 	}
 	
-	public static ArrayList<FoodOpeningPackageRemote> listAll() throws ParseException {
-		ArrayList<FoodOpeningPackageRemote> res = new ArrayList<FoodOpeningPackageRemote>();
+	public static ArrayList<FoodOpeningPackage> listAll() throws ParseException {
+		ArrayList<FoodOpeningPackage> res = new ArrayList<FoodOpeningPackage>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		
 		List<ParseObject> foodOpeningPackages = query.find();
 		for(ParseObject foodOpeningPackage : foodOpeningPackages) {
-			FoodOpeningPackageRemote cur = new FoodOpeningPackageRemote(foodOpeningPackage);
+			FoodOpeningPackage cur = new FoodOpeningPackageRemote(foodOpeningPackage);
 			res.add(cur);
 		}
 		

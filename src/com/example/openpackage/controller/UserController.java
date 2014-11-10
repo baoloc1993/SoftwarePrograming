@@ -17,12 +17,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-
 import com.example.openpackage.entity.CustomerRemote;
-
+import com.example.openpackage.entity.CustomerRemote;
 import com.example.openpackage.entity.ManufacturerRemote;
-
-import com.example.openpackage.entity.SurveyRemote;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.User;
 import com.example.openpackage.ui.MainActivity;
 import com.example.openpackage.ui.ManufacturerUI;
@@ -60,7 +58,7 @@ public class UserController {
 	
 	
 	public boolean validateLogin( String username, String password ) {
-		ArrayList<CustomerRemote> customers;
+		ArrayList<User> customers;
 		ManufacturerRemote mManufacturer = getManufactureUser();
 		try {
 			customers = CustomerRemote.listAll();
@@ -68,11 +66,11 @@ public class UserController {
 			e.printStackTrace();
 			return false;
 		}
-		for(CustomerRemote customer : customers) {
-			if ( customer.getUsername().equals(username) && customer.getPassword().equals(password) ) {
+		for(User CustomerRemote : customers) {
+			if ( CustomerRemote.getUsername().equals(username) && CustomerRemote.getPassword().equals(password) ) {
 				try {
-					Log.i(TAG, "Login Customer");
-					customer.logIn();
+					Log.i(TAG, "Login CustomerRemote");
+					CustomerRemote.logIn();
 					Intent intent = new Intent( mContext, MainActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -109,7 +107,7 @@ public class UserController {
 	}
 	
 	public String validateRegister( String username, String password, String email, int age, boolean gender ) {
-		ArrayList<CustomerRemote> customers;
+		ArrayList<User> customers;
 		
 		try {
 			customers = CustomerRemote.listAll();
@@ -120,15 +118,15 @@ public class UserController {
 		
 		if ( username.isEmpty() || password.isEmpty() || email.isEmpty() ) return "You need to fill all information.";
 		if (!isValidEmailAddress(email)) return "Your email is invalid.";
-		for(CustomerRemote customer : customers) {
-			if ( customer.getUsername().equals(username) || customer.getEmail().equals(email) ) {
+		for(User CustomerRemote : customers) {
+			if ( CustomerRemote.getUsername().equals(username) || CustomerRemote.getEmail().equals(email) ) {
 				return "Your Username or Email has existed.";
 			}
 		}
 		
 		try {
-			CustomerRemote customer = new CustomerRemote( username, password, email, age, gender );
-			customer.logIn();
+			User CustomerRemote = new CustomerRemote( username, password, email, age, gender );
+			CustomerRemote.logIn();
 			Intent intent = new Intent( mContext, MainActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -142,13 +140,13 @@ public class UserController {
 	
 	public boolean verifyForgetInfo(String email) {
 		Log.i(TAG, email);
-		ArrayList<CustomerRemote> customers;
+		ArrayList<User> customers;
 		try {
 			customers = CustomerRemote.listAll();
-			for(CustomerRemote customer : customers) {
-				if ( customer.getEmail().equals(email) ) {
-					sendEmail( customer );
-					Log.i(TAG, "find" + customer.getEmail() );
+			for(User CustomerRemote : customers) {
+				if ( CustomerRemote.getEmail().equals(email) ) {
+					sendEmail( CustomerRemote );
+					Log.i(TAG, "find" + CustomerRemote.getEmail() );
 					return true;
 				}
 			}
@@ -159,9 +157,9 @@ public class UserController {
 		return false;
 	}
 	
-	public ArrayList<SurveyRemote> retrievePersonalRecord(CustomerRemote customer) {
+	public ArrayList<Survey> retrievePersonalRecord(CustomerRemote CustomerRemote) {
 		try {
-			return customer.getSurveyList();
+			return CustomerRemote.getSurveyList();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -189,12 +187,12 @@ public class UserController {
 		   return result;
 		}
 	
-	private void sendEmail( CustomerRemote customer ) {
+	private void sendEmail( User CustomerRemote ) {
 
         String msgBody = "<p>Here is your username and password. Thank you for use our Application.</p>"
         		+ "<ul>"
-        		+ "<li>Username: " + customer.getUsername() + "</li>"
-        		+ "<li>Password: " + customer.getPassword() + "</li>"
+        		+ "<li>Username: " + CustomerRemote.getUsername() + "</li>"
+        		+ "<li>Password: " + CustomerRemote.getPassword() + "</li>"
         		+ "</ul>";
 
         try {
@@ -216,7 +214,7 @@ public class UserController {
             
             msg.setFrom(new InternetAddress("ntuananhhp95@gmail.com", "Nguyen Tuan Anh"));
             msg.addRecipient(Message.RecipientType.TO,
-                             new InternetAddress(customer.getEmail(), "Mr " + customer.getUsername()));
+                             new InternetAddress(CustomerRemote.getEmail(), "Mr " + CustomerRemote.getUsername()));
             msg.setSubject("Get Username and Password");
             msg.setContent(msgBody, "text/html");
             Transport.send(msg);

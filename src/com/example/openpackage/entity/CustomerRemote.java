@@ -49,8 +49,8 @@ public class CustomerRemote extends User {
 		return new CustomerRemote(customers.get(0));
 	}
 	
-	public static ArrayList<CustomerRemote> listAll() throws ParseException {
-		ArrayList<CustomerRemote> res = new ArrayList<CustomerRemote>();
+	public static ArrayList<User> listAll() throws ParseException {
+		ArrayList<User> res = new ArrayList<User>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		
 		List<ParseObject> customers = query.find();
@@ -62,7 +62,7 @@ public class CustomerRemote extends User {
 		return res;
 	}
 	
-	public void addSurvey( SurveyRemote survey ) throws ParseException {
+	public void addSurvey( Survey survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
 		save();
@@ -71,8 +71,8 @@ public class CustomerRemote extends User {
 	public int getAge() {
 		return mParseObject.getInt("age");
 	}
-	public ArrayList<SurveyRemote> getSurveyList() throws ParseException {
-		ArrayList<SurveyRemote> surveyList = new ArrayList<SurveyRemote>();
+	public ArrayList<Survey> getSurveyList() throws ParseException {
+		ArrayList<Survey> surveyList = new ArrayList<Survey>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		
 		List<ParseObject> surveys = relation.getQuery().find();

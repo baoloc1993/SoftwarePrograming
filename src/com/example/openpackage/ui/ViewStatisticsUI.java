@@ -2,38 +2,35 @@ package com.example.openpackage.ui;
 
 import java.util.ArrayList;
 
-import com.example.openpackage.controller.FoodOpeningPackageController;
-import com.example.openpackage.controller.SurveyController;
-
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
-
-import com.example.openpackage.entity.SurveyRemote;
-import com.example.openpackageapplication.R;
-import com.parse.ParseException;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.openpackage.controller.FoodOpeningPackageController;
+import com.example.openpackage.controller.SurveyController;
+import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.FoodOpeningPackageRemote;
+import com.example.openpackage.entity.Survey;
+import com.example.openpackageapplication.R;
+import com.parse.ParseException;
 
 
 public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener{
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	ViewGroup viewGroup;
 	public static ListView mListPackageStat;
-	private ArrayList<FoodOpeningPackageRemote> mList;
+	private ArrayList<FoodOpeningPackage> mList;
 	View rootView;
 	public ViewStatisticsUI(){
 	}
@@ -91,12 +88,12 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 					int position, long id) {
 				Intent i = new Intent(getActivity().getApplicationContext(),ViewSingleStatistic.class);
 				
-				FoodOpeningPackageRemote curPackage = mList.get(position);
+				FoodOpeningPackage curPackage = mList.get(position);
 				SurveyController mSurveyController = new SurveyController(getActivity().getApplicationContext());
-				ArrayList<SurveyRemote> mSurvey = mSurveyController.getSurveyList(curPackage);
+				ArrayList<Survey> mSurvey = mSurveyController.getSurveyList(curPackage);
 				double[] rate_list = {0,0,0,0,0};
 				
-				for(SurveyRemote cur : mSurvey){
+				for(Survey cur : mSurvey){
 					rate_list[cur.getRate()-1]++;
 				}
 				int rank = 1;

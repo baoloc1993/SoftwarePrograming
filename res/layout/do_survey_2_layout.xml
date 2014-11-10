@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/description_title"
         android:layout_below="@+id/description_title"
-        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/ShareFBButton"
         android:text="TextView"
         android:textSize="13sp" />
 

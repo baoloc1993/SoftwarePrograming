@@ -132,7 +132,7 @@ public class ReminderController {
 			if(isNewReminder){
 				//Log.d("DEBUG", "inside create new reminder");
 				Log.d("INSIDE CONTROLLER", String.valueOf(time.getYear()));
-				ReminderRemote newReminder = new ReminderRemote(name,description,time,active) ;
+				Reminder newReminder = Factory.createReminderObject("RemoteDB", name, description, time, active);
 			
 				reminderList.add(newReminder);
 				try {

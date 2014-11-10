@@ -13,14 +13,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.openpackage.controller.UserController;
-
 import com.example.openpackage.entity.CustomerRemote;
-
+import com.example.openpackage.entity.CustomerRemote;
 import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackage.entity.User;
 import com.example.openpackageapplication.R;
@@ -48,10 +46,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		
 		// TODO erase when done
 		
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("CustomerRemote");
 //		try {
 //			ParseObject x = query.get("c0Iju0ayaz");
-//			mCurrentUser = new Customer(x);
+//			mCurrentUser = new CustomerRemote(x);
 //			mCurrentUser.logIn();
 //			Log.i(TAG, mCurrentUser.getUsername());
 //		} catch (ParseException e) {
@@ -125,7 +123,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 		        @Override
 		        public void onClick(DialogInterface dialog, int which) {
-		        	CustomerRemote user = (CustomerRemote) mUserController.getCurrentUser();
+		        	User user = mUserController.getCurrentUser();
 		        	mUserController.logOut(user);
 		        	Intent intent = new Intent(mContext, LoginFormActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

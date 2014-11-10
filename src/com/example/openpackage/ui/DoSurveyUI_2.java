@@ -5,10 +5,8 @@ import java.util.Date;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,19 +18,15 @@ import android.widget.TextView;
 import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
-
 import com.example.openpackage.entity.CustomerRemote;
 import com.example.openpackage.entity.FacebookUIHelper;
-
-import com.example.openpackage.entity.FoodOpeningPackageRemote;
+import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackage.entity.UIHelper;
 import com.example.openpackageapplication.R;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.FacebookDialog;
 
 public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callbacks{
 	private static String TAG = "DoSurveyUI_2";
-	private FoodOpeningPackageRemote mFood;
+	private FoodOpeningPackage mFood;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	private SurveyController mSurveyController;
 	

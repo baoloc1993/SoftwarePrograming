@@ -6,10 +6,10 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-public class SurveyRemote {
+public class SurveyRemote implements Survey{
 	private static String CLASSNAME = "Survey";
 	
-//	private Customer user;
+//	private CustomerRemote user;
 //	private Date date;
 //	private String comment;
 //	private int rate;
@@ -21,7 +21,7 @@ public class SurveyRemote {
 		this.mParseObject = mParseObject;
 	}
 	
-	public SurveyRemote( CustomerRemote user, Date date, String comment,int rate, FoodOpeningPackageRemote type ) throws ParseException {
+	public SurveyRemote( CustomerRemote user, Date date, String comment,int rate, FoodOpeningPackage type ) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME); 
 		mParseObject.put("user",user.getParseObject());
 		mParseObject.put("date",date);
@@ -59,7 +59,7 @@ public class SurveyRemote {
 		return mParseObject;
 	}
 	
-	public FoodOpeningPackageRemote getFoodOpeningPackage() throws ParseException {
+	public FoodOpeningPackage getFoodOpeningPackage() throws ParseException {
 		ParseObject res = null;
 		res = mParseObject.getParseObject("type").fetch();
 		return new FoodOpeningPackageRemote(res);
@@ -69,7 +69,7 @@ public class SurveyRemote {
 		mParseObject.save();
 	}
 
-	public static SurveyRemote findById(String id) throws ParseException {
+	public static Survey findById(String id) throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		return new SurveyRemote(query.get(id));
 	}

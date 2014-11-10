@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.ManufacturerRemote;
+import com.example.openpackage.entity.Reminder;
 import com.example.openpackage.entity.ReminderRemote;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
@@ -52,7 +53,7 @@ public class ListReminderFragment extends Fragment {
 		Log.d("CLASS MANU", String.valueOf(mUserController.getCurrentUser() instanceof ManufacturerRemote));
 		ManufacturerRemote tempManufacturer = (ManufacturerRemote) mUserController.getCurrentUser();
 		
-		ArrayList<ReminderRemote> listReminders = null;
+		ArrayList<Reminder> listReminders = null;
 		try {
 			listReminders = tempManufacturer.getReminderList();
 		} catch (ParseException e) {
@@ -66,7 +67,7 @@ public class ListReminderFragment extends Fragment {
 //			e.printStackTrace();
 //		}
 		
-		final ArrayList<ReminderRemote> newlist = listReminders;
+		final ArrayList<Reminder> newlist = listReminders;
 
 		/**
 		 * Calling a backgroung thread will loads recent articles of a website
@@ -93,7 +94,7 @@ public class ListReminderFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				ReminderRemote reminder = newlist.get(position);
+				Reminder reminder = newlist.get(position);
 				String reminderId = reminder.getID();
 				String reminderName = reminder.getName();
 				

@@ -19,7 +19,7 @@ public class ManufacturerRemote extends User {
 		this.mParseObject = mParseObject;
 	}
 	
-	public void addReminder( ReminderRemote reminder ) throws ParseException {
+	public void addReminder( Reminder reminder ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("reminderList");
 		relation.add(reminder.getParseObject());
 		save();
@@ -38,7 +38,8 @@ public class ManufacturerRemote extends User {
 		return res;
 	}
 	
-	public ArrayList<ReminderRemote> getReminderList() throws ParseException {
+	public ArrayList<Reminder> getReminderList() throws ParseException {
+		/*
 		ArrayList<ReminderRemote> reminderList = new ArrayList<ReminderRemote>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("reminderList");
 	
@@ -48,6 +49,8 @@ public class ManufacturerRemote extends User {
 		}
 		
 		return reminderList;
+		*/
+		return Factory.listAllReminder("RemoteDB");
 	}
 	
 	@Override
