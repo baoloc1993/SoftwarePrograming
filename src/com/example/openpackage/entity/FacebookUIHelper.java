@@ -65,10 +65,10 @@ public class FacebookUIHelper extends UiLifecycleHelper implements UIHelper
 	}
 
 	@Override
-	public void openDialog() {
+	public void openDialog(Survey survey, FoodOpeningPackage foodopeningpackage) {
 		FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this.activity)
-        .setLink("https://developers.facebook.com/android")
-        .setDescription("test share fb")
+        .setLink(foodopeningpackage.getvideoLink())
+        .setDescription("Comment: "+survey.getComment()+" Rate: "+survey.getRate())
         .build();
 		super.trackPendingDialogCall(shareDialog.present());
 	}

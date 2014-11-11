@@ -11,7 +11,7 @@ public interface UIHelper {
 	public void onPause();
 	public void onStop();
 	public void onDestroy();
-	public void openDialog();
+	public void openDialog(Survey survey, FoodOpeningPackage foodopeningpackage);
 	public void onSaveInstanceState(Bundle outState);
 }
 

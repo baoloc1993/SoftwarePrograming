@@ -13,6 +13,7 @@ public class YoutubeFragment extends YouTubePlayerSupportFragment {
 	private String currentVideoID = "video_id";
     private YouTubePlayer activePlayer;
     private static String TAG = "YoutubeFragment";
+    
     public static YoutubeFragment newInstance(String url) {
 
     YoutubeFragment YoutubeFragment = new YoutubeFragment();
@@ -40,11 +41,16 @@ public class YoutubeFragment extends YouTubePlayerSupportFragment {
 			public void onInitializationSuccess(Provider provider,
 					YouTubePlayer player, boolean wasRestored) {
 				// TODO Auto-generated method stub
+				
+				String [] token = getArguments().getString("url").split("^\\D+=");
+				
 				 activePlayer = player;
 	                activePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
 	                if (!wasRestored) {
-	                    activePlayer.loadVideo(getArguments().getString("url"), 0);
-
+	                	if(token.length == 1)
+	                		activePlayer.cueVideo(token[0]);
+	                	else
+	                		activePlayer.cueVideo(token[1]);
 	                }
 			}
         });

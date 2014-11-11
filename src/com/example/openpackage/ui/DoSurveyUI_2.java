@@ -5,6 +5,7 @@ import java.util.Date;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -20,7 +21,9 @@ import com.example.openpackage.controller.SurveyController;
 import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.CustomerRemote;
 import com.example.openpackage.entity.FacebookUIHelper;
+import com.example.openpackage.entity.Factory;
 import com.example.openpackage.entity.FoodOpeningPackage;
+import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.UIHelper;
 import com.example.openpackageapplication.R;
 
@@ -29,13 +32,13 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 	private FoodOpeningPackage mFood;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	private SurveyController mSurveyController;
-	
+	private Survey mSurvey;
 	private TextView package_name,package_date, package_rate, package_type, package_description;
 	private Button cancelButton;
 	private CheckBox showListView;
 	private ListView mListView;
 	private UIHelper uiHelper;
-	
+	private Button shareFBButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,15 +99,15 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 				.replace(R.id.survey_container, fragment).commit();
 		
 		/////
-		//Fragment videoFragment = YoutubeFragment.newInstance("Ok7tnT3aL8M");
-		//getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, videoFragment).commit();
+		Fragment videoFragment = Factory.createVideoPlayer("Youtube", mFood.getvideoLink());
+		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, videoFragment).commit();
 		
-		uiHelper = new FacebookUIHelper(this,null);
+		uiHelper = Factory.createShareMedia("Facebook", this);
 	    uiHelper.onCreate(savedInstanceState);
 		/////
 	    
 	    
-		Button shareFBButton = (Button) findViewById(R.id.ShareFBButton);
+		shareFBButton = (Button) findViewById(R.id.ShareFBButton);
 		UserController mUserController = new UserController(this);
 		if(mSurveyController.getSurvey(mFood,(CustomerRemote) mUserController.getCurrentUser()) == null)
 		{
@@ -112,8 +115,14 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		};
 	}
 	
+	public void allowShare(Survey survey)
+	{
+		shareFBButton.setVisibility(View.VISIBLE);
+		mSurvey = survey;
+	}
+	
 	public void onClick(View v) {
-		uiHelper.openDialog();
+		uiHelper.openDialog(mSurvey,mFood);
 	}
 
 	@Override
@@ -128,6 +137,7 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		
 		((SurveyListAdapter) mListView.getAdapter()).refill(mSurveyController.getSurveyList(mFood));
 		package_rate.setText(new DecimalFormat("0.0").format(mFood.getAverage())  +"/5.0");
+		
 	}
 	
 	@Override

@@ -120,6 +120,7 @@ public class Survey_Form extends Fragment{
 					DateUtils.SECOND_IN_MILLIS).toString();
 			
 			date.setText(converDate);
+			mCallbacks.allowShare(mSurvey);
 			
 			Log.i(TAG, "STILL OKAY2");
 		}
@@ -128,6 +129,7 @@ public class Survey_Form extends Fragment{
 	
 	public interface Callbacks {
 		public void onSubmitSurveySelected();
+		public void allowShare(Survey survey);
 	}
 	
 	private Callbacks mCallbacks; 
