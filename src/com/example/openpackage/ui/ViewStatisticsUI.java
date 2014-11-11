@@ -80,8 +80,8 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 		}
 		
 		txtStat.setText("In type " + parent
-		.getItemAtPosition(position).toString() + ":\n The package that have maximum average point: " + mList.get(maxPos).getTitle() 
-		+ "\n The package that have minimum average point: " + mList.get(minPos).getTitle());
+		.getItemAtPosition(position).toString() + ":\nThe highest avg score package: " + mList.get(maxPos).getTitle() 
+		+ "\nThe mininum avg scorce package: " + mList.get(minPos).getTitle());
 		mListPackageStat.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,

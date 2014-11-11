@@ -62,9 +62,9 @@
                 android:id="@+id/editVideoLink"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/VideoLink"
+                android:layout_marginRight="20dp"
                 android:ems="10"
                 android:inputType="textMultiLine" />
 
