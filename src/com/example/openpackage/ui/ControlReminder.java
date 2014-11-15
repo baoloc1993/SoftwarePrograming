@@ -45,10 +45,28 @@ public abstract class ControlReminder extends Activity {
 	DatePicker datePicker;
 	EditText desc;
 	CheckBox isActivate;
+	
+	/**
+	 * Name of reminder
+	 */
 	protected String nameString;
+	
+	/**
+	 * Description of reminder
+	 */
 	protected String descriptionStr;
+	
+	/**
+	 * Date and Time when reminder will be alarmed
+	 */
 	protected Date time2;
+	
+
+	/**
+	 * Status of reminder. True if active, false if deactive
+	 */
 	protected boolean isActive2;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

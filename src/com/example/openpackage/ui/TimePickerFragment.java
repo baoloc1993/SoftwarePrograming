@@ -35,9 +35,7 @@ public class TimePickerFragment extends DialogFragment
 	}
 	
 	
-	/**
-	 * Get the hour, minute which user input
-	 */
+	
 	@Override
 	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 	// Do something with the time chosen by the user

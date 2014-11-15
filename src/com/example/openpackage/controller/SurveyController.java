@@ -21,9 +21,15 @@ import com.parse.ParseException;
  */
 public class SurveyController {
 	
-	private final static String TAG  = "SurveyController";
 	
+	/**
+	 * Current context of application
+	 */
 	Context mContext;
+	
+	/**
+	 * User Controller
+	 */
 	UserController mUserController;
 	
 	/**
@@ -128,7 +134,7 @@ public class SurveyController {
 	 */
 	public Survey getSurvey(FoodOpeningPackage mFood, CustomerRemote user) {
 		ArrayList<Survey>surveys = getSurveyList(mFood);
-		if (surveys == null) Log.i(TAG, "ArraySurvey is NULL");
+		
 		for(Survey survey : surveys)
 			try {
 				if (survey.getUser().getId().equals(user.getId())) {

@@ -12,8 +12,14 @@ import com.parse.ParseQuery;
  *
  */
 public class SurveyRemote implements Survey{
-	private static String CLASSNAME = "Survey";
+	/**
+	 * Name of table in online datase
+	 */
+	private static String TABLE_NAME = "Survey";
 	
+	/**
+	 * An object of class
+	 */
 	private ParseObject mParseObject;
 	
 	/**
@@ -34,7 +40,7 @@ public class SurveyRemote implements Survey{
 	 * @throws ParseException
 	 */
 	public SurveyRemote( CustomerRemote user, Date date, String comment,int rate, FoodOpeningPackage type ) throws ParseException {
-		mParseObject = new ParseObject(CLASSNAME); 
+		mParseObject = new ParseObject(TABLE_NAME); 
 		mParseObject.put("user",user.getParseObject());
 		mParseObject.put("date",date);
 		mParseObject.put("comment", comment);
@@ -99,7 +105,7 @@ public class SurveyRemote implements Survey{
 	 * @throws ParseException
 	 */
 	public static Survey findById(String id) throws ParseException {
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(TABLE_NAME);
 		return new SurveyRemote(query.get(id));
 	}
 

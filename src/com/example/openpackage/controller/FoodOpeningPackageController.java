@@ -16,6 +16,10 @@ import com.parse.ParseException;
  *
  */
 public class FoodOpeningPackageController {
+	
+	/**
+	 * Current context of Application
+	 */
 	Context mContext;
 	
 	/**

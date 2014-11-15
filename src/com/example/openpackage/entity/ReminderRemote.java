@@ -16,8 +16,14 @@ import com.parse.ParseQuery;
  *
  */
 public class ReminderRemote implements Reminder {
-	private static String CLASSNAME = "Reminder";
+	/**
+	 * Name of table in online database
+	 */
+	private static String TABLE_NAME = "Reminder";
 	
+	/**
+	 * An object of this class
+	 */
 	ParseObject mParseObject;
 	
 	/**
@@ -39,7 +45,7 @@ public class ReminderRemote implements Reminder {
 	public ReminderRemote( String name, String description, Date time, boolean active ) throws ParseException {
 		time.setYear(time.getYear() - 1900);
 		
-		mParseObject = new ParseObject(CLASSNAME);
+		mParseObject = new ParseObject(TABLE_NAME);
 		mParseObject.put("name", name);
 		mParseObject.put("description", description);
 		mParseObject.put("time", time);
@@ -107,7 +113,7 @@ public class ReminderRemote implements Reminder {
 	 */
 	public ArrayList<Reminder> listAll() throws ParseException {
 		ArrayList<Reminder> res = new ArrayList<Reminder>();
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(TABLE_NAME);
 		
 			List<ParseObject> reminders = query.find();
 			for(ParseObject reminder : reminders) {

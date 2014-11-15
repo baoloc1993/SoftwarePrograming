@@ -14,8 +14,15 @@ import com.parse.ParseRelation;
  *
  */
 public class FoodOpeningPackageRemote implements FoodOpeningPackage{
-	private static String CLASSNAME = "FoodOpeningPackage";
 	
+	/**
+	 * Name of table in online database
+	 */
+	private static String TABLE_NAME = "FoodOpeningPackage";
+	
+	/**
+	 * Object of this class
+	 */
 	private ParseObject mParseObject;
 	
 	/**
@@ -35,7 +42,7 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 	 * @throws ParseException
 	 */
 	public FoodOpeningPackageRemote(String title,String description, String videoLink, String type) throws ParseException {
-		mParseObject = new ParseObject(CLASSNAME);
+		mParseObject = new ParseObject(TABLE_NAME);
 		mParseObject.put("title", title);
 		mParseObject.put("description", description);
 		mParseObject.put("videoLink", videoLink);
@@ -94,7 +101,7 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 	 * @throws ParseException
 	 */
 	public static FoodOpeningPackage findById( String Id ) throws ParseException {
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(TABLE_NAME);
 		return new FoodOpeningPackageRemote(query.get(Id));
 	}
 	
@@ -122,7 +129,7 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 	 */
 	public static ArrayList<FoodOpeningPackage> listAll() throws ParseException {
 		ArrayList<FoodOpeningPackage> res = new ArrayList<FoodOpeningPackage>();
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(TABLE_NAME);
 		
 		List<ParseObject> foodOpeningPackages = query.find();
 		for(ParseObject foodOpeningPackage : foodOpeningPackages) {
@@ -141,7 +148,7 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 	
 	/**
 	 * Save data of FoodOpeningPackage and push to online database
-	 * @throws ParseException
+	 * @throws ParseException when cannot save and push the data to online database
 	 */
 	private void save() throws ParseException {
 		mParseObject.save();
