@@ -12,12 +12,20 @@ import android.widget.Toast;
 import com.example.openpackage.controller.UserController;
 import com.example.openpackageapplication.R;
 
+/**
+ * Display forget password activity
+ * @author Nguyen Tuan Anh
+ *
+ */
 public class ForgetPasswordActivity extends Activity {
 
-	
+	/** The email of user */
 	String emailStr;
+	
+	/** The username*/
 	String username;
-	/** Called when the activity is first created. */
+	
+	/* Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -30,9 +38,6 @@ public class ForgetPasswordActivity extends Activity {
 	    
 	    final EditText email = (EditText) findViewById(R.id.email_forgot_field);
 	   
-	    
-//	    EditText user = (EditText)findViewById(R.id.username_forgot_field);
-//	    username = user.getText().toString();
 	    
 	    Button forgetButton = (Button) findViewById(R.id.send_email_button);
 	    forgetButton.setOnClickListener(new OnClickListener() {
