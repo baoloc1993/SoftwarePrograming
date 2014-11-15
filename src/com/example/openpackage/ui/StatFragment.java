@@ -25,7 +25,7 @@ public class StatFragment extends Fragment{
 				false);
 		double mean = 0,mode = 0;
 		double variance = 0;
-		String numberOfSurvey = bundle.getString("numberOfSurvey");
+		int numberOfSurvey = bundle.getInt("numberOfSurvey");
 		double[] rateList = bundle.getDoubleArray("rateList");
 		
 		for(int i = 0; i < rateList.length; ++i){
