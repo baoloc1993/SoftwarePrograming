@@ -27,7 +27,18 @@ import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.UIHelper;
 import com.example.openpackageapplication.R;
 
-public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callbacks{
+/**
+ * Display the detail of the FoodOpeningPackage object
+ * 1. Name of package
+ * 2. Date Time when object is created
+ * 3. Rate of object
+ * 4. Type of object
+ * 5. Description of object
+ * 6. List of survey of this object
+ * @author Nguyen Phan Huy
+ *
+ */
+public class DoSurveyUI_2 extends FragmentActivity implements SurveyForm.Callbacks{
 	private static String TAG = "DoSurveyUI_2";
 	private FoodOpeningPackage mFood;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
@@ -63,6 +74,10 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		mListView.setVisibility(View.INVISIBLE);
 		
 		showListView = (CheckBox) findViewById(R.id.checkBox1);
+		
+		/*
+		 * Tick box if checked, display all the survey of this object
+		 */
 		showListView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -72,14 +87,16 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		});
 		
 		cancelButton = (Button) findViewById(R.id.Back);
-		
-		
+		/*
+		 * Back button
+		 */
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
+		
 		String converDate = DateUtils.getRelativeTimeSpanString(
 				mFood.getParseObject().getUpdatedAt().getTime(),
 				new Date().getTime(), 
@@ -91,22 +108,26 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		package_description.setText(mFood.getDescription());
 		
 		Bundle arguments = new Bundle();
-		arguments.putString(Survey_Form.FOODOPENINGPACKAGE_ID, mFood.getID());
+		arguments.putString(SurveyForm.FOODOPENINGPACKAGE_ID, mFood.getID());
 		
-		Survey_Form fragment = new Survey_Form();
+		SurveyForm fragment = new SurveyForm();
 		fragment.setArguments(arguments);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.survey_container, fragment).commit();
 		
-		/////
+		/*
+		 * Display the video of youtube
+		 */
 		Fragment videoFragment = Factory.createVideoPlayer("Youtube", mFood.getvideoLink());
 		getSupportFragmentManager().beginTransaction().replace(R.id.youtube_container, videoFragment).commit();
 		
 		uiHelper = Factory.createShareMedia("Facebook", this);
 	    uiHelper.onCreate(savedInstanceState);
-		/////
+		
 	    
-	    
+	    /*
+	     * ShareButton
+	     */
 		shareFBButton = (Button) findViewById(R.id.ShareFBButton);
 		UserController mUserController = new UserController(this);
 		if(mSurveyController.getSurvey(mFood,(CustomerRemote) mUserController.getCurrentUser()) == null)
@@ -121,16 +142,20 @@ public class DoSurveyUI_2 extends FragmentActivity implements Survey_Form.Callba
 		mSurvey = survey;
 	}
 	
-	public void onClick(View v) {
-		uiHelper.openDialog(mSurvey,mFood);
-	}
+//	/**
+//	 * 
+//	 * @param v
+//	 */
+//	public void onClick(View v) {
+//		uiHelper.openDialog(mSurvey,mFood);
+//	}
 
 	@Override
 	public void onSubmitSurveySelected() {
 		Bundle arguments = new Bundle();
-		arguments.putString(Survey_Form.FOODOPENINGPACKAGE_ID, mFood.getID());
+		arguments.putString(SurveyForm.FOODOPENINGPACKAGE_ID, mFood.getID());
 		
-		Survey_Form fragment = new Survey_Form();
+		SurveyForm fragment = new SurveyForm();
 		fragment.setArguments(arguments);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.survey_container, fragment).commit();

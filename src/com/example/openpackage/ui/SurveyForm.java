@@ -28,7 +28,17 @@ import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 
-public class Survey_Form extends Fragment{
+/**
+ * Fragment that display the form of survey
+ * If user has submited a form before. It will display a form for user to make a survey
+ * 	1. Submit button
+ * 	2. Rating bar
+ * 	3. Comment
+ * If user has submit a form before. It will display the survey that be made by current user
+ * @author Nguyen Phan Huy
+ *
+ */
+public class SurveyForm extends Fragment{
 	public final static String FOODOPENINGPACKAGE_ID = "FoodOpeningPackageId";
 	private final static String TAG = "Survey_Form";
 	private Survey mSurvey;
@@ -37,6 +47,7 @@ public class Survey_Form extends Fragment{
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	private CustomerRemote user;
 	private FoodOpeningPackage mFood;	
+	private Callbacks mCallbacks;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,10 +59,7 @@ public class Survey_Form extends Fragment{
 		String foodId = getArguments().getString(FOODOPENINGPACKAGE_ID);
 		mFood = mFoodOpeningPackageController.getById(foodId);
 		
-		user = (CustomerRemote) mUserController.getCurrentUser();
-		if ( user == null ) Log.i(TAG, "No User");
-		else Log.i(TAG, user.getUsername());
-		
+		user = (CustomerRemote) mUserController.getCurrentUser();	
 		mSurvey = mSurveyController.getSurvey(mFood, user);
 	}
 	
@@ -59,6 +67,9 @@ public class Survey_Form extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = null;
+		/*
+		 * If user has not submit any form before
+		 */
 		if (mSurvey==null) {
 			rootView = inflater.inflate(R.layout.survey_form, container, false);
 			
@@ -96,10 +107,15 @@ public class Survey_Form extends Fragment{
 				}
 			});
 			
-		} else {
-			Log.i(TAG, "LOAD FORM");
-			rootView = inflater.inflate(R.layout.survey_view, container, false);
 			
+		}
+		/* 
+		 * If user has submitted a form before
+		 *
+		 */
+		else {
+			
+			rootView = inflater.inflate(R.layout.survey_view, container, false);
 			TextView username = (TextView) rootView.findViewById(R.id.username);
 			RatingBar rate = (RatingBar) rootView.findViewById(R.id.ratingBar1);
 			TextView comment = (TextView) rootView.findViewById(R.id.comment);
@@ -107,9 +123,7 @@ public class Survey_Form extends Fragment{
 			RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.container);
 			
 			layout.setBackgroundColor(getActivity().getResources().getColor(R.color.lighter_gray));
-			
-			Log.i(TAG, "STILL OKAY");
-			
+
 			username.setText("Your Survey");
 			rate.setRating( (float) mSurvey.getRate());
 			comment.setText(mSurvey.getComment());
@@ -121,18 +135,29 @@ public class Survey_Form extends Fragment{
 			
 			date.setText(converDate);
 			mCallbacks.allowShare(mSurvey);
-			
-			Log.i(TAG, "STILL OKAY2");
 		}
 		return rootView;
 	}
 	
+	/**
+	 * 
+	 * @author Nguyen Phan Huy
+	 *
+	 */
 	public interface Callbacks {
+		
+		/**
+		 * Action when submit the survey
+		 */
 		public void onSubmitSurveySelected();
+		/**
+		 * Make a Survey can be shared
+		 * @param survey Survey object which is allowed to be shared 
+		 */
 		public void allowShare(Survey survey);
 	}
 	
-	private Callbacks mCallbacks; 
+	 
 	
 	@Override
 	public void onAttach(Activity activity) {
