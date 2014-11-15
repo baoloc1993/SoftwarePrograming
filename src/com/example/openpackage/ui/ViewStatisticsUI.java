@@ -61,7 +61,7 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 		mList = mFoodOpeningPackageController.getFoodOpeningPacketList(parent
 		.getItemAtPosition(position).toString());
 		Log.d("dadaa", mList.get(0).getTitle().toString());
-		ListFoodPackageAdapter adapter = new ListFoodPackageAdapter(getActivity(),R.layout.list_package_statistics,mList);
+		ListStatisticFoodPackageAdapter adapter = new ListStatisticFoodPackageAdapter(getActivity(),R.layout.list_package_statistics,mList);
 		mListPackageStat = (ListView) rootView.findViewById(R.id.list_package_stat);
 		
 		mListPackageStat.setAdapter(adapter);
