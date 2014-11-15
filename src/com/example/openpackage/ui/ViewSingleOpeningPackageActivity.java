@@ -38,7 +38,7 @@ import com.example.openpackageapplication.R;
  * @author Nguyen Phan Huy
  *
  */
-public class DoSurveyUI_2 extends FragmentActivity implements SurveyForm.Callbacks{
+public class ViewSingleOpeningPackageActivity extends FragmentActivity implements SurveyForm.Callbacks{
 	private static String TAG = "DoSurveyUI_2";
 	private FoodOpeningPackage mFood;
 	private FoodOpeningPackageController mFoodOpeningPackageController;
@@ -142,13 +142,13 @@ public class DoSurveyUI_2 extends FragmentActivity implements SurveyForm.Callbac
 		mSurvey = survey;
 	}
 	
-//	/**
-//	 * 
-//	 * @param v
-//	 */
-//	public void onClick(View v) {
-//		uiHelper.openDialog(mSurvey,mFood);
-//	}
+	/**
+	 * 
+	 * @param v
+	 */
+	public void onClick(View v) {
+		uiHelper.openDialog(mSurvey,mFood);
+	}
 
 	@Override
 	public void onSubmitSurveySelected() {

@@ -8,22 +8,32 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 
+/**
+ * A class store all data of FoodOpeningPacket. Data is get from online dabase
+ * @author Tran Phuong Thao
+ *
+ */
 public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 	private static String CLASSNAME = "FoodOpeningPackage";
 	
-//	private String title;
-//	private String description;
-//	private String videoLink;
-//	private String type;
-//	private ArrayList<Survey> surveyList;
-//	private double average;
-	
 	private ParseObject mParseObject;
 	
+	/**
+	 * Contructor of class 
+	 * @param mParseObject : FoodOpeningPackageRemote object
+	 */
 	public FoodOpeningPackageRemote(ParseObject mParseObject) {
 		this.mParseObject = mParseObject;
 	}
 	
+	/**
+	 * Contructor of class
+	 * @param title : Title of object
+	 * @param description : description of object
+	 * @param videoLink : link of video of object
+	 * @param type : type of object
+	 * @throws ParseException
+	 */
 	public FoodOpeningPackageRemote(String title,String description, String videoLink, String type) throws ParseException {
 		mParseObject = new ParseObject(CLASSNAME);
 		mParseObject.put("title", title);
@@ -34,22 +44,27 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 		save();
 	}
 
+	@Override
 	public String getTitle() {
 		return mParseObject.getString("title");
 	}
 	
+	@Override
 	public String getDescription() {
 		return mParseObject.getString("description");
 	}
 	
+	@Override
 	public String getvideoLink() {
 		return mParseObject.getString("videoLink");
 	}
 	
+	@Override
 	public String getType() {
 		return mParseObject.getString("type");
 	}
 	
+	@Override
 	public ArrayList<Survey> getSurveyList() throws ParseException {
 		ArrayList<Survey> surveyList = new ArrayList<Survey>();
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
@@ -62,20 +77,28 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 		return surveyList;
 	}
 	
+	@Override
 	public double getAverage() {
 		return mParseObject.getDouble("average");
 	}
 	
+	@Override
 	public String getID () {
 		return mParseObject.getObjectId();
 	}
 	
+	/**
+	 * Find a FoodOpeningPacakge object by its ID
+	 * @param Id : ID of object
+	 * @return : FoodOpeningPacket object. Null if cannot find any object
+	 * @throws ParseException
+	 */
 	public static FoodOpeningPackage findById( String Id ) throws ParseException {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
 		return new FoodOpeningPackageRemote(query.get(Id));
 	}
 	
-	
+	@Override
 	public void addSurvey( Survey survey ) throws ParseException {
 		ParseRelation<ParseObject> relation = mParseObject.getRelation("surveyList");
 		relation.add(survey.getParseObject());
@@ -92,6 +115,11 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 		save();
 	}
 	
+	/**
+	 * List all FoodOpeningPackage object in database
+	 * @return list of FoodOpeningPackage in database
+	 * @throws ParseException
+	 */
 	public static ArrayList<FoodOpeningPackage> listAll() throws ParseException {
 		ArrayList<FoodOpeningPackage> res = new ArrayList<FoodOpeningPackage>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(CLASSNAME);
@@ -106,11 +134,15 @@ public class FoodOpeningPackageRemote implements FoodOpeningPackage{
 	}
 	
 
-	
+	@Override
 	public ParseObject getParseObject() {
 		return mParseObject;
 	}
 	
+	/**
+	 * Save data of FoodOpeningPackage and push to online database
+	 * @throws ParseException
+	 */
 	private void save() throws ParseException {
 		mParseObject.save();
 	}

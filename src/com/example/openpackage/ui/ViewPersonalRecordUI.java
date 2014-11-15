@@ -67,7 +67,7 @@ public class ViewPersonalRecordUI extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent intent = new Intent(getActivity(), DoSurveyUI_2.class);
+				Intent intent = new Intent(getActivity(), ViewSingleOpeningPackageActivity.class);
 				try {
 					intent.putExtra("FoodOpeningPackageID", mSurvey.get(position).getFoodOpeningPackage().getID());
 				} catch (ParseException e) {

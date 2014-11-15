@@ -10,11 +10,27 @@ import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.parse.ParseException;
 
+/**
+ * Control data of the FoodOpeningPackage Entity
+ * @author Tran Phuong Thao
+ *
+ */
 public class FoodOpeningPackageController {
 	Context mContext;
+	
+	/**
+	 * Contructor of class
+	 * @param mContext  current context of application
+	 */
 	public FoodOpeningPackageController(Context mContext) {
 		this.mContext = mContext;
 	}
+	
+	/**
+	 * Get the list of FoodOpeningPacket which are the same type
+	 * @param type : Type of FoodOpeningPacket
+	 * @return List of FoodOpeningPacket object
+	 */
 	public ArrayList<FoodOpeningPackage> getFoodOpeningPacketList(String type) {
 		ArrayList<FoodOpeningPackage> res = new ArrayList<FoodOpeningPackage>();
 		try {
@@ -36,6 +52,11 @@ public class FoodOpeningPackageController {
 		}
 		return res;
 	}
+	/**
+	 * get the FoodOpeningPackage object by its ID
+	 * @param foodID : ID of object 
+	 * @return FoodOpeningPackage object. null if cannot get any object
+	 */
 	public FoodOpeningPackage getById(String foodID) {
 		try {
 			return FoodOpeningPackageRemote.findById(foodID);

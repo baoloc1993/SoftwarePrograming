@@ -14,6 +14,11 @@ import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.example.openpackageapplication.R;
 
+/**
+ * - Display and Control the list of FoodOpenPackage by using an ArrayList of FoodOpenPackage class
+ * @author TRAN PHUONG THAO
+ *
+ */
 public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackage> {
 	private List<FoodOpeningPackage> mList;
 	private Context mContext;
@@ -22,6 +27,7 @@ public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackage>
 		mContext = context;
 		mList = list;
 	}
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
@@ -47,11 +53,20 @@ public class FoodOpenPackageListAdapter extends ArrayAdapter<FoodOpeningPackage>
 		return convertView;
 	}
 	
+	/**
+	 * 
+	 * @author Tran Phuong Thao
+	 *
+	 */
 	private static class ViewHolder {
 		TextView nameLabel;
 		TextView averageRate;
 	}
 	
+	/**
+	 * Reload all data of the list of FoodOpeningPackage
+	 * @param list : list of FoodOpeningPackage
+	 */
 	public void refill( List<FoodOpeningPackage> list ) {
 		mList.clear();
 		mList.addAll(list);
