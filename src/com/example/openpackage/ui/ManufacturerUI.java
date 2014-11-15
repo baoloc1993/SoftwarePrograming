@@ -23,17 +23,39 @@ import com.example.openpackage.controller.UserController;
 import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackageapplication.R;
 
+/** 
+ * Display MainufacturerUI Activity
+ * @author Nguyen Tuan Anh
+ *
+ */
 public class ManufacturerUI extends FragmentActivity implements ActionBar.TabListener{
-
+	/** The context of application */
 	private Context mContext;
+	
+	/** The ViewPager attribute */
 	private ViewPager mViewPager;
+	
+	/** The TabsPagerAdapter attribute*/
 	private TabsPagerAdapter mTabsPagerAdapter;
+	
+	/** The ActionBar attribute*/
 	private ActionBar mActionBar;
+	
+	/** The User Controller */
 	private UserController mUserController;
+	
+	/** The static screen's height attribute*/
 	private static int screenHeight;
+	
+	/** The static screen's width attribute */
 	private static int screenWidth;
+	
+	/** The ManufacturerUI attribute */
 	private ManufacturerUI activity;
+	
+	/** The Reminder Controller attribute*/
 	private ReminderController reminderController = new ReminderController(mContext);
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -149,16 +171,25 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		
 	}
 
+	/**
+	 * Gets the screen's height
+	 * @return Returns screen' height
+	 */
 	public int getScreenHeight() {
 		return screenHeight;
 	}
-
+    
+	/**
+	 * Gets the screen's width
+	 * @return Returns screen's width
+	 */
 	public int getScreenWidth() {
 		return screenWidth;
 	}
 
 	/**
-	 * @return the standard size for rendering item
+	 * Gets a static standarsize of the screen
+	 * @return Returns the standard size for rendering item
 	 */
 	public static int getStandardSize() {
 		return Math.min(screenWidth, screenHeight);

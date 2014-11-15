@@ -1,4 +1,19 @@
 package com.example.openpackage.ui;
+
+
+import com.example.openpackage.controller.UserController;
+import com.example.openpackageapplication.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
 /**
  * Regsiter Activity
  * 
@@ -18,28 +33,29 @@ package com.example.openpackage.ui;
  * - Password and Confirm password have to be the same
  * - Email and Confirm Email have to be the same
  * - Valid all field before create account
- */
-import com.example.openpackage.controller.UserController;
-import com.example.openpackageapplication.R;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-
+ * 
+ * @author Nguyen Tuan Anh
+ * */
 public class RegisterActivity extends Activity {
-
+	/** The isFemale states user's gender attribute*/
 	boolean isFemale = false;
+	
+	/** The username attribute*/
 	String user;
+	
+	/** The password attribute*/
 	String pass;
+	
+	/** The confirm password attribute*/
 	String rePass;
+	
+	/** The email of user attribute */
 	String emailStr;
+	
+	/** The confirm email of user atribute*/
 	String reEmailStr;
+	
+	/** The age attribute*/
 	int ageInt = 0;
 	
 	

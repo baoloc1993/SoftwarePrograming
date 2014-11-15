@@ -13,7 +13,18 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+/**
+ * Class that control the create of Shared Media, Video player and Reminder
+ * @author Huynh Ba Dat
+ *
+ */
 public class Factory {
+	/**
+	 * Create a facebook user interface
+	 * @param choice The choice 
+	 * @param activity The activity that facebook user interface run on
+	 * @return Return a FacebookUIHelper  
+	 */
 	public static UIHelper createShareMedia(String choice, Activity activity)
 	{
 		if(choice.equals("Facebook"))
@@ -23,6 +34,12 @@ public class Factory {
 		return null;
 	}
 	
+	/**
+	 * Create a video player fragment
+	 * @param choice The choice 
+	 * @param URL The url of video
+	 * @return
+	 */
 	public static Fragment createVideoPlayer(String choice, String URL)
 	{
 		if(choice.endsWith("Youtube"))
@@ -32,6 +49,12 @@ public class Factory {
 		return null;
 	}
 	
+	/**
+	 * Gets a list of reminder
+	 * @param choice The choice
+	 * @return Returns an ArrayList of reminder 
+	 * @throws ParseException
+	 */
 	public static ArrayList<Reminder> listAllReminder(String choice) throws ParseException
 	{
 		ArrayList<Reminder> res = null;
@@ -49,6 +72,16 @@ public class Factory {
 		return res;
 	}
 	
+	/**
+	 * Create a reminder object with given information
+	 * @param choice The choice 
+	 * @param name The name
+	 * @param description The description
+	 * @param time The item
+	 * @param active The activate
+	 * @return Returns a reminder object 
+	 * @throws ParseException
+	 */
 	public static Reminder createReminderObject(String choice, String name, String description, Date time, boolean active) throws ParseException
 	{
 		if(choice.equals("RemoteDB"))

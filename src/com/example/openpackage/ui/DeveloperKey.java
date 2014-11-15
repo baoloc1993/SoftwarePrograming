@@ -4,6 +4,7 @@ package com.example.openpackage.ui;
 
 /**
  * Static container class for holding a reference to your YouTube Developer Key.
+ * @author Huynh Ba Dat
  */
 public class DeveloperKey {
 

@@ -1,17 +1,6 @@
 package com.example.openpackage.ui;
 
-/**
- * Login Form Activity
- * 
- * Field:
- * - User Name
- * - Password
- * 
- * Button:
- * - Login
- * - Create new account
- * - Forget Password
- */
+
 import com.example.openpackage.controller.UserController;
 import com.example.openpackageapplication.R;
 
@@ -26,11 +15,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+/**
+ * Login Form Activity
+ * 
+ * Field:
+ * - User Name
+ * - Password
+ * 
+ * Button:
+ * - Login
+ * - Create new account
+ * - Forget Password
+ * @author Nguyen Tuan Anh
+ */
 public class LoginFormActivity extends Activity {
+	/** The static constant String TAG*/
 	private final static String TAG = "LoginFormActivity";
 
-	/** Called when the activity is first created. */
+	/* Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -52,8 +54,6 @@ public class LoginFormActivity extends Activity {
 					UserController userController = new UserController(getApplicationContext());
 					final String user = username.getText().toString();
 					final String pass = password.getText().toString();
-					Log.i(TAG,user);
-					Log.i(TAG,pass);
 					
 					if (!userController.validateLogin(user, pass)){
 						displayErrorMessage(user, pass);
@@ -89,11 +89,12 @@ public class LoginFormActivity extends Activity {
 		});
 	}
 	
+	
 	/**
 	 * Display error message when unsucessfull login
-	 * 
+	 * @param username The username of user
+	 * @param password The password of user
 	 */
-	
 	public void displayErrorMessage(String username, String password){
 			Toast.makeText(
 					getApplicationContext(),
