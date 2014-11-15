@@ -7,9 +7,6 @@ import com.parse.ParseObject;
 /**
  * Interface of Reminder. Store basical function to control Reminder
  * @author Ngo Le Bao Loc
- *
- *
- * 
  * 
  */
 public interface Reminder {
