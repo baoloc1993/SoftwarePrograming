@@ -31,14 +31,13 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 
 /**
- * 
- * @author Ngo Le Bao Loc
- * 
- * The Fragment display:
+ *  The Fragment display:
  * - List of reminder, each reminder have : ID, Date, Name, Description, Status (active or not)
  * - Create Reminder Button
  * 
  * When user click to each reminder on the list, user will go to EditReminderFragment to edit Reminder
+ * @author Ngo Le Bao Loc
+ * 
  *
  */
 public class ListReminderFragment extends Fragment {

@@ -1,10 +1,4 @@
-/**
- * ControlRemider
- * 
- * Control the layout and function of layout like getText, get Date, get String
- * 
- * CreateRemiderActivity and EditReminderActivity extends this Class
- */
+
 package com.example.openpackage.ui;
 
 import java.util.Date;
@@ -31,11 +25,12 @@ import android.widget.Toast;
 
 /**
  * 
+ * Control the layout and function of layout like get Text, get Date, get String
+ * CreateReminder and EditReminder extends from this class 
  * @author Ngo Le Bao Loc
  * 
  * 
- * Control the layout and function of layout like get Text, get Date, get String
- * CreateReminder and EditReminder extends from this class 
+
  * 
  */
 public abstract class ControlReminder extends Activity {

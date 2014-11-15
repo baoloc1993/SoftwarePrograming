@@ -34,13 +34,16 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 /**
- * 
+ * Create Reminder with:
+ *  + Name of reminder
+ * 	+ Description of reminder
+ * 	+ Date of reminder
+ *  + Status of reminder
  * @author NGO LE BAO LOC
- * Create the reminder activity
- * Extends from ControlReminder
  */
 public class CreateReminderActivity extends ControlReminder {
 
+	
 	String nameStr;
 	String description;
 	Date time;

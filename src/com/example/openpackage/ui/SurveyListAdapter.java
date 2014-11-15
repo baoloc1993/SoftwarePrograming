@@ -24,7 +24,7 @@ import com.parse.ParseException;
  * 2. Comment of a survey
  * 3. Rating bar
  * 4. Date when survey is created
- * @author LEBAO_000
+ * @author Nguyen Phan Huy
  *
  */
 public class SurveyListAdapter extends ArrayAdapter<Survey> {
@@ -32,7 +32,12 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 	private Context mContext;
 	private List<Survey> mList;
 	private int mType;
-	
+	/**
+	 * Contructor of class
+	 * @param context current context of application
+	 * @param objects list of survey
+	 * @param type type of object which is rated
+	 */
 	public SurveyListAdapter(Context context, List<Survey> objects, int type) {
 		super(context, R.layout.survey_view, objects);
 		mContext = context;

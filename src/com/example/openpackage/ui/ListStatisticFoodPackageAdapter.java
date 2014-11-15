@@ -20,6 +20,11 @@ import com.example.openpackageapplication.R;
  */
 public class ListStatisticFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackage>{
 
+	/**
+	 * Contructor of class
+	 * @param context Current context of Application
+	 * @param resource
+	 */
 	public ListStatisticFoodPackageAdapter(Context context, int resource) {
 		super(context, resource);
 		// TODO Auto-generated constructor stub
