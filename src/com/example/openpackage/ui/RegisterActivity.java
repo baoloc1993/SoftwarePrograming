@@ -37,13 +37,25 @@ import android.widget.Toast;
  * @author Nguyen Tuan Anh
  * */
 public class RegisterActivity extends Activity {
-
+	/** The isFemale states user's gender attribute*/
 	boolean isFemale = false;
+	
+	/** The username attribute*/
 	String user;
+	
+	/** The password attribute*/
 	String pass;
+	
+	/** The confirm password attribute*/
 	String rePass;
+	
+	/** The email of user attribute */
 	String emailStr;
+	
+	/** The confirm email of user atribute*/
 	String reEmailStr;
+	
+	/** The age attribute*/
 	int ageInt = 0;
 	
 	
