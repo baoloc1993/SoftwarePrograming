@@ -20,15 +20,37 @@ import com.example.openpackage.entity.CustomerRemote;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
-
+/**
+ * Display the Personal information of current user
+ * @author Huynh Ba Dat
+ *
+ */
 public class ViewPersonalRecordUI extends Fragment {
+	/** The constant static String TAG*/
 	private final static String TAG = "ViewPersonalRecordUI";
 	
-	private TextView mUsername, mGenderAge, mNumSurvey;
+	/** The TextView that views username*/
+	private TextView mUsername;
+	
+	/** The TextView that views gender and age*/
+	private TextView mGenderAge;
+	
+	/** The TextView that views the number of survey*/
+	private TextView mNumSurvey;
+	
+	/** The User Controller attribute*/
 	private UserController mUserController;
+	
+	/** The Survey Controller attribute*/
 	private SurveyController mSurveyController;
+	
+	/** The list view attribute*/
 	private ListView mListView;
+	
+	/** The list of survey*/
 	private ArrayList<Survey> mSurvey;
+	
+	/** The current user reference*/
 	private CustomerRemote user;
 	
 	@Override
@@ -77,6 +99,5 @@ public class ViewPersonalRecordUI extends Fragment {
 				
 			}
 		});
-		Log.i(TAG, "Reload PersonalRecord");
 	}
 }
