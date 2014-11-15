@@ -14,6 +14,7 @@ import android.app.Fragment;
  *
  */
 public class TabListenerStat implements ActionBar.TabListener{
+	/** The fragment attribute*/
 	android.app.Fragment fragment;
 	
 	/** 

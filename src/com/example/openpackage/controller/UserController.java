@@ -233,6 +233,10 @@ public class UserController {
 		   return result;
 		}
 	
+	/**
+	 * Send email to reset password
+	 * @param CustomerRemote the CustomerRemote object
+	 */
 	private void sendEmail( User CustomerRemote ) {
 
         String msgBody = "<p>Here is your username and password. Thank you for use our Application.</p>"

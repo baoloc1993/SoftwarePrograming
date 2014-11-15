@@ -9,7 +9,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 /**
- * The Class AlarmReciever 
  * derived from base class BroadcastReceiver to receive and handle code from sender 
  * @author Tran Phuong Thao
  */

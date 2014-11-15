@@ -52,14 +52,14 @@ public class RegisterActivity extends Activity {
 	/** The email of user attribute */
 	String emailStr;
 	
-	/** The confirm email of user atribute*/
+	/** The confirm email of user attribute*/
 	String reEmailStr;
 	
 	/** The age attribute*/
 	int ageInt = 0;
 	
 	
-	/** Called when the activity is first created. */
+	/* Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class RegisterActivity extends Activity {
 	    final EditText reEmail = (EditText)findViewById(R.id.rewrite_email_signup_field);
 	    final EditText age = (EditText)findViewById(R.id.age_signup_field);
 	    
-	   //boolean isMale = true;
+
 	    final RadioGroup gender = (RadioGroup)findViewById(R.id.radioGroup);
 	   
 	   
@@ -135,6 +135,16 @@ public class RegisterActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * Returns true if register is valid, else return false and display the error
+	 * @param user The username
+	 * @param password The password
+	 * @param rePassword The confirm password
+	 * @param email The email
+	 * @param reEmail The confirm email
+	 * @param ageInt The age
+	 * @return Returns true if register is valid
+	 */
 	private boolean isRegisterValid(String user, String password, String rePassword, String email, String reEmail,int ageInt){
 		if (user == null || password == null || email == null){
 			Toast.makeText(getApplicationContext(), "You have to fill all the field", Toast.LENGTH_LONG).show();
