@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 /** 
  * The Class TabsStatPageAdapter
- * @author 
+ * @author Tran Vu Xuan Nhat
  * */
 public class TabsStatPageAdapter  extends FragmentPagerAdapter{
 	

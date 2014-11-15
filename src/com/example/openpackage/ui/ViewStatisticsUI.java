@@ -25,13 +25,30 @@ import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
-
+/**
+ * Display the StatisticsUI fragment
+ * @author Tran Vu Xuan Nhat
+ *
+ */
 public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener{
+	/** The FoodOpeningPackageController */
 	private FoodOpeningPackageController mFoodOpeningPackageController;
+	
+	/** The ViewGroup attribute*/
 	ViewGroup viewGroup;
+	
+	/** The static ListView of FoodOpeningPackage*/
 	public static ListView mListPackageStat;
+	
+	/** The ArrayList of FoodOpeningPackage */
 	private ArrayList<FoodOpeningPackage> mList;
+	
+	/** The root view */
 	View rootView;
+	
+	/**
+	 * Instantiate a new ViewStatisticsUI object
+	 */
 	public ViewStatisticsUI(){
 	}
 	
