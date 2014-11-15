@@ -17,10 +17,19 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/**
+ * Display the graph based on the data collect from Survey
+ * @author: Tran Vu Xuan Nhat 
+ **/
 public class GraphFragment extends Fragment{
+	/** root view of the fragment*/
 	View rootView;
-	Bundle bundle; ;
+	/** the bundle for transfer information between GraphFragment fragment and ViewSingleStatistisUI Activity */
+	Bundle bundle; 
+	
+	/**
+	 * Instantiate a graph fragment
+	 */
 	public GraphFragment(){
 		bundle = ViewSingleStatistic.bundle;
 	}
@@ -32,13 +41,10 @@ public class GraphFragment extends Fragment{
 				false);
 		
 	    double[] rate_list = bundle.getDoubleArray("rateList");
-	    //Log.d("rate_list",String.valueOf(rate_list[0]));
 	    
 	    TextView t1 = (TextView) rootView.findViewById(R.id.graph_title);
-	    //t1.setText("aaaa");
 	    t1.setText("This bar chart show the statistic for package "+bundle.getString("name")+" type "+bundle.getString("type")+
 	    		"\nX-axis is labeled by the rate level. \nY-axis is labeled by number of people that have same rate.");
-//	    //t1.setTextColor(Color.WHITE);
 	    
 	    GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
 	    new GraphViewData(0,rate_list[0])

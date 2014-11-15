@@ -9,11 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+/** 
+ * The Class StatFragment
+ * @author: Tran Vu Xuan Nhat
+ * */
 public class StatFragment extends Fragment{
 	View rootView;
 	Bundle bundle;
 	
+	/** 
+	 * Instantiate a statistic summary fragment
+	 * */
 	public StatFragment(){
 		bundle = ViewSingleStatistic.bundle;
 	}

@@ -24,14 +24,40 @@ import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
-
+/** 
+ * View the statistic fragment under Statistic tab in ManufactureUI activity
+ *@author: Tran Vu Xuan Nhat 
+ * */
 
 public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener{
+	/**
+	 * The food opening package controller
+	 *  */
 	private FoodOpeningPackageController mFoodOpeningPackageController;
+	
+	/**
+	 * The ViewGroup 
+	 * */
 	ViewGroup viewGroup;
+	
+	/**
+	 * The static list view to show all the packages with the same type
+	 */
 	public static ListView mListPackageStat;
+	
+	/**
+	 * The list of food opening package
+	 */
 	private ArrayList<FoodOpeningPackage> mList;
+	
+	/**
+	 * The root view
+	 */
 	View rootView;
+	
+	/**
+	 * Instantiate a new ViewStatisticsUI fragment
+	 */
 	public ViewStatisticsUI(){
 	}
 	
@@ -60,7 +86,6 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 		
 		mList = mFoodOpeningPackageController.getFoodOpeningPacketList(parent
 		.getItemAtPosition(position).toString());
-		Log.d("dadaa", mList.get(0).getTitle().toString());
 		ListFoodPackageAdapter adapter = new ListFoodPackageAdapter(getActivity(),R.layout.list_package_statistics,mList);
 		mListPackageStat = (ListView) rootView.findViewById(R.id.list_package_stat);
 		

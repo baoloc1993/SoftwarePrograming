@@ -8,9 +8,19 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.app.Fragment;
 
+/**
+ * The Class TabListenerStat
+ * @author Tran Vu Xuan Nhat
+ *
+ */
 public class TabListenerStat implements ActionBar.TabListener{
 	android.app.Fragment fragment;
 	
+	/** 
+	 * Instantiate a tab listener for ViewSingleStatisticUI activity
+	 * @param fragment The fragment under tab selected 
+	 * 
+	 * */
 	public TabListenerStat(Fragment fragment){
 		 this.fragment = fragment;
 	}
