@@ -33,7 +33,7 @@ import android.widget.Toast;
  *  
  *  @author Ngo Le Bao Loc
  */
-public class EditReminderActivity extends ControlReminder {
+public class EditReminderActivity extends ReminderUI {
 
 
 	/** Called when the activity is first created. */

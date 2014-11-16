@@ -33,7 +33,7 @@ import android.widget.Toast;
 
  * 
  */
-public abstract class ControlReminder extends Activity {
+public abstract class ReminderUI extends Activity {
 	
 	EditText name;
 	TimePicker timePicker;
@@ -192,7 +192,7 @@ public abstract class ControlReminder extends Activity {
 				}
 				if (result == "Successfull Update Reminder"){
 					//GO BACK TO MANUFACTURERUI
-					Intent in = new Intent(getApplicationContext(), ManufacturerUI.class);
+					Intent in = new Intent(getApplicationContext(), MainUIManufacturer.class);
 					startActivity(in);
 				}
 				
@@ -208,7 +208,7 @@ public abstract class ControlReminder extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//GO BACK TO LIST REMINDER FRAGMENT
-				Intent i = new Intent(getApplicationContext(), ManufacturerUI.class);
+				Intent i = new Intent(getApplicationContext(), MainUIManufacturer.class);
 				startActivity(i);
 				
 			}
@@ -226,7 +226,7 @@ public abstract class ControlReminder extends Activity {
 				ReminderController reminderController= new ReminderController(getApplicationContext());
 				Toast.makeText(getApplicationContext(), reminderController.removeReminder(id), Toast.LENGTH_LONG).show();
 				//GO BACK TO MANUFACTURERUI
-				Intent in = new Intent(getApplicationContext(), ManufacturerUI.class);
+				Intent in = new Intent(getApplicationContext(), MainUIManufacturer.class);
 				startActivity(in);
 			}
 		});

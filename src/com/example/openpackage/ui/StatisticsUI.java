@@ -30,7 +30,7 @@ import com.parse.ParseException;
  * @author Tran Vu Xuan Nhat
  *
  */
-public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener{
+public class StatisticsUI extends Fragment implements OnItemSelectedListener{
 	/** The FoodOpeningPackageController */
 	private FoodOpeningPackageController mFoodOpeningPackageController;
 	
@@ -49,7 +49,7 @@ public class ViewStatisticsUI extends Fragment implements OnItemSelectedListener
 	/**
 	 * Instantiate a new ViewStatisticsUI object
 	 */
-	public ViewStatisticsUI(){
+	public StatisticsUI(){
 	}
 	
 	@Override

@@ -29,7 +29,7 @@ import com.parse.ParseException;
  * @author TRAN VU XUAN NHAT
  *
  */
-public class CreateFoodFragment extends Fragment{
+public class CreateFoodOpeningPackageUI extends Fragment{
 	
 	private Spinner mSpinner;
 	private EditText mTitle,mDescription,mVideoLink;

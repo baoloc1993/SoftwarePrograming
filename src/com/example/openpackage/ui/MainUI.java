@@ -29,7 +29,7 @@ import com.parse.ParseQuery;
  * @author Nguyen Tuan Anh
  *
  */
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+public class MainUI extends FragmentActivity implements ActionBar.TabListener {
 	/** The static constant String TAG*/
 	private static final String TAG = "MainActivity";
 	
@@ -65,7 +65,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		User user = mUserController.getCurrentUser();
 		
 		if (user == null ) {
-			Intent intent = new Intent(this, LoginFormActivity.class);
+			Intent intent = new Intent(this, LoginUI.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
@@ -73,7 +73,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		}
 		
 		if (user instanceof ManufacturerRemote) {
-			Intent intent = new Intent(this, ManufacturerUI.class);
+			Intent intent = new Intent(this, MainUIManufacturer.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
@@ -132,7 +132,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		        public void onClick(DialogInterface dialog, int which) {
 		        	User user = mUserController.getCurrentUser();
 		        	mUserController.logOut(user);
-		        	Intent intent = new Intent(mContext, LoginFormActivity.class);
+		        	Intent intent = new Intent(mContext, LoginUI.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
@@ -191,7 +191,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
-				return new DoSurveyUI();
+				return new SurveyUI();
 
 			case 1:
 				return new ViewPersonalRecordUI();

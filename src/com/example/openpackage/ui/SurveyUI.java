@@ -30,7 +30,7 @@ import com.example.openpackageapplication.R;
  * @author Nguyen Phan Huy
  *
  */
-public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
+public class SurveyUI extends Fragment implements OnItemSelectedListener {
 	private static String TAG = "DoSurveyUI";
 	private Spinner mSpinner;
 	private ListView mListView;

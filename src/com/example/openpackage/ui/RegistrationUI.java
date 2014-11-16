@@ -36,7 +36,7 @@ import android.widget.Toast;
  * 
  * @author Nguyen Tuan Anh
  * */
-public class RegisterActivity extends Activity {
+public class RegistrationUI extends Activity {
 	/** The isFemale states user's gender attribute*/
 	boolean isFemale = false;
 	
@@ -128,7 +128,7 @@ public class RegisterActivity extends Activity {
 				 
 				if (isRegisterValid(user, pass, rePass, emailStr, reEmailStr,ageInt)){
 					UserController userController = new UserController(getApplicationContext());
-					String result = userController.validateRegister(user, pass, emailStr, ageInt, isFemale);
+					String result = userController.validateNewUserData(user, pass, emailStr, ageInt, isFemale);
 					Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
 				}
 			}

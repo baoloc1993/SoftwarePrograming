@@ -30,10 +30,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 			return new ListReminderFragment();
 			
 		case 1:
-			return new ViewStatisticsUI();
+			return new StatisticsUI();
 		
 		case 2:
-			return new CreateFoodFragment();
+			return new CreateFoodOpeningPackageUI();
 		default:
 			break;
 		}

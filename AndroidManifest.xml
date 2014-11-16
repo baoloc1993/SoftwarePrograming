@@ -19,7 +19,7 @@
         android:screenOrientation="portrait" >
         
         <activity
-            android:name="com.example.openpackage.ui.MainActivity"
+            android:name="com.example.openpackage.ui.MainUI"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -37,22 +37,22 @@
         </activity>
 
        	<activity 
-            android:name="com.example.openpackage.ui.LoginFormActivity"
+            android:name="com.example.openpackage.ui.LoginUI"
             android:screenOrientation="portrait">
         </activity>
         
        	<activity 
-            android:name="com.example.openpackage.ui.ManufacturerUI"
+            android:name="com.example.openpackage.ui.MainUIManufacturer"
             android:screenOrientation="portrait">
         </activity>
         
        	<activity 
-            android:name="com.example.openpackage.ui.RegisterActivity"
+            android:name="com.example.openpackage.ui.RegistrationUI"
             android:screenOrientation="portrait">
         </activity>
         
        	<activity 
-            android:name="com.example.openpackage.ui.ForgetPasswordActivity"
+            android:name="com.example.openpackage.ui.ForgetPasswordUI"
             android:screenOrientation="portrait">
         </activity>
 
@@ -72,8 +72,8 @@
         </activity>
         <activity android:name="com.example.openpackage.ui.EditReminderActivity"
             	  android:screenOrientation="portrait"></activity>
-        <activity android:name = "com.example.openpackage.ui.ViewSingleStatistic"   
-           	      android:screenOrientation = "portrait">
+        <activity android:name = "com.example.openpcom.example.openpackage.ui.ViewSingleStatistic"	      
+            	android:screenOrientation = "portrait">
         </activity>
     </application>
 

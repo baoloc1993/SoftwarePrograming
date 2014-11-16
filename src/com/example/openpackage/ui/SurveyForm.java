@@ -57,7 +57,7 @@ public class SurveyForm extends Fragment{
 		mFoodOpeningPackageController = new FoodOpeningPackageController(getActivity());
 		
 		String foodId = getArguments().getString(FOODOPENINGPACKAGE_ID);
-		mFood = mFoodOpeningPackageController.getById(foodId);
+		mFood = mFoodOpeningPackageController.getFoodOpeningPackageById(foodId);
 		
 		user = (CustomerRemote) mUserController.getCurrentUser();	
 		mSurvey = mSurveyController.getSurvey(mFood, user);
@@ -91,7 +91,7 @@ public class SurveyForm extends Fragment{
 							int rate = (int) rating.getRating();
 							//Log.i(TAG, comment.getText().toString() );
 							//Log.i(TAG, rating.getRating()+"");
-							boolean create = mSurveyController.validateCreateData(cmt, rate, mFood);
+							boolean create = mSurveyController.validateNewSurveyData(cmt, rate, mFood);
 							if (!create) {
 								Toast.makeText(getActivity(), "Your survey is invalid", Toast.LENGTH_SHORT).show();
 							} else {

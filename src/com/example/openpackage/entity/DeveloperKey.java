@@ -1,6 +1,6 @@
 // Copyright 2012 Google Inc. All Rights Reserved.
 
-package com.example.openpackage.ui;
+package com.example.openpackage.entity;
 
 /**
  * Static container class for holding a reference to your YouTube Developer Key.

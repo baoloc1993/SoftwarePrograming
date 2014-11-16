@@ -133,7 +133,7 @@ public class ListReminderFragment extends Fragment {
 		 */
 		ImageView createReminder = (ImageView) rootView.findViewById(R.id.new_reminder_button);
 		createReminder.setImageResource(R.drawable.add_icon);
-		int size = (int) (ManufacturerUI.getStandardSize() * 0.1);
+		int size = (int) (MainUIManufacturer.getStandardSize() * 0.1);
 		createReminder.getLayoutParams().width = size;
 		createReminder.getLayoutParams().height = size;
 		

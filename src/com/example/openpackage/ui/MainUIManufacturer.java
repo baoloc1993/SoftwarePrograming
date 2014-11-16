@@ -28,7 +28,7 @@ import com.example.openpackageapplication.R;
  * @author Nguyen Tuan Anh
  *
  */
-public class ManufacturerUI extends FragmentActivity implements ActionBar.TabListener{
+public class MainUIManufacturer extends FragmentActivity implements ActionBar.TabListener{
 	/** The context of application */
 	private Context mContext;
 	
@@ -51,7 +51,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 	private static int screenWidth;
 	
 	/** The ManufacturerUI attribute */
-	private ManufacturerUI activity;
+	private MainUIManufacturer activity;
 	
 	/** The Reminder Controller attribute*/
 	private ReminderController reminderController = new ReminderController(mContext);
@@ -133,7 +133,7 @@ public class ManufacturerUI extends FragmentActivity implements ActionBar.TabLis
 		        	final ManufacturerRemote user = (ManufacturerRemote) mUserController.getCurrentUser();
 		        	reminderController.removeAllAlarms();
 		        	mUserController.logOut(user);
-		        	Intent intent = new Intent(getApplicationContext(), LoginFormActivity.class);
+		        	Intent intent = new Intent(getApplicationContext(), LoginUI.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);

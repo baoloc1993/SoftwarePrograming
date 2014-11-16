@@ -41,7 +41,7 @@ import android.widget.Toast;
  *  + Status of reminder
  * @author NGO LE BAO LOC
  */
-public class CreateReminderActivity extends ControlReminder {
+public class CreateReminderActivity extends ReminderUI {
 
 	
 	String nameStr;

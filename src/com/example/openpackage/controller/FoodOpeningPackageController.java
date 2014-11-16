@@ -61,7 +61,7 @@ public class FoodOpeningPackageController {
 	 * @param foodID : ID of object 
 	 * @return FoodOpeningPackage object. null if cannot get any object
 	 */
-	public FoodOpeningPackage getById(String foodID) {
+	public FoodOpeningPackage getFoodOpeningPackageById(String foodID) {
 		try {
 			return FoodOpeningPackageRemote.findById(foodID);
 		} catch (ParseException e) {

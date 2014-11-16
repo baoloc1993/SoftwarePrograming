@@ -5,7 +5,7 @@ import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackage.entity.ReminderRemote;
 import com.example.openpackage.entity.Reminder;
 import com.example.openpackage.entity.User;
-import com.example.openpackage.ui.MainActivity;
+import com.example.openpackage.ui.MainUI;
 import com.parse.ParseException;
 
 import android.content.Context;

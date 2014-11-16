@@ -121,7 +121,7 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 			}
 			
 			if (status != null){
-				int size = (int) (ManufacturerUI.getStandardSize() * 0.1);
+				int size = (int) (MainUIManufacturer.getStandardSize() * 0.1);
 				status.getLayoutParams().width = size;
 				status.getLayoutParams().height = size;
 				if (i.getActive()){

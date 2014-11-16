@@ -77,7 +77,7 @@ public class GraphFragment extends Fragment{
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Intent i = new Intent(getActivity().getApplicationContext(),ManufacturerUI.class);
+			Intent i = new Intent(getActivity().getApplicationContext(),MainUIManufacturer.class);
 			startActivity(i);
 		}
 		

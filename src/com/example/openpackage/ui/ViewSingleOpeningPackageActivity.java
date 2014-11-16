@@ -60,7 +60,7 @@ public class ViewSingleOpeningPackageActivity extends FragmentActivity implement
 		mSurveyController = new SurveyController(this);
 		
 		String FoodID = getIntent().getStringExtra("FoodOpeningPackageID");
-		mFood = mFoodOpeningPackageController.getById(FoodID);
+		mFood = mFoodOpeningPackageController.getFoodOpeningPackageById(FoodID);
 		
 		package_name = (TextView) findViewById(R.id.package_name);
 		package_date = (TextView) findViewById(R.id.package_date);

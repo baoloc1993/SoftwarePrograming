@@ -22,8 +22,8 @@ import com.example.openpackage.entity.CustomerRemote;
 import com.example.openpackage.entity.ManufacturerRemote;
 import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.User;
-import com.example.openpackage.ui.MainActivity;
-import com.example.openpackage.ui.ManufacturerUI;
+import com.example.openpackage.ui.MainUI;
+import com.example.openpackage.ui.MainUIManufacturer;
 import com.parse.ParseException;
 /**
  * Control the processing of data of User entity
@@ -100,7 +100,7 @@ public class UserController {
 			if ( CustomerRemote.getUsername().equals(username) && CustomerRemote.getPassword().equals(password) ) {
 				try {
 					CustomerRemote.logIn();
-					Intent intent = new Intent( mContext, MainActivity.class);
+					Intent intent = new Intent( mContext, MainUI.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					mContext.startActivity(intent);
@@ -116,7 +116,7 @@ public class UserController {
 		if (mManufacturer!=null && mManufacturer.getUsername().equals(username) && mManufacturer.getPassword().equals(password)) {
 			try {
 				mManufacturer.logIn();
-				Intent intent = new Intent( mContext, ManufacturerUI.class);
+				Intent intent = new Intent( mContext, MainUIManufacturer.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				/*
@@ -144,7 +144,7 @@ public class UserController {
 	 * @param gender The gender user input 
 	 * @return Returns the String that show the errors or result of register process
 	 */
-	public String validateRegister( String username, String password, String email, int age, boolean gender ) {
+	public String validateNewUserData( String username, String password, String email, int age, boolean gender ) {
 		ArrayList<User> customers;
 		
 		try {
@@ -165,7 +165,7 @@ public class UserController {
 		try {
 			User CustomerRemote = new CustomerRemote( username, password, email, age, gender );
 			CustomerRemote.logIn();
-			Intent intent = new Intent( mContext, MainActivity.class);
+			Intent intent = new Intent( mContext, MainUI.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			mContext.startActivity(intent);
@@ -181,7 +181,7 @@ public class UserController {
 	 * @param email The email that will be sent by request of user who forget password
 	 * @return Returns true if email is verified
 	 */
-	public boolean verifyForgetInfo(String email) {
+	public boolean verifyForgetPasswordInfo(String email) {
 		ArrayList<User> customers;
 		try {
 			customers = CustomerRemote.listAll();

@@ -28,7 +28,7 @@ import android.widget.Toast;
  * - Forget Password
  * @author Nguyen Tuan Anh
  */
-public class LoginFormActivity extends Activity {
+public class LoginUI extends Activity {
 	/** The static constant String TAG*/
 	private final static String TAG = "LoginFormActivity";
 
@@ -70,7 +70,7 @@ public class LoginFormActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//GOTO FORGETPASS ACTIVITY
-				Intent forgetPassActivity = new Intent(getApplicationContext(), ForgetPasswordActivity.class);
+				Intent forgetPassActivity = new Intent(getApplicationContext(), ForgetPasswordUI.class);
 				startActivity(forgetPassActivity);
 			}
 		});
@@ -83,7 +83,7 @@ public class LoginFormActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//GOTO FORGETPASS ACTIVITY
-				Intent registerActivity = new Intent(getApplicationContext(), RegisterActivity.class);
+				Intent registerActivity = new Intent(getApplicationContext(), RegistrationUI.class);
 				startActivity(registerActivity);
 			}
 		});

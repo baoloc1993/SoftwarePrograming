@@ -93,7 +93,7 @@ public class SurveyController {
 	 * @param id Id of survey 
 	 * @return Survey object. Null if id is invalid or cannot get the survey
 	 */
-	public Survey getById(String id) {
+	public Survey getSurveyById(String id) {
 		try {
 			return SurveyRemote.findById(id);
 		} catch (ParseException e) {
@@ -109,7 +109,7 @@ public class SurveyController {
 	 * @param food : FoodOpeningPackage object which is rated
 	 * @return true if the information are all correct
 	 */
-	public boolean validateCreateData(String cmt, int rate, FoodOpeningPackage food) {
+	public boolean validateNewSurveyData(String cmt, int rate, FoodOpeningPackage food) {
 		cmt = cmt.trim();
 		if (rate == 0 || cmt.isEmpty()) 
 			return false;

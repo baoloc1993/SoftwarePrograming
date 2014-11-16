@@ -17,7 +17,7 @@ import com.example.openpackageapplication.R;
  * @author Nguyen Tuan Anh
  *
  */
-public class ForgetPasswordActivity extends Activity {
+public class ForgetPasswordUI extends Activity {
 
 	/** The email of user */
 	String emailStr;
@@ -48,7 +48,7 @@ public class ForgetPasswordActivity extends Activity {
 				 emailStr = email.getText().toString();
 				 
 				UserController userController = new UserController(getApplicationContext());
-				if(!userController.verifyForgetInfo(emailStr)){
+				if(!userController.verifyForgetPasswordInfo(emailStr)){
 					Toast.makeText(getApplicationContext(),
 							"Email does not exist",
 							Toast.LENGTH_LONG).show();
