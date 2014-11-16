@@ -16,17 +16,46 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-
+/**
+ * Display the statistic report, included graph and analysis, of single food package 
+ * @author Tran Vu Xuan Nhat
+ *
+ */
 public class ViewSingleStatistic extends FragmentActivity implements ActionBar.TabListener{
+	/**
+	 * The ViewPager attribute of activity
+	 */
 	private ViewPager mViewPager;
+	
+	/**
+	 * The TabsStatPageAdapter user to handle tab under this activity
+	 */
 	private TabsStatPageAdapter mTabsStatPagerAdapter;
+	
+	/**
+	 * The Action Bar of activity 
+	 */
 	private ActionBar mActionBar;
+	
+	/**
+	 * The screen's height
+	 */
 	private static int screenHeight;
+	
+	/**
+	 * The screen's width
+	 */
 	private static int screenWidth;
+	
+	/**
+	 * The ViewSingleStatistic reference
+	 */
 	private ViewSingleStatistic activity;
-	//private Intent graphInfo = getIntent();
+	
+	/**
+	 * The bundle store information transfer between activity and fragment
+	 */
 	public static Bundle bundle;
-	private TabsPagerAdapter mTabsPagerAdapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -36,7 +65,6 @@ public class ViewSingleStatistic extends FragmentActivity implements ActionBar.T
 	    //Get data from previous Intent
 	    Intent i = getIntent();
 	    bundle = i.getExtras();
-	   // bundle.getDoubleArray(key)
 	    
 		// Initilization
         mViewPager = (ViewPager) findViewById(R.id.pager2);
@@ -95,16 +123,25 @@ public class ViewSingleStatistic extends FragmentActivity implements ActionBar.T
 		
 	}
 	
+	/**
+	 * Gets the screen's height
+	 * @return Returns the screen's height
+	 */
 	public int getScreenHeight() {
 		return screenHeight;
 	}
 
+	/**
+	 * Gets the screen's width
+	 * @return Returns the screen's width
+	 */
 	public int getScreenWidth() {
 		return screenWidth;
 	}
 
 	/**
-	 * @return the standard size for rendering item
+	 * Gets the standard size of screen
+	 * @return Returns the standard size for rendering item
 	 */
 	public static int getStandardSize() {
 		return Math.min(screenWidth, screenHeight);

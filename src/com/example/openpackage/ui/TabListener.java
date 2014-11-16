@@ -8,10 +8,19 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.app.Fragment;
 
+/** 
+ * Tab listener for mainufacturerUI activity
+ * @author Nguyen Tuan Anh
+ *
+ */
 public class TabListener implements ActionBar.TabListener{
-
+	/** The fragment attribute*/
 	android.app.Fragment fragment;
 	
+	/**
+	 * Instantiate a new TabListener object
+	 * @param fragment The Fragment
+	 */
 	public TabListener(Fragment fragment) {
 		// TODO Auto-generated constructor stub
 		this.fragment = fragment;

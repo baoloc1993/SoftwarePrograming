@@ -1,13 +1,8 @@
-/**
- * ControlRemider
- * 
- * Control the layout and function of layout like getText, get Date, get String
- * 
- * CreateRemiderActivity and EditReminderActivity extends this Class
- */
+
 package com.example.openpackage.ui;
 
 import java.util.Date;
+
 
 import com.example.openpackage.controller.ReminderController;
 import com.example.openpackage.controller.ReminderService;
@@ -28,6 +23,16 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+/**
+ * 
+ * Control the layout and function of layout like get Text, get Date, get String
+ * CreateReminder and EditReminder extends from this class 
+ * @author Ngo Le Bao Loc
+ * 
+ * 
+
+ * 
+ */
 public abstract class ControlReminder extends Activity {
 	
 	EditText name;
@@ -35,10 +40,28 @@ public abstract class ControlReminder extends Activity {
 	DatePicker datePicker;
 	EditText desc;
 	CheckBox isActivate;
+	
+	/**
+	 * Name of reminder
+	 */
 	protected String nameString;
+	
+	/**
+	 * Description of reminder
+	 */
 	protected String descriptionStr;
+	
+	/**
+	 * Date and Time when reminder will be alarmed
+	 */
 	protected Date time2;
+	
+
+	/**
+	 * Status of reminder. True if active, false if deactive
+	 */
 	protected boolean isActive2;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,13 +70,28 @@ public abstract class ControlReminder extends Activity {
 	    setContentView(R.layout.new_edit_reminder_layout);
 	    
 	}
+	
 	/**
+	 * Create or Edit Fragment. 
+	 * 1.After Create or Edit Fragment, the reminder will be set 
+	 * automatically if it active.
+	 * 2.Back Button will go back to the list of Reminder
+	 * 3.User can cancel the reminder if they are editing the fragment. When reminder is canceled,
+	 * the background service wil be stopped.
+	 * 
+	 * @param id = id of Reminder.
+	 * @param nameStr = name of Reminder.
+	 * @param description = description of Reminder.
+	 * @param time = time of reminder
+	 * @param isActive true if Reminder is active, false if Reminder is not active
+	 * 
 	 * IF NEW REMINDER
-	 * @param id = null
-	 * @param nameStr = null
-	 * @param description = null
-	 * @param time = current Date
-	 * @param isActive = false
+	 * id = null
+	 * name = null
+	 * description = null
+	 * time = current time
+	 * isActive = false
+	 * 
 	 */
 	
 	protected void getData(final String id,final String nameStr, String description, final Date time, final boolean isActive, final boolean isNew){
@@ -126,7 +164,7 @@ public abstract class ControlReminder extends Activity {
 				int day = datePicker.getDayOfMonth();
 				int hour = timePicker.getCurrentHour();
 				int minute = timePicker.getCurrentMinute();
-				//Log.d("DEBUG 123", String.valueOf(nameString));
+				
 				time2 = new Date(year,month,day,hour,minute);
 				
 				 Toast.makeText(getApplicationContext(),time2.toLocaleString(), Toast.LENGTH_LONG).show();
@@ -140,8 +178,8 @@ public abstract class ControlReminder extends Activity {
 				
 				if(result == "Successfull Update Reminder" && isActive2){
 					Intent i = new Intent(getApplicationContext(),ReminderService.class);
-					Toast.makeText(getApplicationContext(), String.valueOf(day), Toast.LENGTH_LONG);
-					Log.d("SERVICE", String.valueOf(year));
+					//Toast.makeText(getApplicationContext(), String.valueOf(day), Toast.LENGTH_LONG);
+					//Log.d("SERVICE", String.valueOf(year));
 					i.putExtra("name", nameString);
 					i.putExtra("description", descriptionStr);
 					i.putExtra("year", year);

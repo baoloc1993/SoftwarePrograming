@@ -24,16 +24,31 @@ import com.example.openpackage.entity.User;
 import com.example.openpackageapplication.R;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
+/**
+ * Display main activity
+ * @author Nguyen Tuan Anh
+ *
+ */
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
-
+	/** The static constant String TAG*/
 	private static final String TAG = "MainActivity";
+	
+	/** The static context of application*/
 	public static Context mContext;
 	
+	/** The ViewPager attribute*/
 	private ViewPager mViewPager;
+	
+	/** The SectionPageAdapter attribute*/
 	private SectionsPagerAdapter mSectionsPagerAdapter;
+	
+	/** The ActionBar attribute */
 	private ActionBar mActionBar;
+	
+	/** The CustomerRemote attribute*/
 	private CustomerRemote mCurrentUser;
+	
+	/** The UserController attribute*/
 	private UserController mUserController;
 	
 	@Override
@@ -47,18 +62,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		// TODO erase when done
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("CustomerRemote");
-//		try {
-//			ParseObject x = query.get("c0Iju0ayaz");
-//			mCurrentUser = new CustomerRemote(x);
-//			mCurrentUser.logIn();
-//			Log.i(TAG, mCurrentUser.getUsername());
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//			Log.i(TAG, "CANT FIND");
-//		}
-		
 		User user = mUserController.getCurrentUser();
-		//mUserController.logOut(user);
 		
 		if (user == null ) {
 			Intent intent = new Intent(this, LoginFormActivity.class);
@@ -76,7 +80,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			finish();
 		}
 		
-		//Log.i(TAG, "GO HERE");
 		
 		mSectionsPagerAdapter = new SectionsPagerAdapter(this, this.getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -98,7 +101,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			}
 		});
 	}
-
+	
+	/**
+	 * Get the ViewPager attribute
+	 * @return Returns a ViewPager object
+	 */
 	public ViewPager getViewPager() {
 		return mViewPager;
 	}
@@ -161,9 +168,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		
 	}
 
-
+	/**
+	 * SectionsPagerAdapter for Activity
+	 * @author Nguyen Tuan Anh
+	 *
+	 */
 	class SectionsPagerAdapter extends FragmentPagerAdapter {
+		/** The context of application*/
 		Context mContext;
+		
+		/**
+		 * Instantiate a new SectionsPagerAdapter object
+		 * @param context The context
+		 * @param fragmentManager The fragment manager
+		 */
 		public SectionsPagerAdapter(Context context,FragmentManager fragmentManager) {
 			super(fragmentManager);
 			mContext = context;	
@@ -186,6 +204,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return 2;
 		}
 		
+		/**
+		 * Gets title of the tab
+		 * @param position the position of the tab
+		 * @return Returns a String which is the name of the tab
+		 */
 		public String getTitleTab(int position) {
 			switch (position) {
 			case 0:

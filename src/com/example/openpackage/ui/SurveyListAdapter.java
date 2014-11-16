@@ -17,12 +17,27 @@ import com.example.openpackage.entity.SurveyRemote;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
+/**
+ * SurveyListAdapter , control the display of the list of survey
+ * Each item of survey will have:
+ * 1.  Username of user which created this survey
+ * 2. Comment of a survey
+ * 3. Rating bar
+ * 4. Date when survey is created
+ * @author Nguyen Phan Huy
+ *
+ */
 public class SurveyListAdapter extends ArrayAdapter<Survey> {
 
 	private Context mContext;
 	private List<Survey> mList;
 	private int mType;
-	
+	/**
+	 * Contructor of class
+	 * @param context current context of application
+	 * @param objects list of survey
+	 * @param type type of object which is rated
+	 */
 	public SurveyListAdapter(Context context, List<Survey> objects, int type) {
 		super(context, R.layout.survey_view, objects);
 		mContext = context;
@@ -59,6 +74,9 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 			}
 		}
 		
+		/**
+		 * Display the time in format : MM minutes ago
+		 */
 		String converDate = DateUtils.getRelativeTimeSpanString(
 				survey.getParseObject().getUpdatedAt().getTime(),
 				new Date().getTime(), 
@@ -71,6 +89,11 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 		return convertView;
 	}
 	
+	/**
+	 * Class store basic attribute of survey (username, comment. rating bar, date) 
+	 * @author Nguyen Phan Huy
+	 *
+	 */
 	private static class ViewHolder {
 		TextView username;
 		TextView comment;
@@ -78,6 +101,10 @@ public class SurveyListAdapter extends ArrayAdapter<Survey> {
 		TextView date;
 	}
 	
+	/**
+	 * Reset the list of survey
+	 * @param objects List of Survey
+	 */
 	public void refill(List<Survey> objects) {
 		mList.clear();
 		mList.addAll(objects);

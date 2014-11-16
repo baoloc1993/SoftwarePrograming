@@ -3,7 +3,10 @@ package com.example.openpackage.controller;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
+/** 
+ * derived from class BroadcastReceiver to set the alarm after turning on device  
+ * @author: Tran Phuong Thao
+ * */
 public class AlarmSetter extends BroadcastReceiver{
 
 	@Override

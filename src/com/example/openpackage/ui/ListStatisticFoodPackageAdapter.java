@@ -13,21 +13,33 @@ import android.widget.TextView;
 import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackageapplication.R;
 
-public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackage>{
+/**
+ * Adapter control the statistic of all FoodOpeningPackage object
+ * @author Tran Vu Xuan Nhat
+ *
+ */
+public class ListStatisticFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackage>{
 
-	public ListFoodPackageAdapter(Context context, int resource) {
+	/**
+	 * Contructor of class
+	 * @param context Current context of Application
+	 * @param resource
+	 */
+	public ListStatisticFoodPackageAdapter(Context context, int resource) {
 		super(context, resource);
 		// TODO Auto-generated constructor stub
 	}
 	
 	private ArrayList<FoodOpeningPackage> listPackage;
-	/*
-	 * here we must override the constructor for ArrayAdapter the only variable
-	 * we care about now is ArrayList<Item> objects, because it is the list of
-	 * objects we want to display.
+	
+	/**
+	 * Contructor of class
+	 * @param context current context of application
+	 * @param textViewResourceId 
+	 * @param listPackage list of FoodOpeningPackage
 	 */
 	
-	public ListFoodPackageAdapter(Context context, int textViewResourceId,
+	public ListStatisticFoodPackageAdapter(Context context, int textViewResourceId,
 			ArrayList<FoodOpeningPackage> listPackage){
 		super(context, textViewResourceId, listPackage);
 		this.listPackage = listPackage;
@@ -76,9 +88,6 @@ public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackage>{
 					.findViewById(R.id.stat_name);
 			holder.averageRate = (TextView) v
 					.findViewById(R.id.stat_rate);
-			//TextView dateInfo = (TextView) v.findViewById(R.id.date_info_single_reminder);
-			
-			//ImageView status = (ImageView) v.findViewById(R.id.status_reminder);
 			
 
 			// check to see if each individual textview is null.
@@ -88,25 +97,7 @@ public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackage>{
 			
 			holder.nameLabel.setText((position+1) + ". "+ cur.getTitle());
 			holder.averageRate.setText( new DecimalFormat("0.0").format(cur.getAverage()) + "/5.0");
-			
-
-			// init example series data
-			/*GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
-			    new GraphViewData(1, 2.0d)
-			    , new GraphViewData(2, 1.5d)
-			    , new GraphViewData(3, 2.5d)
-			    , new GraphViewData(4, 1.0d)
-			});
-			 
-			GraphView graphView = new BarGraphView(
-			    this.getContext() // context
-			    , "GraphViewDemo" // heading
-			);
-			graphView.addSeries(exampleSeries); // data
-			 
-			LinearLayout layout = (LinearLayout) v.findViewById(R.layout.singleview_statistics_layout);
-			layout.addView(graphView);*/
-			
+						
 
 		}
 
@@ -114,6 +105,11 @@ public class ListFoodPackageAdapter extends ArrayAdapter<FoodOpeningPackage>{
 		return v;
 
 	}
+	/**
+	 * 
+	 * @author Tran Vu Xuan Nhat
+	 *
+	 */
 	private static class ViewHolder {
 		TextView nameLabel;
 		TextView averageRate;

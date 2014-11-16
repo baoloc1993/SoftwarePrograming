@@ -31,7 +31,7 @@
         
         
         <activity 
-            android:name="com.example.openpackage.ui.DoSurveyUI_2"
+            android:name="com.example.openpackage.ui.ViewSingleOpeningPackageActivity"
             
             android:screenOrientation="portrait">
         </activity>

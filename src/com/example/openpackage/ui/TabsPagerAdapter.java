@@ -6,8 +6,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+/**
+ * Tab Adapter for MainufacturerUI activity
+ * @author Nguyen Tuan Anh
+ *
+ */
 public class TabsPagerAdapter extends FragmentPagerAdapter {
-
+	/**
+	 * Instantiate a new TabsPagerAdapter object
+	 * @param fragmentManager The fragment manager
+	 */
 	public TabsPagerAdapter(FragmentManager fragmentManager) {
 		super(fragmentManager);
 		// TODO Auto-generated constructor stub

@@ -21,7 +21,15 @@ import com.example.openpackage.controller.FoodOpeningPackageController;
 import com.example.openpackage.entity.FoodOpeningPackage;
 import com.example.openpackageapplication.R;
 
-
+/**
+ * A Fragment display the list of FoodOpeningPackage object.
+ * Display when user click to tab Do Survey
+ * 
+ * When user click to each FoodOpeningPackage, it will go to display single FoodOpenningPackage object
+ * and their detail
+ * @author Nguyen Phan Huy
+ *
+ */
 public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 	private static String TAG = "DoSurveyUI";
 	private Spinner mSpinner;
@@ -39,7 +47,7 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 		mListView = (ListView) rootView.findViewById(R.id.listView1);
 		mFoodOpeningPacketController = new FoodOpeningPackageController(
 				getActivity());
-		Log.i(TAG, "Fuck VA");
+		
 		
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
 		        R.array.title_array, android.R.layout.simple_spinner_item);
@@ -54,7 +62,7 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 			
-				Intent intent = new Intent(getActivity(), DoSurveyUI_2.class);
+				Intent intent = new Intent(getActivity(), ViewSingleOpeningPackageActivity.class);
 		
 				intent.putExtra("FoodOpeningPackageID", mList.get(position).getID());
 				startActivity(intent);
@@ -86,7 +94,7 @@ public class DoSurveyUI extends Fragment implements OnItemSelectedListener {
 				Toast.LENGTH_SHORT).show();
 		mList = mFoodOpeningPacketController.getFoodOpeningPacketList(parent
 				.getItemAtPosition(position).toString());
-		// Log.i(TAG, mList.get(0).getTitle());
+		
 		if (mListView.getAdapter() == null) {
 			FoodOpenPackageListAdapter adapter = new FoodOpenPackageListAdapter(
 					getActivity(), mList);

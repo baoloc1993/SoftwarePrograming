@@ -9,9 +9,21 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.Session.StatusCallback;
 import com.facebook.widget.FacebookDialog;
 
+/**
+ * FacebookUI Helper for facebook
+ * @author Huynh Ba Dat
+ *
+ */
 public class FacebookUIHelper extends UiLifecycleHelper implements UIHelper
 {
+	/** The activity attribute*/
 	Activity activity = null;
+	
+	/**
+	 * Instantiate a new FacebookUIHelper object
+	 * @param activity The activity
+	 * @param callback The callback status
+	 */
 	public FacebookUIHelper(Activity activity, StatusCallback callback) {
 		super(activity, callback);
 		// TODO Auto-generated constructor stub

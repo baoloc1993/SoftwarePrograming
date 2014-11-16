@@ -18,10 +18,21 @@ import com.example.openpackage.entity.FoodOpeningPackageRemote;
 import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 
+/**
+ * User Interface
+ * Create a FoodOpeningPackage Object
+ * 1. Type of object
+ * 2. Title of object
+ * 3. description of object
+ * 4. Video link of object
+ * 5. Submit button
+ * @author TRAN VU XUAN NHAT
+ *
+ */
 public class CreateFoodFragment extends Fragment{
 	
 	private Spinner mSpinner;
-	private EditText mTitle,mDescriotion,mVideoLink;
+	private EditText mTitle,mDescription,mVideoLink;
 	private Button mButton;
 	
 	@Override
@@ -37,13 +48,13 @@ public class CreateFoodFragment extends Fragment{
 		mSpinner.setAdapter(adapter);
 		
 		mTitle = (EditText) rootView.findViewById(R.id.editTitle);
-		
-		mDescriotion = (EditText) rootView.findViewById(R.id.editDescription);
-		
+		mDescription = (EditText) rootView.findViewById(R.id.editDescription);
 		mVideoLink = (EditText) rootView.findViewById(R.id.editVideoLink);
-		
 		mButton = (Button) rootView.findViewById(R.id.Submit);
 		
+		/*
+		 * Submit button
+		 */
 		mButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -56,7 +67,7 @@ public class CreateFoodFragment extends Fragment{
 			        public void onClick(DialogInterface dialog, int which) {
 			        	
 			        	String title = mTitle.getText().toString();
-			        	String description = mDescriotion.getText().toString();
+			        	String description = mDescription.getText().toString();
 			        	String videoLink = mVideoLink.getText().toString();
 			        	String type = mSpinner.getSelectedItem().toString();
 			        	

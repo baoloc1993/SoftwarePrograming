@@ -16,11 +16,27 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ArrayList;
-
+/**
+ * Control all data of reminder
+ * @author Ngo Le Bao Loc
+ *
+ */
 public class ReminderController {
 	Context mContext;
+	/**
+	 * List of reminder
+	 */
 	private static ArrayList<Reminder> reminderList;
+	
+	/**
+	 * List of Alarm Serivce
+	 */
 	private static ArrayList<Intent> alarmIntent;
+	
+	/**
+	 * Contructor of class
+	 * @param context current context of application
+	 */
 	public ReminderController(Context context){
 		mContext = context;
 		try{
@@ -34,6 +50,10 @@ public class ReminderController {
 		alarmIntent = new ArrayList<Intent>();
 	}
 	
+	/**
+	 * Load all data of reminder of current user after user login to the database
+	 * Start all reminder which has status is ACTIVE
+	 */
 	public void firstUpdateAlarmAfterLogIn(){
 		for(Reminder r : reminderList){
 			if(r.getActive()){
@@ -41,7 +61,6 @@ public class ReminderController {
 				i.putExtra("name", r.getName());
 				i.putExtra("description", r.getDescription());
 				i.putExtra("year", r.getTime().getYear());
-				Log.d("DEBUG 1st Update", String.valueOf(r.getTime().getYear()));
 				i.putExtra("month", r.getTime().getMonth());
 				i.putExtra("day", r.getTime().getDay());
 				i.putExtra("hour",r.getTime().getHours());
@@ -52,10 +71,20 @@ public class ReminderController {
 			}
 		}
 	}
+	
+	/**
+	 * Get the list of reminder
+	 * @return list of reminder
+	 */
 	public  ArrayList<Reminder> getReminderList(){
 		return reminderList;
 	}
 	
+	/**
+	 * Add new alarm background service
+	 * @param context current context of application
+	 * @param i service want to be run in background
+	 */
 	public void addNewAlarm(Context context,Intent i){
 		alarmIntent.add(i);
 		i.setAction("CREATE");
@@ -63,6 +92,10 @@ public class ReminderController {
 		
 	}
 	
+	/**
+	 * Stop a alarm service by its name
+	 * @param name Name of alarm service which will be canceled 
+	 */
 	private void removeAlarm(String name){
 		
 		Intent j = new Intent(mContext,ReminderService.class);
@@ -77,6 +110,10 @@ public class ReminderController {
 		}
 		mContext.startService(j);
 	}
+	
+	/**
+	 * Remove all alarm background services
+	 */
 	public void removeAllAlarms(){
 		Log.d("REMOVE","REMOVE ALL ALLARM");
 		for(int i = 0; i < alarmIntent.size();++i){
@@ -87,7 +124,18 @@ public class ReminderController {
 				
 		}
 	}
+	
 	@SuppressWarnings("deprecation")
+	/**
+	 * Validate all data of reminder when create or edit the reminder item
+	 * @param name Name of reminder
+	 * @param description description of reminder
+	 * @param time time of reminder
+	 * @param active status of reminder. True is ACTIVE, False is DEACTIVE
+	 * @param isNewReminder true when creating new Reminder, false when edit current Reminder
+	 * @param ID ID of reminder. Null if create new Reminder
+	 * @return Result Message.
+	 */
 	public String validateReminderForm(String name, String description,Date time, boolean active,boolean isNewReminder, String ID){
 		Log.d("DEBUG", "inside validate reminder");
 		if( name.isEmpty()){
@@ -174,7 +222,11 @@ public class ReminderController {
 		return "Successfull Update Reminder";
 	}
 	
-	//REMOVE REMINDER
+	/**
+	 * Stop a Reminder service by its id
+	 * @param id ID of reminder Serivece
+	 * @return result message
+	 */
 	public String removeReminder (String id){
 		for (Reminder reminder : reminderList){
 			if (id.compareTo(reminder.getID()) == 0){

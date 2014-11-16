@@ -4,7 +4,11 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
-
+/**
+ * The Application which start at the very first part of the program
+ * @author Tran Phuong Thao
+ *
+ */
 public class OpenPacketApplication extends Application {
 	@Override
 	public void onCreate() {

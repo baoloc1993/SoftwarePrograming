@@ -1,9 +1,5 @@
 package com.example.openpackage.ui;
-/**
- * ListReminderAdapter
- * 
- * - Display the list of Reminder by using an ArrayList of Reminder class
- */
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,8 +16,22 @@ import com.example.openpackage.entity.Reminder;
 import com.example.openpackage.entity.ReminderRemote;
 import com.example.openpackageapplication.R;
 
+/**
+ * ListReminderAdapter
+ * - Display and Control the list of Reminder by using an ArrayList of Reminder class
+ * @author NGO LE BAO LOC
+ * 
+ *
+ */
 public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 
+	
+	/**
+	 * Contructor of Adapter
+	 * 
+	 * @param context context of current Application
+	 * 
+	 */
 	public ListReminderAdapter(Context context, int resource) {
 		super(context, resource);
 		// TODO Auto-generated constructor stub
@@ -29,11 +39,16 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 	
 	private ArrayList<Reminder> listReminders;
 	
-	/*
+	/**
 	 * here we must override the constructor for ArrayAdapter the only variable
-	 * we care about now is ArrayList<Item> objects, because it is the list of
+	 * we care about now is ArrayList<Reminder> objects, because it is the list of
 	 * objects we want to display.
+	 * 
+	 * @param context  current context of Application
+	 * @param textViewResourceId 
+	 * @param listReminders List of Reminder we want to control
 	 */
+	
 	public ListReminderAdapter(Context context, int textViewResourceId,
 			ArrayList<Reminder> listReminders) {
 		super(context, textViewResourceId, listReminders);
@@ -41,10 +56,6 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 	}
 	
 	
-	/*
-	 * we are overriding the getView method here - this is what defines how each
-	 * list item will look.
-	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -96,16 +107,14 @@ public class ListReminderAdapter extends ArrayAdapter<Reminder> {
 				nameInfo.setText(i.getName());
 			}
 			if (dateInfo != null) {
-				//i.getTime().toGMTString()
-				//String text = ""
-				//GET DATE/TIME
+				
 				Date date = i.getTime();
 				int year = date.getYear() + 1900;
 				int month =  date.getMonth() + 1 ;
 				int day = date.getDate();
 				int hour = date.getHours();
 				int minute = date.getMinutes();
-				//Date time2 = new Date(year,month,day,hour,minute);
+				
 				
 				String result = String.format("%2d : %2d   %2d/%2d/%4d", hour,minute,day,month,year);
 				dateInfo.setText(result);

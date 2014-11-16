@@ -1,14 +1,6 @@
 package com.example.openpackage.ui;
 
-/**
- * CreateReminderActivity
- * 
- * - Create Reminder with:
- * 	+ Name
- * 	+ Description
- * 	+ Date
- *  + Active
- */
+
 import java.util.Date;
 
 import com.example.openpackage.controller.ReminderController;
@@ -30,7 +22,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
+/**
+ * EditReminderActivity
+ * 
+ * - Edit Reminder with:
+ * 	+ Name of reminder
+ * 	+ Description of reminder
+ * 	+ Date of remidner
+ *  + Status of reminder
+ *  
+ *  @author Ngo Le Bao Loc
+ */
 public class EditReminderActivity extends ControlReminder {
 
 

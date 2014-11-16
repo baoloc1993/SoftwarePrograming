@@ -7,9 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
-
+/** 
+ * The Class TabsStatPageAdapter
+ * @author Tran Vu Xuan Nhat
+ * */
 public class TabsStatPageAdapter  extends FragmentPagerAdapter{
-	public Intent graphInfo;
+	
+	/** 
+	 * Instantiate a tab adapter for ViewSingleStatistic UI activity
+	 * @param fragmentManager The fragment manager handles fragment under  ViewSingleStatistic UI
+	 * */
 	public TabsStatPageAdapter(FragmentManager fragmentManager) {
 		super(fragmentManager);
 		// TODO Auto-generated constructor stub

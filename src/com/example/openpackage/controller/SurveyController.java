@@ -14,18 +14,37 @@ import com.example.openpackage.entity.Survey;
 import com.example.openpackage.entity.SurveyRemote;
 import com.parse.ParseException;
 
+/**
+ * Store all function to control Survey
+ * @author Nguyen Phan Huy
+ *
+ */
 public class SurveyController {
 	
-	private final static String TAG  = "SurveyController";
 	
+	/**
+	 * Current context of application
+	 */
 	Context mContext;
+	
+	/**
+	 * User Controller
+	 */
 	UserController mUserController;
 	
+	/**
+	 * Contructor of class
+	 * @param mContext current context of application
+	 */
 	public SurveyController(Context mContext) {
 		this.mContext = mContext;
 		mUserController = new UserController(mContext);
 	}
 	
+	/**
+	 * Sort the list of survey. The oldest first
+	 * @param cur ArrayList of Survey
+	 */
 	private void Sort(ArrayList<Survey> cur) {
 		Collections.sort(cur, new Comparator<Survey>() {
 
@@ -37,6 +56,11 @@ public class SurveyController {
 		});
 	}
 	
+	/**
+	 * Get the list of survey of a FoodPackage. The list is sorted
+	 * @param cur The FoodOpeningPackage object want to be get the surveys
+	 * @return The list of Surveys
+	 */
 	public ArrayList<Survey> getSurveyList(FoodOpeningPackage cur) {
 		try {
 			ArrayList<Survey> res = cur.getSurveyList();
@@ -48,6 +72,11 @@ public class SurveyController {
 		return null;
 	}
 	
+	/**
+	 * Get the list of survey of a Customer. The list is sorted
+	 * @param cur The Customer object want to be get the surveys
+	 * @return The list of surveys
+	 */
 	public ArrayList<Survey> getSurveyList(CustomerRemote cur) {
 		try {
 			ArrayList<Survey> res = cur.getSurveyList();
@@ -59,6 +88,11 @@ public class SurveyController {
 		return null;
 	}
 
+	/**
+	 * Get Survey by its ID
+	 * @param id Id of survey 
+	 * @return Survey object. Null if id is invalid or cannot get the survey
+	 */
 	public Survey getById(String id) {
 		try {
 			return SurveyRemote.findById(id);
@@ -68,6 +102,13 @@ public class SurveyController {
 		return null;
 	}
 	
+	/**
+	 * Validate the Survey which is created. Check all the input of user 
+	 * @param cmt : Comment of survey
+	 * @param rate : Rate of survey (From 1 to 5)
+	 * @param food : FoodOpeningPackage object which is rated
+	 * @return true if the information are all correct
+	 */
 	public boolean validateCreateData(String cmt, int rate, FoodOpeningPackage food) {
 		cmt = cmt.trim();
 		if (rate == 0 || cmt.isEmpty()) 
@@ -85,9 +126,15 @@ public class SurveyController {
 		return false;
 	}
 
+	/**
+	 * get a survey which is rated by particular user to particular object
+	 * @param mFood FoodOpeningPackage object which is rated
+	 * @param user Customer object which make the survey
+	 * @return the survey. Null if cannot find the suitable survey
+	 */
 	public Survey getSurvey(FoodOpeningPackage mFood, CustomerRemote user) {
 		ArrayList<Survey>surveys = getSurveyList(mFood);
-		if (surveys == null) Log.i(TAG, "ArraySurvey is NULL");
+		
 		for(Survey survey : surveys)
 			try {
 				if (survey.getUser().getId().equals(user.getId())) {

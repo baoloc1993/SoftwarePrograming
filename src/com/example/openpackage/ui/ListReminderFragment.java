@@ -30,7 +30,16 @@ import com.example.openpackageapplication.R;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
-
+/**
+ *  The Fragment display:
+ * - List of reminder, each reminder have : ID, Date, Name, Description, Status (active or not)
+ * - Create Reminder Button
+ * 
+ * When user click to each reminder on the list, user will go to EditReminderFragment to edit Reminder
+ * @author Ngo Le Bao Loc
+ * 
+ *
+ */
 public class ListReminderFragment extends Fragment {
 
 	public static ListView listRemindersView;
@@ -50,7 +59,7 @@ public class ListReminderFragment extends Fragment {
 
 		//Temporary create new Manufacturer Object
 		//In reality, received the Manufacter Object from other Activity
-		Log.d("CLASS MANU", String.valueOf(mUserController.getCurrentUser() instanceof ManufacturerRemote));
+		
 		ManufacturerRemote tempManufacturer = (ManufacturerRemote) mUserController.getCurrentUser();
 		
 		ArrayList<Reminder> listReminders = null;
@@ -60,26 +69,13 @@ public class ListReminderFragment extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		try {
-//			listReminders = tempManufacturer.getReminderList();
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		final ArrayList<Reminder> newlist = listReminders;
 
-		/**
-		 * Calling a backgroung thread will loads recent articles of a website
-		 *
-		 * @param rss
-		 *            url of website
-		 * */
-		//new LoadRSSFeedItems(listNews, mPullToRefreshLayout).execute();
-
+		
 		// selecting single ListView item
 		// Launching new screen on Selecting Single ListItem
-		/**
+		/*
 		 * LIST REMINDER
 		 */
 		ListReminderAdapter adapter = new ListReminderAdapter(
@@ -89,22 +85,23 @@ public class ListReminderFragment extends Fragment {
 
 		listRemindersView = (ListView) rootView.findViewById(R.id.list_reminders);
 		listRemindersView.setAdapter(adapter);
+		/*
+		 * Go to Edit Reminder Acvitity
+		 */
 		listRemindersView.setOnItemClickListener( new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
+				//Get Information of Reminder
 				Reminder reminder = newlist.get(position);
 				String reminderId = reminder.getID();
 				String reminderName = reminder.getName();
-				
 				int reminderDay = reminder.getTime().getDate();
 				int reminderMonth = reminder.getTime().getMonth();
 				int reminderYear = reminder.getTime().getYear();
 				int reminderHour = reminder.getTime().getHours();
 				int reminderMinute = reminder.getTime().getMinutes();
-				
-				Toast.makeText(getActivity(), reminder.getTime().toGMTString(), Toast.LENGTH_LONG).show();
 				String reminderDesc = reminder.getDescription();
 				boolean isActive = reminder.getActive();
 				
@@ -120,17 +117,18 @@ public class ListReminderFragment extends Fragment {
 				bundle.putString("Description", reminderDesc);
 				bundle.putBoolean("Active", isActive);
 				
+				//Go to EditReminder Activity
 				Intent i = new Intent(getActivity(), EditReminderActivity.class);
 				i.putExtras(bundle);
 				startActivity(i);
 
 				
 			}
-			//return onItemClickListener;
+			
 		});
 		
 		
-		/**
+		/*
 		 * CREATE REMINDER
 		 */
 		ImageView createReminder = (ImageView) rootView.findViewById(R.id.new_reminder_button);
@@ -139,13 +137,14 @@ public class ListReminderFragment extends Fragment {
 		createReminder.getLayoutParams().width = size;
 		createReminder.getLayoutParams().height = size;
 		
-		
+		/*
+		 * Go to Create Reminder Acvitivy
+		 */
 		createReminder.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 				Intent i = new Intent(getActivity(), CreateReminderActivity.class);
 				startActivity(i);
 

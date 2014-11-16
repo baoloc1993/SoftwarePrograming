@@ -9,11 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+/** 
+ * The Class StatFragment
+ * @author: Tran Vu Xuan Nhat
+ * */
 public class StatFragment extends Fragment{
 	View rootView;
 	Bundle bundle;
 	
+	/** 
+	 * Instantiate a statistic summary fragment
+	 * */
 	public StatFragment(){
 		bundle = ViewSingleStatistic.bundle;
 	}
@@ -25,7 +31,7 @@ public class StatFragment extends Fragment{
 				false);
 		double mean = 0,mode = 0;
 		double variance = 0;
-		String numberOfSurvey = bundle.getString("numberOfSurvey");
+		int numberOfSurvey = bundle.getInt("numberOfSurvey");
 		double[] rateList = bundle.getDoubleArray("rateList");
 		
 		for(int i = 0; i < rateList.length; ++i){
