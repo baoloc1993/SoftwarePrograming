@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller
+END
+AlarmReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller/AlarmReceiver.java
+END
+AlarmSetter.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller/AlarmSetter.java
+END
+ReminderController.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller/ReminderController.java
+END
+FoodOpeningPackageController.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller/FoodOpeningPackageController.java
+END
+UserController.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller/UserController.java
+END
+SurveyController.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller/SurveyController.java
+END
+ReminderService.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/CE_CZ2006/!svn/ver/6448/SSP1/24Hour/OpenPackageApplication/FoodOpeningPackage/src/com/example/openpackage/controller/ReminderService.java
+END
