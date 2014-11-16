@@ -216,9 +216,7 @@ public abstract class ControlReminder extends Activity {
 		
 		//CANCEL REMINDER
 		Button cancelReminder = (Button) findViewById(R.id.cancel_reminder);
-		if (id != null){
-			cancelReminder.setVisibility(View.VISIBLE);
-		}
+		cancelReminder.setVisibility(View.INVISIBLE);
 		
 		cancelReminder.setOnClickListener(new OnClickListener() {
 			
